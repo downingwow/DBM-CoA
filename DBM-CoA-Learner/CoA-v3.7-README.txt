@@ -1,0 +1,5 @@
+v3.7 experimental patch: preserves v3.6 sync/timers.
+Tracks observed dungeon/raid names keyed by map ID and instance type, and only promotes names after >=3 observations.
+Includes named registry reference for user-provided CoA dungeons/raids (not DBM GUI modules).
+Adds selective world-event tracking for Headless Horseman, Ahune, Coren Direbrew and Apothecary Trio when targeted outdoors. Existing DBM-WorldEvents modules are preserved.
+KNOWN LIMITATIONS: No automatic DBM GUI menu generation. World-event tracking outside instances requires targeting the boss and may stop when target is lost/out of combat. Unverified on Conquest Reborn client.

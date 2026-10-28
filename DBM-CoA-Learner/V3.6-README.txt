@@ -1,0 +1,17 @@
+DBM-CoA v3.6 EXPERIMENTAL
+
+Install all addon folders from this ZIP into Interface/AddOns. Existing DBM modules unchanged.
+LiveLearning.lua runs inside DBM-CoA-Learner (no separate Observer required).
+/dbmcoa experimental off  - disable learned warnings and bars
+/dbmcoa experimental on   - enable them
+/dbmcoa fast off          - legacy one-discovery-per-message mode
+/dbmcoa fast on           - batch up to 4 discoveries per 0.75s message
+/dbmcoa status            - sync diagnostics
+
+Only party/raid, only known NPC/spell pairs. Existing DBM warnings unaffected.
+Repeat bars need >=5 consistent LOCAL observations in the same named instance.
+Old blank-instance statistics are intentionally not trusted for bars.
+Experimental warning spam is possible for frequently cast spells; disable if needed.
+New v3.6 batches require v3.6 peers; old clients ignore batch envelopes.
+Chat channel DBMCoASync is unchanged and separate from LootCollector.
+No arbitrary Lua is downloaded or executed. No runtime validation on Ascension client yet.

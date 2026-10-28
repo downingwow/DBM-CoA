@@ -1,0 +1,9 @@
+DBM-CoA v3.8 TEST BUILD
+- New Interface > AddOns > DBM-CoA settings panel.
+- Shared BBLC25C channel: DBM only reuses the existing channel; LootCollector owns joining.
+- No channel joins, leaves, renumbering, or chat-window modifications by DBM.
+- DBM-CoA discovery/timing protocol unchanged.
+- Existing saved DBMCoALearnerDB remains compatible.
+- This build does not import raw Observer data or install new encounter modules.
+- Questie-X not included; no Questie source ZIP available.
+- Test in game, especially that /1 World remains intact and DBM sync starts once LootCollector has joined BBLC25C.

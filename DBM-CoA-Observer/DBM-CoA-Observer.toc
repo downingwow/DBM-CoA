@@ -1,0 +1,5 @@
+## Interface: 30300
+## Title: DBM-CoA Overnight Observer
+## Notes: Passive encounter evidence collection; independent of learner sync
+## SavedVariables: DBMCoAObserverDB
+LearnerObserver.lua
