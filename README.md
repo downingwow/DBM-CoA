@@ -1,31 +1,30 @@
-# DBM-CoA
+# DBM-CoA — Deadly Boss Mods for Conquest of Azeroth
 
-Encounter learning, warnings, timing synchronization, and PvP development.
+A legacy-client DBM package with an experimental **CoA encounter AutoLearner**, built for **Ascension: Conquest of Azeroth / Conquest Reborn** (Interface 30300).
 
-An addon for **Ascension: Conquest of Azeroth** on Conquest Reborn. Maintained by Uncle Bone.
+## Features
 
-## Download
+- DBM core, GUI, timers, warnings, and included raid, dungeon, and PvP modules.
+- Encounter observation and **experimental live-learning** of combat events and timing evidence while playing.
+- Persistent learned encounter data in SavedVariables; independent Observer component also included in the current package.
+- Instance-aware encounter detection and timing-data synchronization.
+- Shared-channel synchronization over LootCollector's `BBLC25C` channel, using DBM-CoA-specific protocol messages and delayed cooperative startup.
+- Sync diagnostics including sent, received, duplicate, rejected, pending, and peer-response counters.
+- Compact DBM-CoA settings integrated with the DBM options interface, and a draggable learner status window.
+- Compatibility-focused changes for the legacy WoW API.
 
-[Latest stable release](https://github.com/robsdow87/DBM-CoA/releases/latest) · [Previous versions](https://github.com/robsdow87/DBM-CoA/releases)
+**Experimental:** Learned warnings and timers require validation. Presence of legacy DBM PvP modules does not mean that automatic battleground or arena learning is already implemented; that is planned work.
 
-**No release has been published yet.** Current source files must be verified before the first release.
+## Current source package
+
+**v3.12 — Safe Channel Startup** is the latest available package. The source and a downloadable GitHub Release have **not yet been published**.
 
 ## Installation
 
-1. Download the ZIP attached to a published GitHub Release (not the automatic GitHub source archive).
-2. Extract into your World of Warcraft `Interface/AddOns` directory.
-3. Ensure the `DBM-CoA` folder contains its `.toc` file; restart the game.
+Once released, extract **all addon folders** from the release ZIP into `Interface/AddOns` (including DBM-Core, DBM-GUI, the encounter modules, and DBM-CoA components). Do not install only one folder.
 
-## Compatibility
+## Downloads and support
 
-Built for the legacy client used by Ascension: Conquest of Azeroth. Questie-X, DBM-CoA, and LootCollector use LootCollector's existing shared channel `BBLC25C`, with distinct message protocols. Preserve compatibility with older clients and addon versions when updating.
+[Releases](https://github.com/downingwow/DBM-CoA/releases) · [Issues](https://github.com/downingwow/DBM-CoA/issues) · [Changelog](CHANGELOG.md)
 
-## Feedback
-
-[Report bugs and request features](https://github.com/robsdow87/DBM-CoA/issues). Include addon version, client version, error text, and steps to reproduce.
-
-## Release process
-
-When verified addon source is present in `DBM-CoA/`, pushing a version tag such as `v1.0.0` triggers the release workflow to validate the folder and package it as a downloadable ZIP. Earlier tagged releases remain accessible.
-
-See [CHANGELOG.md](CHANGELOG.md) for release history.
+**Credits:** Deadly Boss Mods upstream authors and contributors; CoA learner adaptation maintained by Uncle Bone. Community project; not an official DBM or Ascension release.
