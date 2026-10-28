@@ -1,30 +1,58 @@
-name: Publish addon release
+name: Package and publish addon release
+
 on:
   push:
     tags:
       - 'v*'
+
 permissions:
   contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Validate and package addon
+      - name: Check out tagged source
+        uses: actions/checkout@v4
+      - name: Verify addon files and build ZIP
         shell: bash
         run: |
           set -euo pipefail
-          ADDON="${{ github.event.repository.name }}"
-          test -d "$ADDON" || { echo "::error::Expected addon directory $ADDON/ is missing"; exit 1; }
-          test -n "$(find "$ADDON" -maxdepth 1 -name '*.toc' -print -quit)" || { echo "::error::Missing addon .toc in $ADDON/"; exit 1; }
+          REPO="${{ github.event.repository.name }}"
           VERSION="${GITHUB_REF_NAME}"
-          zip -qr "${ADDON}-${VERSION}.zip" "$ADDON" -x '*/.DS_Store' '*/Thumbs.db'
-      - name: Publish GitHub release
+          mkdir -p dist
+          case "$REPO" in
+            Questie-X)
+              dirs=(Questie-X)
+              ;;
+            LootCollector)
+              dirs=(LootCollector LootCollector_CustomImport LootCollector_StarterDB)
+              ;;
+            DBM-CoA)
+              mapfile -t dirs < <(find . -maxdepth 1 -type d -name 'DBM-*' -printf '%f\n' | sort)
+              ;;
+            *)
+              echo "::error::Unknown addon repository: $REPO"
+              exit 1
+              ;;
+          esac
+          test "${#dirs[@]}" -gt 0 || { echo "::error::No addon directories"; exit 1; }
+          for dir in "${dirs[@]}"; do
+            test -d "$dir" || { echo "::error::Missing $dir"; exit 1; }
+            test -n "$(find "$dir" -maxdepth 1 -name '*.toc' -print -quit)" || { echo "::error::Missing .toc in $dir"; exit 1; }
+          done
+          if [ "$REPO" = DBM-CoA ]; then
+            for dir in DBM-Core DBM-GUI DBM-CoA-Learner DBM-CoA-Observer; do
+              test -d "$dir" || { echo "::error::Required DBM folder missing: $dir"; exit 1; }
+            done
+          fi
+          zip -qr "dist/${REPO}-${VERSION}.zip" "${dirs[@]}" -x '*/.DS_Store' '*/Thumbs.db'
+      - name: Publish versioned GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          ADDON="${{ github.event.repository.name }}"
+          REPO="${{ github.event.repository.name }}"
           VERSION="${GITHUB_REF_NAME}"
-          gh release create "$VERSION" "${ADDON}-${VERSION}.zip" --generate-notes --title "${ADDON} ${VERSION}" --verify-tag
+          gh release create "$VERSION" "dist/${REPO}-${VERSION}.zip" --title "${REPO} ${VERSION}" --generate-notes --verify-tag
