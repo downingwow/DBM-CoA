@@ -1,30 +1,60 @@
-# DBM-CoA — Deadly Boss Mods for Conquest of Azeroth
+# DBM-CoA — Boss Warnings, Encounter Timers & Experimental Auto-Learning
 
-A legacy-client DBM package with an experimental **CoA encounter AutoLearner**, built for **Ascension: Conquest of Azeroth / Conquest Reborn** (Interface 30300).
+**DBM-CoA helps you react to dangerous fights.** It combines the familiar **Deadly Boss Mods (DBM)** boss-mod system with a custom experimental learner for **Ascension: Conquest of Azeroth / Conquest Reborn**.
 
-## Features
+## What DBM does during a fight
 
-- DBM core, GUI, timers, warnings, and included raid, dungeon, and PvP modules.
-- Encounter observation and **experimental live-learning** of combat events and timing evidence while playing.
-- Persistent learned encounter data in SavedVariables; independent Observer component also included in the current package.
-- Instance-aware encounter detection and timing-data synchronization.
-- Shared-channel synchronization over LootCollector's `BBLC25C` channel, using DBM-CoA-specific protocol messages and delayed cooperative startup.
-- Sync diagnostics including sent, received, duplicate, rejected, pending, and peer-response counters.
-- Compact DBM-CoA settings integrated with the DBM options interface, and a draggable learner status window.
-- Compatibility-focused changes for the legacy WoW API.
+When a supported encounter is recognized, DBM can provide **warnings, countdown bars, sounds, and on-screen alerts** for important boss abilities. This helps a group anticipate mechanics rather than relying only on the combat log. The included package contains DBM's core interface and modules for many classic-era dungeons, raids, world events, and PvP content.
 
-**Experimental:** Learned warnings and timers require validation. Presence of legacy DBM PvP modules does not mean that automatic battleground or arena learning is already implemented; that is planned work.
+**Important:** A packaged boss module is not proof that a specific custom CoA encounter has fully accurate warnings. Custom bosses may require new data.
 
-## Current source package
+## What makes DBM-CoA different: AutoLearner
 
-**v3.12 — Safe Channel Startup** is the latest available package. The source and a downloadable GitHub Release have **not yet been published**.
+Many custom CoA bosses do not have handcrafted DBM modules. **DBM-CoA AutoLearner** watches supported combat information while you are actively playing and tries to build evidence about how encounters work.
 
-## Installation
+- **Records combat events** such as observed spell activity and timing evidence during encounters.
+- **Builds local encounter history** that can be used to study patterns and improve future warnings.
+- **Learns timing information** from repeated observations rather than requiring every encounter to be manually programmed from scratch.
+- **Stores learned data** in WoW SavedVariables so it survives logouts and restarts.
+- **Synchronizes compatible learning data** with other addon users, potentially improving knowledge faster than one player's runs alone.
+- **Provides diagnostics** for sent and received messages, duplicate or rejected records, retries, and responsive addon peers.
+- **Offers a draggable status display** and learner-related controls integrated with DBM's options.
 
-Once released, extract **all addon folders** from the release ZIP into `Interface/AddOns` (including DBM-Core, DBM-GUI, the encounter modules, and DBM-CoA components). Do not install only one folder.
+This system is **experimental**. Observed timing patterns are not necessarily exact cooldowns, and incomplete or malformed data can lead to unreliable warnings. Players should still pay attention to the encounter.
 
-## Downloads and support
+## Sharing and other addon compatibility
 
-[Releases](https://github.com/downingwow/DBM-CoA/releases) · [Issues](https://github.com/downingwow/DBM-CoA/issues) · [Changelog](CHANGELOG.md)
+DBM-CoA uses the **existing LootCollector channel `BBLC25C`**, with DBM-specific messages rather than creating a competing global channel. Startup joining is delayed to avoid interfering with existing channels. The latest build is designed to coexist with compatible Questie-X and LootCollector builds.
 
-**Credits:** Deadly Boss Mods upstream authors and contributors; CoA learner adaptation maintained by Uncle Bone. Community project; not an official DBM or Ascension release.
+The peer-response count reflects other responding addon users, **not necessarily everyone present in the chat channel**. Learning and sync only happen when the game client and addon are running; this is not an overnight server-side monitor.
+
+## Observer component
+
+The current ZIP also includes **DBM-CoA-Observer**, a separate passive evidence-collection addon. It stores its own data independently of the main learner. Its presence does **not** mean the Observer and AutoLearner databases have already been merged.
+
+## PvP: current versus planned
+
+The package includes traditional **DBM-PvP** content. A future expansion of the **CoA learner** is planned to collect battleground objective events and carefully validated arena/player spell timing evidence. **Do not confuse the included PvP modules with a finished automatic PvP-learning system.**
+
+## What's included
+
+The package contains multiple separate addon folders, including **DBM-Core**, **DBM-GUI**, encounter modules, **DBM-CoA-Learner**, and **DBM-CoA-Observer**. The complete package must be extracted into `Interface/AddOns` so all required components sit side by side.
+
+## Install / update
+
+1. Back up `DBMCoALearnerDB`, `DBMCoAObserverDB`, and other DBM SavedVariables before updating.
+2. Extract **all top-level folders** from the release ZIP into `World of Warcraft/Interface/AddOns`.
+3. Restart the game and check that DBM-Core and the CoA learner are enabled.
+4. Configure learner recording, sharing, and diagnostics in DBM's options. Review experimental warnings before relying on them.
+
+## Current build and known limits
+
+**Latest package located:** *DBM-CoA v3.12 — Safe Channel Startup*. It has **not yet been published as a GitHub Release**. [Release downloads](https://github.com/downingwow/DBM-CoA/releases) will appear after the verified package is uploaded.
+
+The learner can receive duplicate or invalid timing records, and older versions may not support all current message types. Learned encounter warnings and exact backward compatibility still require in-game verification. Interface target: **30300**.
+
+## Credits and support
+
+Based on [Deadly Boss Mods](https://github.com/DeadlyBossMods/DeadlyBossMods) by its original authors and contributors. CoA-specific learner adaptation and distribution by **Uncle Bone**. Community project, not an official DBM or Ascension release.
+
+[Report issues / request features](https://github.com/downingwow/DBM-CoA/issues) · [Changelog](CHANGELOG.md)
