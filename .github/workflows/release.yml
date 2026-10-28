@@ -1,0 +1,30 @@
+name: Publish addon release
+on:
+  push:
+    tags:
+      - 'v*'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate and package addon
+        shell: bash
+        run: |
+          set -euo pipefail
+          ADDON="${{ github.event.repository.name }}"
+          test -d "$ADDON" || { echo "::error::Expected addon directory $ADDON/ is missing"; exit 1; }
+          test -n "$(find "$ADDON" -maxdepth 1 -name '*.toc' -print -quit)" || { echo "::error::Missing addon .toc in $ADDON/"; exit 1; }
+          VERSION="${GITHUB_REF_NAME}"
+          zip -qr "${ADDON}-${VERSION}.zip" "$ADDON" -x '*/.DS_Store' '*/Thumbs.db'
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ADDON="${{ github.event.repository.name }}"
+          VERSION="${GITHUB_REF_NAME}"
+          gh release create "$VERSION" "${ADDON}-${VERSION}.zip" --generate-notes --title "${ADDON} ${VERSION}" --verify-tag
