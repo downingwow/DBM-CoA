@@ -49,7 +49,7 @@ The package contains multiple separate addon folders, including **DBM-Core**, **
 
 ## Current build and known limits
 
-**Latest package located:** *DBM-CoA v3.12 — Safe Channel Startup*. It has **not yet been published as a GitHub Release**. [Release downloads](https://github.com/downingwow/DBM-CoA/releases) will appear after the verified package is uploaded.
+**Latest package located:** *DBM-CoA v3.12 — Safe Channel Startup*. Its source files have now been uploaded to this repository. **A downloadable GitHub Release has not yet been published.** [Release downloads](https://github.com/downingwow/DBM-CoA/releases) will appear after the verified package is uploaded.
 
 The learner can receive duplicate or invalid timing records, and older versions may not support all current message types. Learned encounter warnings and exact backward compatibility still require in-game verification. Interface target: **30300**.
 
