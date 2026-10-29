@@ -139,7 +139,7 @@ local function refresh()
  if not recording then start(z) end
 end
 local function safeField(v)
- v=tostring(v or ""):gsub("[|;\r\n%z]", " "):gsub("[^%g ]", "")
+ v=tostring(v or ""):gsub("[|;\r\n%z]", " "):gsub("[^%w %-_%.%,]", " ")
  return v:sub(1,55)
 end
 -- v3.14 smart sync: additive protocol, preserving all DCOAL31 receive formats.
@@ -177,8 +177,8 @@ local function smartReceive(msg,sender)
  peers[sender or "?"]=clock()
  for _,h in ipairs(items) do
   if typ=="I" then
-   if smartMap[h]==nil and not smartWaiting[h] and #smartPending<128 then
-    smartWaiting[h]=true;smartPending[#smartPending+1]=h
+   if smartMap[h]==nil and (not smartWaiting[h] or clock()-smartWaiting[h]>180) and #smartPending<128 then
+    smartWaiting[h]=clock();smartPending[#smartPending+1]=h
    end
   else
    local k=smartMap[h]
@@ -205,6 +205,11 @@ local function syncSend(payload)
  if type(id)~="number" or id<=0 or type(SendChatMessage)~="function" then return false end
  -- Never transmit literal pipe bytes: WoW chat interprets them as escape sequences.
  local msg=(payload:sub(1,#SMART+1)==SMART..";" and "" or PREFIX..";")..payload:gsub("|", " ")
+ -- Sanitize stored legacy fields on the wire, without mutating saved knowledge.
+ if payload:sub(1,2)=="D;" then
+  local typ,inst,diff,nid,sid,label=payload:match("^D;([NS]);([^;]*);(%d+);(%d+);(%d+);([^;]*)$")
+  if typ then msg=PREFIX..";D;"..typ..";"..safeField(inst)..";"..diff..";"..nid..";"..sid..";"..safeField(label) end
+ end
  if #msg>240 or msg:find("[^%w ;%-_%.%,]") then lastSyncError="invalid payload";return false end
  local ok,err=pcall(SendChatMessage,msg,"CHANNEL",nil,id)
  if ok then sent=sent+1;if payload:sub(1,2)=="D;" then discoverySent=discoverySent+1 elseif payload:sub(1,2)=="T;" then timingSent=timingSent+1 else pingSent=pingSent+1 end;lastSyncError="none" else lastSyncError=tostring(err):sub(1,80) end
@@ -469,7 +474,9 @@ f:SetScript("OnUpdate",function(self,dt)
  local id=type(GetChannelName)=="function" and GetChannelName(SYNC_CHANNEL) or 0
  if type(id)~="number" or id<=0 then return end
  if not backfillDone then
-  queueBackfill()
+  -- v3.15: inventory/request replaces the expensive full-database login flood.
+  -- Older clients can still send records to us using the unchanged receiver.
+  if db.fullBackfillEnabled then queueBackfill() else backfillDone=true end
   for k in pairs(db.timings or {}) do enqueueTiming(k) end
  end
  local payload,kind,key,batchKeys
