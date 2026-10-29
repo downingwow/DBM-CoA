@@ -1,5 +1,6 @@
 ## Interface: 30300
-## Title: DBM CoA AutoLearner and Sync v3.8
+## Title: DBM CoA AutoLearner and Sync v3.13
+## Version: 3.13
 ## Notes: Automatic encounter learning and opt-out channel synchronization for Conquest of Azeroth.
 ## Dependencies: DBM-Core
 ## SavedVariables: DBMCoALearnerDB

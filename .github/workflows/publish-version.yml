@@ -1,0 +1,38 @@
+name: Publish versioned DBM-CoA build
+on:
+  push:
+    branches: [main]
+    paths: ['release.json']
+permissions:
+  contents: write
+concurrency:
+  group: publish-dbm-version
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build release ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="$(python3 -c 'import json; print(json.load(open("release.json"))["version"])')"
+          [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]
+          mkdir -p dist
+          for dir in DBM-Core DBM-GUI DBM-CoA-Learner DBM-CoA-Observer; do
+            test -d "$dir"
+          done
+          mapfile -t dirs < <(find . -maxdepth 1 -type d -name 'DBM-*' -printf '%f\n' | sort)
+          for dir in "${dirs[@]}"; do
+            test -n "$(find "$dir" -maxdepth 1 -name '*.toc' -print -quit)"
+          done
+          zip -qr "dist/DBM-CoA-${VERSION}.zip" "${dirs[@]}" -x '*/.DS_Store' '*/Thumbs.db'
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create "$VERSION" "dist/DBM-CoA-${VERSION}.zip" --target "$GITHUB_SHA" --title "DBM-CoA ${VERSION} — Overnight Collection" --notes-file "releases/${VERSION}.md" --latest
