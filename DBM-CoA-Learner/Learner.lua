@@ -25,7 +25,7 @@ local lastReceive="none"
 local peerCount=0
 local statusFrame, statusText
 local known = {}
--- Channel setup is optional and separate from recording. This release does not transmit data.
+-- Channel setup is optional and separate from recording. Legacy-compatible sync remains enabled.
 local SYNC_CHANNEL="BBLC25C" -- cooperative shared channel; no addon dependency
 local channelElapsed=0
 local stableSeconds=0
@@ -256,7 +256,7 @@ local function receive(msg,sender)
   local old=bySource[source]
   if old and old.count>=t.count then timingDuplicates=timingDuplicates+1;return end
   bySource[source]=t
-  timingReceived=timingReceived+1
+  timingReceived=timingReceived+1;db.receiveTotals.timings=(db.receiveTotals.timings or 0)+1
   -- Cap source memory per ability; local observations are stored separately.
   local count=0;for _ in pairs(bySource) do count=count+1 end
   if count>12 then bySource[source]=nil end
@@ -268,8 +268,8 @@ local function receive(msg,sender)
  nid=tonumber(nid);sid=tonumber(sid);diff=tonumber(diff)
  if not nid or nid<1 or nid>100000000 or not sid or sid>100000000 or not diff or diff>100 then rejected=rejected+1;lastReceive="invalid discovery values";return end
  local key=table.concat({kind,inst,tostring(diff),tostring(nid),tostring(sid)},";")
- if known[key] then duplicates=duplicates+1;return end
- known[key]=true;received=received+1
+ if known[key] then duplicates=duplicates+1;db.receiveTotals.duplicates=(db.receiveTotals.duplicates or 0)+1;return end
+ known[key]=true;received=received+1;db.receiveTotals.discoveries=(db.receiveTotals.discoveries or 0)+1
  db.knowledge=db.knowledge or {}
  db.knowledge[key]={kind=kind,instance=inst,difficulty=diff,npc=nid,spell=sid,name=label,seen=date("%Y-%m-%d %H:%M"),remote=true}
  -- Relay newly imported discoveries once; never relay a record already known.
@@ -332,7 +332,7 @@ local function add(ev,sg,sn,dg,dn,spell,name,extra)
    remember("S",session.instance,session.difficulty,id,spell,name or sn)
    -- Count a cast once, not both CAST_START and CAST_SUCCESS.
    if spell and (ev=="SPELL_CAST_START" or ev=="SPELL_CAST_SUCCESS") then
-    local castKey=tostring(id)..":"..tostring(spell)
+    local castKey=tostring(sg or id)..":"..tostring(spell) -- Distinguish same-template creatures
     if ev=="SPELL_CAST_START" then
      session.castStarts=session.castStarts or {};session.castStarts[castKey]=clock()
      observeTiming(session.instance,session.difficulty,id,spell)
@@ -371,6 +371,8 @@ f:SetScript("OnEvent",function(self,event,...)
   if ...~="DBM-CoA-Learner" then return end
   DBMCoALearnerDB=DBMCoALearnerDB or {}
   db=DBMCoALearnerDB;db.sessions=db.sessions or {};db.knowledge=db.knowledge or {};db.timings=db.timings or {};db.remoteTimingSources=db.remoteTimingSources or {}
+  if db.fastSyncDisabled==nil then db.fastSyncDisabled=true end -- Legacy peers cannot decode batch records.
+  db.receiveTotals=db.receiveTotals or {discoveries=0,timings=0,duplicates=0}
   for k in pairs(db.knowledge) do known[k]=true end
   backfillDone=false
   makeStatus()
@@ -430,7 +432,7 @@ f:SetScript("OnUpdate",function(self,dt)
   if not entry then table.remove(syncQueue,1);return end
   payload=table.concat({"D",entry.kind,entry.instance,entry.difficulty,entry.npc,entry.spell,entry.name},";")
   kind="discovery"
-  if not db.fastSyncDisabled then
+  if db.fastSyncDisabled==false then
    batchKeys={key}
    local parts={payload}
    local i=2
@@ -485,7 +487,8 @@ SlashCmdList.DBMCOA=function(s)
  s=(s or ""):lower():match("^%s*(.-)%s*$")
  if not db then return end
  if s=="options" then if InterfaceOptionsFrame_OpenToCategory and _G.DBMCoAOptionsPanel then InterfaceOptionsFrame_OpenToCategory(_G.DBMCoAOptionsPanel);InterfaceOptionsFrame_OpenToCategory(_G.DBMCoAOptionsPanel) else say("Options unavailable on this client") end
- elseif s=="status" then local z=zone();say("Auto="..tostring(not db.disabled).." recording="..tostring(recording).." instance="..z.instance.." type="..z.type.." saved="..#db.sessions.." sent="..sent.." received="..received.." pending="..#syncQueue.." controlPending="..#controlQueue.." retryWait="..math.floor(retryWait+0.5).." pongs="..pings.." lastError="..lastSyncError.." channel="..tostring(type(GetChannelName)=="function" and GetChannelName(SYNC_CHANNEL) or "unsupported").." raw="..rawReceived.." duplicates="..duplicates.." rejected="..rejected.." discoverySent="..discoverySent.." peers3m="..activePeers().." timingSent="..timingSent.." timingReceived="..timingReceived.." timingDuplicates="..timingDuplicates.." timingPending="..#timingQueue.." batches="..batchSent.." relaySent="..relaySent.." lastReceive="..lastReceive)
+ elseif s=="overnight" then local t=db.receiveTotals or {};say("Saved received discoveries="..(t.discoveries or 0).." timing imports="..(t.timings or 0).." duplicates="..(t.duplicates or 0).." | login raw="..rawReceived.." peers3m="..activePeers().." legacy send="..tostring(db.fastSyncDisabled~=false))
+  elseif s=="status" then local z=zone();say("Auto="..tostring(not db.disabled).." recording="..tostring(recording).." instance="..z.instance.." type="..z.type.." saved="..#db.sessions.." sent="..sent.." received="..received.." pending="..#syncQueue.." controlPending="..#controlQueue.." retryWait="..math.floor(retryWait+0.5).." pongs="..pings.." lastError="..lastSyncError.." channel="..tostring(type(GetChannelName)=="function" and GetChannelName(SYNC_CHANNEL) or "unsupported").." raw="..rawReceived.." duplicates="..duplicates.." rejected="..rejected.." discoverySent="..discoverySent.." peers3m="..activePeers().." timingSent="..timingSent.." timingReceived="..timingReceived.." timingDuplicates="..timingDuplicates.." timingPending="..#timingQueue.." batches="..batchSent.." relaySent="..relaySent.." lastReceive="..lastReceive)
  elseif s=="experimental off" then db.experimentalDisabled=true;say("Experimental warnings and bars disabled")
  elseif s=="experimental on" then db.experimentalDisabled=false;say("Experimental warnings and bars enabled")
  elseif s=="fast off" then db.fastSyncDisabled=true;say("Batch sync off; single-record compatibility mode")
