@@ -108,41 +108,20 @@ local function warn(label,who)
   RaidNotice_AddMessage(RaidWarningFrame,"[Learned] "..who..": "..label,ChatTypeInfo.RAID_WARNING)
  elseif DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage("|cffffcc00[DBM Learned]|r "..who..": "..label) end
 end
-local anchor=CreateFrame("Frame",nil,UIParent)
-anchor:SetWidth(240);anchor:SetHeight(125);anchor:SetPoint("CENTER",UIParent,"CENTER",300,80)
-local function bar(i)
- if bars[i] then return bars[i] end
- local b=CreateFrame("StatusBar",nil,anchor)
- b:SetWidth(220);b:SetHeight(16);b:SetPoint("TOP",anchor,"TOP",0,-(i-1)*24)
- b:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
- b:SetMinMaxValues(0,1)
- local bg=b:CreateTexture(nil,"BACKGROUND");bg:SetAllPoints(b);bg:SetTexture(0,0,0,0.65)
- local txt=b:CreateFontString(nil,"OVERLAY","GameFontNormalSmall");txt:SetPoint("CENTER",b,"CENTER");b.txt=txt
- b:Hide();bars[i]=b;return b
-end
+-- Native DBM-Core bars: use the player's existing DBM look and movable anchors.
 local function startBar(label,duration)
- if not enabled() then return end
- local now=GetTime()
- local chosen
- for i=1,MAX_BARS do local b=bar(i);if not b.untilTime or b.untilTime<=now then chosen=b;break end end
- if not chosen then return end
- chosen.duration=duration;chosen.untilTime=now+duration;chosen.label=label;chosen:Show()
-end
-local elapsed=0
-f:SetScript("OnUpdate",function(self,dt)
- elapsed=elapsed+dt;if elapsed<0.1 then return end;elapsed=0
- local now=GetTime()
- for i=1,#bars do
-  local b=bars[i]
-  if b:IsShown() then
-   if not enabled() or not b.untilTime or b.untilTime<=now then b:Hide()
-   else local left=b.untilTime-now;b:SetValue(left/b.duration);b.txt:SetText(b.label.." - "..math.ceil(left).."s") end
-  end
+ if not enabled() or type(duration)~="number" or duration<=0 then return end
+ if DBM and DBM.Bars and type(DBM.Bars.CreateBar)=="function" then
+  DBM.Bars:CreateBar(duration,"[Learned] "..tostring(label),"Interface\\Icons\\INV_Misc_PocketWatch_01")
  end
-end)
+end
+SLASH_COABARS1="/coabars"
+SlashCmdList.COABARS=function()
+ if DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage("DBM-CoA: Learned bars use DBM's native anchors. Use /dbm move to reposition them.") end
+end
 f:SetScript("OnEvent",function(self,event,...)
- if event=="PLAYER_ENTERING_WORLD" or event=="ZONE_CHANGED_NEW_AREA" then active={};observed={};lastEvent={};for i=1,#bars do bars[i]:Hide() end;return end
- if event=="PLAYER_REGEN_ENABLED" then active={};observed={};lastEvent={};for i=1,#bars do bars[i]:Hide() end;return end
+ if event=="PLAYER_ENTERING_WORLD" or event=="ZONE_CHANGED_NEW_AREA" then active={};observed={};lastEvent={};return end
+ if event=="PLAYER_REGEN_ENABLED" then active={};observed={};lastEvent={};return end
  if event~="COMBAT_LOG_EVENT_UNFILTERED" or not enabled() then return end
  local inst,diff,instType=currentInstance();if not inst then return end
  local ev=select(2,...)
