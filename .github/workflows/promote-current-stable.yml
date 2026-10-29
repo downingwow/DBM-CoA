@@ -1,0 +1,37 @@
+name: Promote current release to stable
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/promote-current-stable.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mark release stable and latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release edit 'v3.22' --prerelease=false --latest
+          gh api repos/downingwow/DBM-CoA/releases/tags/v3.22 --jq '.prerelease == false and .draft == false' | grep -qx true
+          test "$(gh api repos/downingwow/DBM-CoA/releases/latest --jq .tag_name)" = 'v3.22'
+      - name: Record stable release policy
+        run: |
+          python3 - <<'PY'
+          import json
+          p='.release.json'
+          d=json.load(open(p))
+          d['prerelease']=False
+          open(p,'w').write(json.dumps(d,indent=2)+'\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .release.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record current release as stable'
+            git push origin HEAD:main
+          fi
