@@ -491,9 +491,9 @@ f:SetScript("OnUpdate",function(self,dt)
  if payload then
   -- Smart packets use the same shared-channel rate limiter as legacy messages.
  elseif #smartReply>0 then
-  key=table.remove(smartReply,1)
+  key=smartReply[1]
   local e=db.knowledge and db.knowledge[key]
-  if e then payload=table.concat({"D",e.kind,e.instance,e.difficulty,e.npc,e.spell,e.name},";");kind="smartReply" end
+  if e then payload=table.concat({"D",e.kind,e.instance,e.difficulty,e.npc,e.spell,e.name},";");kind="smartReply" else table.remove(smartReply,1) end
  elseif #controlQueue>0 then
   payload=controlQueue[1];kind="control"
  elseif #syncQueue>0 then
@@ -534,7 +534,7 @@ f:SetScript("OnUpdate",function(self,dt)
  if syncSend(payload) then
   retryDelay=1;retryWait=0
   if kind=="control" then table.remove(controlQueue,1)
-  elseif kind=="smartReply" then discoverySent=discoverySent+1
+  elseif kind=="smartReply" then table.remove(smartReply,1)
   elseif kind=="discovery" then
    if relayQueued[key] then relaySent=relaySent+1;relayQueued[key]=nil end
    table.remove(syncQueue,1)
