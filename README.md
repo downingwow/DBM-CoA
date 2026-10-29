@@ -1,5 +1,14 @@
 # DBM-CoA — Boss Warnings, Encounter Timers & Experimental Auto-Learning
 
+## v3.36 TEST — Native learned timer bars (2026-10-29)
+
+- Learned encounter countdowns now use DBM-Core's native timer bars, not the separate custom bars.
+- Use `/dbm move` to reposition DBM's timer anchors and `/dbm options` to style them.
+- `/coabars` explains the native-bar movement controls.
+- Existing encounter learning and NPC filtering are preserved.
+- **Test build:** Not yet verified in-game on Conquest Reborn. Research-only records are not confirmed boss mechanics.
+
+
 **DBM-CoA helps you react to dangerous fights.** It combines the familiar **Deadly Boss Mods (DBM)** boss-mod system with a custom experimental learner for **Ascension: Conquest of Azeroth / Conquest Reborn**.
 
 ## What DBM does during a fight
