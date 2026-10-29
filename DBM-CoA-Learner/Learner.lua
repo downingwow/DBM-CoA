@@ -142,11 +142,57 @@ local function safeField(v)
  v=tostring(v or ""):gsub("[|;\r\n%z]", " "):gsub("[^%g ]", "")
  return v:sub(1,55)
 end
+-- v3.14 smart sync: additive protocol, preserving all DCOAL31 receive formats.
+local SMART="DCOAS14"
+local smartMap,smartInventory,smartPos={}, {},1
+local smartPending,smartReply,smartWaiting={}, {},{}
+local smartReceived,smartRequests,smartTick=0,0,0
+local function smartHash(k)
+ local h=5381
+ for i=1,#k do h=(h*33+k:byte(i))%4294967296 end
+ return string.format("%08x",h)
+end
+local function smartAdd(k)
+ local h=smartHash(k)
+ if smartMap[h]==nil then
+  smartMap[h]=k;smartInventory[#smartInventory+1]=h
+ elseif smartMap[h]~=k then smartMap[h]=false end -- hash collisions are not requested
+end
+local function smartRebuild()
+ smartMap={};smartInventory={};smartPos=1
+ for k in pairs(db.knowledge or {}) do smartAdd(k) end
+ table.sort(smartInventory)
+end
+local function smartReceive(msg,sender)
+ if type(msg)~="string" or #msg>240 then return end
+ local typ,body=msg:match("^DCOAS14;([IR]);([0-9a-f,]+)$")
+ if not typ then return end
+ local items={}
+ for h in body:gmatch("[^,]+") do
+  if #h~=8 or #items>=8 then return end
+  items[#items+1]=h
+ end
+ if #items==0 then return end
+ smartReceived=smartReceived+1
+ peers[sender or "?"]=clock()
+ for _,h in ipairs(items) do
+  if typ=="I" then
+   if smartMap[h]==nil and not smartWaiting[h] and #smartPending<128 then
+    smartWaiting[h]=true;smartPending[#smartPending+1]=h
+   end
+  else
+   local k=smartMap[h]
+   if type(k)=="string" and #smartReply<128 then
+    smartReply[#smartReply+1]=k;smartRequests=smartRequests+1
+   end
+  end
+ end
+end
 local function remember(kind, instance, difficulty, npcId, spellId, label)
  if not db or db.disabled or not npcId or npcId<=0 then return end
  local key=table.concat({kind,safeField(instance),tostring(difficulty or 0),tostring(npcId),tostring(spellId or 0)}, ";")
  if known[key] then return end
- known[key]=true;discovered=discovered+1
+ known[key]=true;discovered=discovered+1;smartAdd(key)
  db.knowledge=db.knowledge or {}
  db.knowledge[key]={kind=kind,instance=safeField(instance),difficulty=difficulty or 0,npc=npcId,spell=spellId or 0,name=safeField(label),seen=date("%Y-%m-%d %H:%M")}
  if #syncQueue<MAX_QUEUE then syncQueue[#syncQueue+1]=key end
@@ -158,7 +204,7 @@ local function syncSend(payload)
  local id=type(GetChannelName)=="function" and GetChannelName(SYNC_CHANNEL) or 0
  if type(id)~="number" or id<=0 or type(SendChatMessage)~="function" then return false end
  -- Never transmit literal pipe bytes: WoW chat interprets them as escape sequences.
- local msg=PREFIX..";"..payload:gsub("|", " ")
+ local msg=(payload:sub(1,#SMART+1)==SMART..";" and "" or PREFIX..";")..payload:gsub("|", " ")
  if #msg>240 or msg:find("[^%w ;%-_%.%,]") then lastSyncError="invalid payload";return false end
  local ok,err=pcall(SendChatMessage,msg,"CHANNEL",nil,id)
  if ok then sent=sent+1;if payload:sub(1,2)=="D;" then discoverySent=discoverySent+1 elseif payload:sub(1,2)=="T;" then timingSent=timingSent+1 else pingSent=pingSent+1 end;lastSyncError="none" else lastSyncError=tostring(err):sub(1,80) end
@@ -269,7 +315,7 @@ local function receive(msg,sender)
  if not nid or nid<1 or nid>100000000 or not sid or sid>100000000 or not diff or diff>100 then rejected=rejected+1;lastReceive="invalid discovery values";return end
  local key=table.concat({kind,inst,tostring(diff),tostring(nid),tostring(sid)},";")
  if known[key] then duplicates=duplicates+1;db.receiveTotals.duplicates=(db.receiveTotals.duplicates or 0)+1;return end
- known[key]=true;received=received+1;db.receiveTotals.discoveries=(db.receiveTotals.discoveries or 0)+1
+ known[key]=true;received=received+1;smartAdd(key);db.receiveTotals.discoveries=(db.receiveTotals.discoveries or 0)+1
  db.knowledge=db.knowledge or {}
  db.knowledge[key]={kind=kind,instance=inst,difficulty=diff,npc=nid,spell=sid,name=label,seen=date("%Y-%m-%d %H:%M"),remote=true}
  -- Relay newly imported discoveries once; never relay a record already known.
@@ -290,7 +336,7 @@ local function isSyncChannel(displayName, channelIndex, baseName)
  return type(current)=="number" and current>0 and tonumber(channelIndex)==current
 end
 local function channelFilter(self,event,msg,sender,language,displayName,target,flags,zoneId,channelIndex,baseName)
- if type(msg)=="string" and msg:sub(1,#PREFIX+1)==PREFIX..";" and isSyncChannel(displayName,channelIndex,baseName) then return true end
+ if type(msg)=="string" and (msg:sub(1,#PREFIX+1)==PREFIX..";" or msg:sub(1,#SMART+1)==SMART..";") and isSyncChannel(displayName,channelIndex,baseName) then return true end
  return false
 end
 if type(ChatFrame_AddMessageEventFilter)=="function" then ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL",channelFilter) end
@@ -374,6 +420,7 @@ f:SetScript("OnEvent",function(self,event,...)
   if db.fastSyncDisabled==nil then db.fastSyncDisabled=true end -- Legacy peers cannot decode batch records.
   db.receiveTotals=db.receiveTotals or {discoveries=0,timings=0,duplicates=0}
   for k in pairs(db.knowledge) do known[k]=true end
+  smartRebuild()
   backfillDone=false
   makeStatus()
   -- Preserve old recordings; default to automatic operation.
@@ -383,7 +430,9 @@ f:SetScript("OnEvent",function(self,event,...)
  if event=="PLAYER_LOGOUT" then save();return end
  if event=="CHAT_MSG_CHANNEL" then
   local msg,sender,language,channelString,target,flags,zoneId,channelIndex,baseName=...
-  if isSyncChannel(channelString,channelIndex,baseName) then receive(msg,sender) end
+  if isSyncChannel(channelString,channelIndex,baseName) then
+   if type(msg)=="string" and msg:sub(1,#SMART+1)==SMART..";" then smartReceive(msg,sender) else receive(msg,sender) end
+  end
   return
  end
  if event=="PLAYER_ENTERING_WORLD" then safeJoinAfter=GetTime()+35;refresh();return end
@@ -424,7 +473,28 @@ f:SetScript("OnUpdate",function(self,dt)
   for k in pairs(db.timings or {}) do enqueueTiming(k) end
  end
  local payload,kind,key,batchKeys
- if #controlQueue>0 then
+ smartTick=smartTick+1
+ -- Reserve one of four send slots for inventory/request traffic.
+ if smartTick%4==0 then
+  if #smartPending>0 then
+   local h=table.remove(smartPending,1)
+   payload=SMART..";R;"..h;kind="smart"
+  elseif #smartInventory>0 then
+   local parts={}
+   for i=1,8 do
+    parts[#parts+1]=smartInventory[smartPos]
+    smartPos=smartPos%#smartInventory+1
+   end
+   payload=SMART..";I;"..table.concat(parts,",");kind="smart"
+  end
+ end
+ if payload then
+  -- Smart packets use the same shared-channel rate limiter as legacy messages.
+ elseif #smartReply>0 then
+  key=table.remove(smartReply,1)
+  local e=db.knowledge and db.knowledge[key]
+  if e then payload=table.concat({"D",e.kind,e.instance,e.difficulty,e.npc,e.spell,e.name},";");kind="smartReply" end
+ elseif #controlQueue>0 then
   payload=controlQueue[1];kind="control"
  elseif #syncQueue>0 then
   key=syncQueue[1]
@@ -464,6 +534,7 @@ f:SetScript("OnUpdate",function(self,dt)
  if syncSend(payload) then
   retryDelay=1;retryWait=0
   if kind=="control" then table.remove(controlQueue,1)
+  elseif kind=="smartReply" then discoverySent=discoverySent+1
   elseif kind=="discovery" then
    if relayQueued[key] then relaySent=relaySent+1;relayQueued[key]=nil end
    table.remove(syncQueue,1)
@@ -487,7 +558,8 @@ SlashCmdList.DBMCOA=function(s)
  s=(s or ""):lower():match("^%s*(.-)%s*$")
  if not db then return end
  if s=="options" then if InterfaceOptionsFrame_OpenToCategory and _G.DBMCoAOptionsPanel then InterfaceOptionsFrame_OpenToCategory(_G.DBMCoAOptionsPanel);InterfaceOptionsFrame_OpenToCategory(_G.DBMCoAOptionsPanel) else say("Options unavailable on this client") end
- elseif s=="overnight" then local t=db.receiveTotals or {};say("Saved received discoveries="..(t.discoveries or 0).." timing imports="..(t.timings or 0).." duplicates="..(t.duplicates or 0).." | login raw="..rawReceived.." peers3m="..activePeers().." legacy send="..tostring(db.fastSyncDisabled~=false))
+ elseif s=="smart" then say("Smart inventory="..#smartInventory.." requests="..#smartPending.." replies="..#smartReply.." packetsReceived="..smartReceived.." requestsReceived="..smartRequests)
+  elseif s=="overnight" then local t=db.receiveTotals or {};say("Saved received discoveries="..(t.discoveries or 0).." timing imports="..(t.timings or 0).." duplicates="..(t.duplicates or 0).." | login raw="..rawReceived.." peers3m="..activePeers().." legacy send="..tostring(db.fastSyncDisabled~=false))
   elseif s=="status" then local z=zone();say("Auto="..tostring(not db.disabled).." recording="..tostring(recording).." instance="..z.instance.." type="..z.type.." saved="..#db.sessions.." sent="..sent.." received="..received.." pending="..#syncQueue.." controlPending="..#controlQueue.." retryWait="..math.floor(retryWait+0.5).." pongs="..pings.." lastError="..lastSyncError.." channel="..tostring(type(GetChannelName)=="function" and GetChannelName(SYNC_CHANNEL) or "unsupported").." raw="..rawReceived.." duplicates="..duplicates.." rejected="..rejected.." discoverySent="..discoverySent.." peers3m="..activePeers().." timingSent="..timingSent.." timingReceived="..timingReceived.." timingDuplicates="..timingDuplicates.." timingPending="..#timingQueue.." batches="..batchSent.." relaySent="..relaySent.." lastReceive="..lastReceive)
  elseif s=="experimental off" then db.experimentalDisabled=true;say("Experimental warnings and bars disabled")
  elseif s=="experimental on" then db.experimentalDisabled=false;say("Experimental warnings and bars enabled")
