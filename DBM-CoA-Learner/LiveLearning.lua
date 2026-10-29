@@ -97,8 +97,9 @@ f:SetScript("OnEvent",function(self,event,...)
  if old and now-old<3 then return end -- suppress CAST_START/CAST_SUCCESS double warning
  active[k]=now
  local e=lookup(nid,sid,inst,diff)
- if not e then return end
- local name=(type(spell)=="string" and spell~="" and spell) or (e.name and e.name~="" and e.name) or ("Spell "..sid)
+ -- Observed enemy cast is real; warn immediately even on the first sighting.
+ -- Predicted bars still require five stable local timing samples.
+ local name=(type(spell)=="string" and spell~="" and spell) or (e and e.name and e.name~="" and e.name) or ("Spell "..sid)
  -- Live cast notification, once per GUID+spell per 3 seconds.
  warn(name,who or ("NPC "..nid))
  local duration=prediction(nid,sid,inst,diff)

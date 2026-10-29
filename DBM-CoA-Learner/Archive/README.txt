@@ -1,0 +1,1 @@
+Preserved Exiles database labels. Historical and not verified for Conquest Reborn. Not auto-shared as discoveries. Saved in-game observed discoveries are shared on upgrade using the normal channel pacing.

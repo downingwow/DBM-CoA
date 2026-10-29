@@ -25,40 +25,28 @@ local lastReceive="none"
 local peerCount=0
 local statusFrame, statusText
 local known = {}
--- Channel setup is optional and separate from recording. Legacy-compatible sync remains enabled.
-local SYNC_CHANNEL="BBLC25C" -- cooperative shared channel; no addon dependency
+-- Channel setup is optional and separate from recording. This release does not transmit data.
+local SYNC_CHANNEL="BBLC25C" -- shared with LootCollector; do not own or alter membership
 local channelElapsed=0
 local stableSeconds=0
 local previousSignature=nil
 local joinAttempted=false
-local lastJoinAttempt=-100
-local safeJoinAfter=nil
-local function safeToJoin()
- if not safeJoinAfter or GetTime()<safeJoinAfter then return false end
- local id,name=GetChannelName(1)
- return type(id)=="number" and id>0 and type(name)=="string" and name~="" and name:lower()~=SYNC_CHANNEL:lower()
-end
 local function channelSignature()
  if type(GetChannelName)~="function" then return nil end
+ -- Check channels by number, not just their names. Do not join until stable.
  local parts={}
  for i=1,10 do
   local id,name=GetChannelName(i)
-  if type(id)=="number" and id>0 and type(name)=="string" then parts[#parts+1]=tostring(i)..":"..name end
+  if type(id)=="number" and id>0 and type(name)=="string" then
+   parts[#parts+1]=tostring(i)..":"..name
+  end
  end
  return table.concat(parts,"|")
 end
 local function hideSyncChannel() end
-local function ensureSyncChannel()
- if not db or db.channelDisabled or db.sharingDisabled then return end
- if type(GetChannelName)~="function" or type(JoinChannelByName)~="function" then return end
- local id=GetChannelName(SYNC_CHANNEL)
- if type(id)=="number" and id>0 then return end
- local now=GetTime()
- if safeToJoin() and now-lastJoinAttempt>=30 then
-  lastJoinAttempt=now
-  JoinChannelByName(SYNC_CHANNEL)
- end
-end
+-- Passive channel consumer: LootCollector owns BBLC25C. Never join, leave,
+-- reorder, or hide its chat channel from DBM. Safe even if LootCollector is disabled.
+local function ensureSyncChannel() end
 local function verifyChannels() end
 local function say(s) if DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage("|cff66ccffDBM-CoA|r "..s) end end
 local function clock() return GetTime() end
@@ -142,57 +130,12 @@ local function safeField(v)
  v=tostring(v or ""):gsub("[|;\r\n%z]", " "):gsub("[^%w %-_%.%,]", " ")
  return v:sub(1,55)
 end
--- v3.14 smart sync: additive protocol, preserving all DCOAL31 receive formats.
-local SMART="DCOAS14"
-local smartMap,smartInventory,smartPos={}, {},1
-local smartPending,smartReply,smartWaiting={}, {},{}
-local smartReceived,smartRequests,smartTick=0,0,0
-local function smartHash(k)
- local h=5381
- for i=1,#k do h=(h*33+k:byte(i))%4294967296 end
- return string.format("%08x",h)
-end
-local function smartAdd(k)
- local h=smartHash(k)
- if smartMap[h]==nil then
-  smartMap[h]=k;smartInventory[#smartInventory+1]=h
- elseif smartMap[h]~=k then smartMap[h]=false end -- hash collisions are not requested
-end
-local function smartRebuild()
- smartMap={};smartInventory={};smartPos=1
- for k in pairs(db.knowledge or {}) do smartAdd(k) end
- table.sort(smartInventory)
-end
-local function smartReceive(msg,sender)
- if type(msg)~="string" or #msg>240 then return end
- local typ,body=msg:match("^DCOAS14;([IR]);([0-9a-f,]+)$")
- if not typ then return end
- local items={}
- for h in body:gmatch("[^,]+") do
-  if #h~=8 or #items>=8 then return end
-  items[#items+1]=h
- end
- if #items==0 then return end
- smartReceived=smartReceived+1
- peers[sender or "?"]=clock()
- for _,h in ipairs(items) do
-  if typ=="I" then
-   if smartMap[h]==nil and (not smartWaiting[h] or clock()-smartWaiting[h]>180) and #smartPending<128 then
-    smartWaiting[h]=clock();smartPending[#smartPending+1]=h
-   end
-  else
-   local k=smartMap[h]
-   if type(k)=="string" and #smartReply<128 then
-    smartReply[#smartReply+1]=k;smartRequests=smartRequests+1
-   end
-  end
- end
-end
 local function remember(kind, instance, difficulty, npcId, spellId, label)
+ if (not label or label=="") and CoAArchiveRefs then label=(kind=="N" and CoAArchiveRefs.npcs[npcId]) or (kind=="S" and CoAArchiveRefs.spells[spellId]) end
  if not db or db.disabled or not npcId or npcId<=0 then return end
  local key=table.concat({kind,safeField(instance),tostring(difficulty or 0),tostring(npcId),tostring(spellId or 0)}, ";")
  if known[key] then return end
- known[key]=true;discovered=discovered+1;smartAdd(key)
+ known[key]=true;discovered=discovered+1
  db.knowledge=db.knowledge or {}
  db.knowledge[key]={kind=kind,instance=safeField(instance),difficulty=difficulty or 0,npc=npcId,spell=spellId or 0,name=safeField(label),seen=date("%Y-%m-%d %H:%M")}
  if #syncQueue<MAX_QUEUE then syncQueue[#syncQueue+1]=key end
@@ -203,14 +146,8 @@ local function syncSend(payload)
  if not db or db.channelDisabled or db.channelUnsafe or db.sharingDisabled then return false end
  local id=type(GetChannelName)=="function" and GetChannelName(SYNC_CHANNEL) or 0
  if type(id)~="number" or id<=0 or type(SendChatMessage)~="function" then return false end
- -- Never transmit literal pipe bytes: WoW chat interprets them as escape sequences.
- local msg=(payload:sub(1,#SMART+1)==SMART..";" and "" or PREFIX..";")..payload:gsub("|", " ")
- -- Sanitize stored legacy fields on the wire, without mutating saved knowledge.
- if payload:sub(1,2)=="D;" then
-  local typ,inst,diff,nid,sid,label=payload:match("^D;([NS]);([^;]*);(%d+);(%d+);(%d+);([^;]*)$")
-  if typ then msg=PREFIX..";D;"..typ..";"..safeField(inst)..";"..diff..";"..nid..";"..sid..";"..safeField(label) end
- end
- if #msg>240 or msg:find("[^%w ;%-_%.%,]") then lastSyncError="invalid payload";return false end
+ local msg=PREFIX..";"..payload
+ if #msg>240 or msg:find("[^%w ;%-_%.|]") then lastSyncError="invalid payload";return false end
  local ok,err=pcall(SendChatMessage,msg,"CHANNEL",nil,id)
  if ok then sent=sent+1;if payload:sub(1,2)=="D;" then discoverySent=discoverySent+1 elseif payload:sub(1,2)=="T;" then timingSent=timingSent+1 else pingSent=pingSent+1 end;lastSyncError="none" else lastSyncError=tostring(err):sub(1,80) end
  return ok
@@ -276,7 +213,7 @@ local function receive(msg,sender)
   if #msg>240 then rejected=rejected+1;return end
   local body=msg:sub(#PREFIX+4)
   local parts=0
-  for part in (body..","):gmatch("(.-),") do
+  for part in (body.."|"):gmatch("(.-)|") do
    parts=parts+1
    if parts>6 or part=="" or part:sub(1,2)~="D;" then rejected=rejected+1;return end
    receive(PREFIX..";"..part,sender)
@@ -307,7 +244,7 @@ local function receive(msg,sender)
   local old=bySource[source]
   if old and old.count>=t.count then timingDuplicates=timingDuplicates+1;return end
   bySource[source]=t
-  timingReceived=timingReceived+1;db.receiveTotals.timings=(db.receiveTotals.timings or 0)+1
+  timingReceived=timingReceived+1
   -- Cap source memory per ability; local observations are stored separately.
   local count=0;for _ in pairs(bySource) do count=count+1 end
   if count>12 then bySource[source]=nil end
@@ -319,8 +256,8 @@ local function receive(msg,sender)
  nid=tonumber(nid);sid=tonumber(sid);diff=tonumber(diff)
  if not nid or nid<1 or nid>100000000 or not sid or sid>100000000 or not diff or diff>100 then rejected=rejected+1;lastReceive="invalid discovery values";return end
  local key=table.concat({kind,inst,tostring(diff),tostring(nid),tostring(sid)},";")
- if known[key] then duplicates=duplicates+1;db.receiveTotals.duplicates=(db.receiveTotals.duplicates or 0)+1;return end
- known[key]=true;received=received+1;smartAdd(key);db.receiveTotals.discoveries=(db.receiveTotals.discoveries or 0)+1
+ if known[key] then duplicates=duplicates+1;return end
+ known[key]=true;received=received+1
  db.knowledge=db.knowledge or {}
  db.knowledge[key]={kind=kind,instance=inst,difficulty=diff,npc=nid,spell=sid,name=label,seen=date("%Y-%m-%d %H:%M"),remote=true}
  -- Relay newly imported discoveries once; never relay a record already known.
@@ -341,7 +278,7 @@ local function isSyncChannel(displayName, channelIndex, baseName)
  return type(current)=="number" and current>0 and tonumber(channelIndex)==current
 end
 local function channelFilter(self,event,msg,sender,language,displayName,target,flags,zoneId,channelIndex,baseName)
- if type(msg)=="string" and (msg:sub(1,#PREFIX+1)==PREFIX..";" or msg:sub(1,#SMART+1)==SMART..";") and isSyncChannel(displayName,channelIndex,baseName) then return true end
+ if type(msg)=="string" and msg:sub(1,#PREFIX+1)==PREFIX..";" and isSyncChannel(displayName,channelIndex,baseName) then return true end
  return false
 end
 if type(ChatFrame_AddMessageEventFilter)=="function" then ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL",channelFilter) end
@@ -355,25 +292,96 @@ local function updateStatus()
  local z=zone()
  local ch=type(GetChannelName)=="function" and GetChannelName(SYNC_CHANNEL) or 0
  local n=0;for _ in pairs(db and db.knowledge or {}) do n=n+1 end
- statusText:SetText("DBM-CoA Learner\n"..(recording and "Recording" or "Idle").." | Events: "..(session and #session.events or 0).."\nDiscoveries: "..n.." | Received: "..received.."\nSync: "..(ch>0 and not db.sharingDisabled and "Shared channel available" or "Offline").." | Sent: "..sent.." | Queue: "..#syncQueue.."\nPeers (3m): "..activePeers().." | Raw: "..rawReceived.." | Dup: "..duplicates.." | Bad: "..rejected.."\nTiming sent: "..timingSent.." | Imported: "..timingReceived)
+ local a=db and db.archiveSmart21 or {}
+ local archiveStatus=(db and db.archiveSharingDisabled) and "Paused" or ((ch>0 and db and not db.sharingDisabled and not db.channelDisabled) and "Smart Sync" or "Offline")
+ local lines={
+  "DBM-CoA Learner",
+  (recording and "Recording" or "Idle").." | Events: "..(session and #session.events or 0),
+  "Discoveries: "..n.." | Received: "..received,
+  "Sync: "..(ch>0 and not db.sharingDisabled and "Shared channel available" or "Offline").." | Sent: "..sent.." | Queue: "..#syncQueue,
+  "Peers (3m): "..activePeers().." | Raw: "..rawReceived.." | Dup: "..duplicates.." | Bad: "..rejected,
+  "Timing sent: "..timingSent.." | Imported: "..timingReceived,
+  "Archive: "..archiveStatus.." | Sent: "..(a.sent or 0).." | New: "..(a.received or 0),
+  "Duplicates: "..(a.duplicates or 0).." | Conflicts: "..(a.conflicts or 0).." | Requests: "..(a.requests or 0)
+ }
+ statusText:SetText(table.concat(lines,string.char(10)))
 end
+-- Optional UI skin: no dependency on ElvUI, DragonUI, or third-party APIs.
+-- Uses ElvUI's skinning helpers only when present and safely callable.
+local function applyOptionalUISkin(frame, closeButton, background)
+ if not frame then return end
+ local elv=type(ElvUI)=="table" and ElvUI[1] or nil
+ if type(elv)~="table" then return end
+ if frame.coaElvUISkinned then return end
+ frame.coaElvUISkinned=true
+ local ok=false
+ if type(frame.CreateBackdrop)=="function" then
+  ok=pcall(frame.CreateBackdrop,frame,"Transparent")
+ end
+ if ok then
+  if background then background:Hide() end
+ elseif type(frame.SetTemplate)=="function" then
+  ok=pcall(frame.SetTemplate,frame,"Transparent")
+  if ok and background then background:Hide() end
+ end
+ if closeButton and type(closeButton.SetTemplate)=="function" then
+  pcall(closeButton.SetTemplate,closeButton,"Default")
+ end
+end
+
 local function makeStatus()
  if statusFrame then return end
  statusFrame=CreateFrame("Frame","DBMCoALearnerStatus",UIParent)
- statusFrame:SetWidth(300);statusFrame:SetHeight(120);statusFrame:SetPoint("CENTER",UIParent,"CENTER",0,180)
- statusFrame:SetFrameStrata("LOW")
- local bg=statusFrame:CreateTexture(nil,"BACKGROUND");bg:SetAllPoints(statusFrame);bg:SetTexture(0,0,0,0.72)
+ local width=(db and tonumber(db.statusWidth)) or 405
+ local height=(db and tonumber(db.statusHeight)) or 165
+ width=math.max(320,math.min(850,width))
+ height=math.max(155,math.min(500,height))
+ statusFrame:SetWidth(width);statusFrame:SetHeight(height)
+ statusFrame:SetPoint("CENTER",UIParent,"CENTER",0,180)
+ statusFrame:SetFrameStrata("MEDIUM")
+ statusFrame:SetResizable(true)
+ statusFrame:SetMinResize(320,155)
+ statusFrame:SetMaxResize(850,500)
+ local bg=statusFrame:CreateTexture(nil,"BACKGROUND")
+ bg:SetAllPoints(statusFrame);bg:SetTexture(0,0,0,0.72)
  statusText=statusFrame:CreateFontString(nil,"OVERLAY","GameFontNormalSmall")
- statusText:SetPoint("TOPLEFT",statusFrame,"TOPLEFT",8,-7);statusText:SetJustifyH("LEFT")
- statusFrame:EnableMouse(true);statusFrame:SetMovable(true);statusFrame:RegisterForDrag("LeftButton")
+ statusText:SetPoint("TOPLEFT",statusFrame,"TOPLEFT",8,-8)
+ statusText:SetPoint("BOTTOMRIGHT",statusFrame,"BOTTOMRIGHT",-18,10)
+ statusText:SetJustifyH("LEFT");statusText:SetJustifyV("TOP")
+ statusFrame:EnableMouse(true);statusFrame:SetMovable(true)
+ statusFrame:RegisterForDrag("LeftButton")
  statusFrame:SetScript("OnDragStart",function(self) self:StartMoving() end)
  statusFrame:SetScript("OnDragStop",function(self) self:StopMovingOrSizing() end)
  local close=CreateFrame("Button",nil,statusFrame,"UIPanelCloseButton")
- close:SetWidth(22);close:SetHeight(22);close:SetPoint("TOPRIGHT",statusFrame,"TOPRIGHT",0,0)
+ close:SetWidth(22);close:SetHeight(22)
+ close:SetPoint("TOPRIGHT",statusFrame,"TOPRIGHT",0,0)
  close:SetScript("OnClick",function() if db then db.hideStatus=true end;statusFrame:Hide() end)
+ -- Native 3.3.5a-compatible bottom-right sizing grip (no DragonUI dependency).
+ local grip=CreateFrame("Button",nil,statusFrame)
+ grip:SetWidth(18);grip:SetHeight(18)
+ grip:SetPoint("BOTTOMRIGHT",statusFrame,"BOTTOMRIGHT",-2,2)
+ grip:SetFrameLevel(statusFrame:GetFrameLevel()+5)
+ grip:EnableMouse(true)
+ local texture=grip:CreateTexture(nil,"OVERLAY")
+ texture:SetAllPoints(grip)
+ texture:SetTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
+ grip:SetNormalTexture(texture)
+ grip:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight")
+ grip:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
+ grip:SetScript("OnMouseDown",function(self,button)
+  if button=="LeftButton" then statusFrame:StartSizing("BOTTOMRIGHT") end
+ end)
+ grip:SetScript("OnMouseUp",function(self,button)
+  if button=="LeftButton" then
+   statusFrame:StopMovingOrSizing()
+   if db then db.statusWidth=math.floor(statusFrame:GetWidth()+0.5);db.statusHeight=math.floor(statusFrame:GetHeight()+0.5) end
+  end
+ end)
+ applyOptionalUISkin(statusFrame,close,bg)
  if db and db.hideStatus then statusFrame:Hide() end
  updateStatus()
 end
+
 local function add(ev,sg,sn,dg,dn,spell,name,extra)
  if not recording then return end
  if #session.events>=MAX_EVENTS then session.dropped=session.dropped+1;return end
@@ -383,7 +391,7 @@ local function add(ev,sg,sn,dg,dn,spell,name,extra)
    remember("S",session.instance,session.difficulty,id,spell,name or sn)
    -- Count a cast once, not both CAST_START and CAST_SUCCESS.
    if spell and (ev=="SPELL_CAST_START" or ev=="SPELL_CAST_SUCCESS") then
-    local castKey=tostring(sg or id)..":"..tostring(spell) -- Distinguish same-template creatures
+    local castKey=tostring(id)..":"..tostring(spell)
     if ev=="SPELL_CAST_START" then
      session.castStarts=session.castStarts or {};session.castStarts[castKey]=clock()
      observeTiming(session.instance,session.difficulty,id,spell)
@@ -422,26 +430,20 @@ f:SetScript("OnEvent",function(self,event,...)
   if ...~="DBM-CoA-Learner" then return end
   DBMCoALearnerDB=DBMCoALearnerDB or {}
   db=DBMCoALearnerDB;db.sessions=db.sessions or {};db.knowledge=db.knowledge or {};db.timings=db.timings or {};db.remoteTimingSources=db.remoteTimingSources or {}
-  if db.fastSyncDisabled==nil then db.fastSyncDisabled=true end -- Legacy peers cannot decode batch records.
-  db.receiveTotals=db.receiveTotals or {discoveries=0,timings=0,duplicates=0}
   for k in pairs(db.knowledge) do known[k]=true end
-  smartRebuild()
   backfillDone=false
   makeStatus()
   -- Preserve old recordings; default to automatic operation.
-  refresh();ensureSyncChannel();return
+  refresh();return
  end
  if not db then return end
  if event=="PLAYER_LOGOUT" then save();return end
  if event=="CHAT_MSG_CHANNEL" then
   local msg,sender,language,channelString,target,flags,zoneId,channelIndex,baseName=...
-  if isSyncChannel(channelString,channelIndex,baseName) then
-   if type(msg)=="string" and msg:sub(1,#SMART+1)==SMART..";" then smartReceive(msg,sender) else receive(msg,sender) end
-  end
+  if isSyncChannel(channelString,channelIndex,baseName) then receive(msg,sender) end
   return
  end
- if event=="PLAYER_ENTERING_WORLD" then safeJoinAfter=GetTime()+35;refresh();return end
- if event=="ZONE_CHANGED_NEW_AREA" then refresh();return end
+ if event=="PLAYER_ENTERING_WORLD" or event=="ZONE_CHANGED_NEW_AREA" then refresh();return end
  if event=="CHANNEL_UI_UPDATE" or event=="UPDATE_CHAT_WINDOWS" or event=="CHAT_MSG_CHANNEL_NOTICE" then hideSyncChannel();return end
  if not recording then return end
  if event=="PLAYER_TARGET_CHANGED" then refresh();target()
@@ -474,34 +476,16 @@ f:SetScript("OnUpdate",function(self,dt)
  local id=type(GetChannelName)=="function" and GetChannelName(SYNC_CHANNEL) or 0
  if type(id)~="number" or id<=0 then return end
  if not backfillDone then
-  -- v3.15: inventory/request replaces the expensive full-database login flood.
-  -- Older clients can still send records to us using the unchanged receiver.
-  if db.fullBackfillEnabled then queueBackfill() else backfillDone=true end
+  -- One-time, rate-limited broadcast of saved, observed discoveries on upgrade.
+  -- Name-only historical reference IDs are never presented as observed mechanics.
+  if db.lastBroadcastBuild~="3.15" then
+   queueBackfill()
+   db.lastBroadcastBuild="3.15"
+  else backfillDone=true end
   for k in pairs(db.timings or {}) do enqueueTiming(k) end
  end
  local payload,kind,key,batchKeys
- smartTick=smartTick+1
- -- Reserve one of four send slots for inventory/request traffic.
- if smartTick%4==0 then
-  if #smartPending>0 then
-   local h=table.remove(smartPending,1)
-   payload=SMART..";R;"..h;kind="smart"
-  elseif #smartInventory>0 then
-   local parts={}
-   for i=1,8 do
-    parts[#parts+1]=smartInventory[smartPos]
-    smartPos=smartPos%#smartInventory+1
-   end
-   payload=SMART..";I;"..table.concat(parts,",");kind="smart"
-  end
- end
- if payload then
-  -- Smart packets use the same shared-channel rate limiter as legacy messages.
- elseif #smartReply>0 then
-  key=smartReply[1]
-  local e=db.knowledge and db.knowledge[key]
-  if e then payload=table.concat({"D",e.kind,e.instance,e.difficulty,e.npc,e.spell,e.name},";");kind="smartReply" else table.remove(smartReply,1) end
- elseif #controlQueue>0 then
+ if #controlQueue>0 then
   payload=controlQueue[1];kind="control"
  elseif #syncQueue>0 then
   key=syncQueue[1]
@@ -509,7 +493,7 @@ f:SetScript("OnUpdate",function(self,dt)
   if not entry then table.remove(syncQueue,1);return end
   payload=table.concat({"D",entry.kind,entry.instance,entry.difficulty,entry.npc,entry.spell,entry.name},";")
   kind="discovery"
-  if db.fastSyncDisabled==false then
+  if not db.fastSyncDisabled then
    batchKeys={key}
    local parts={payload}
    local i=2
@@ -518,13 +502,13 @@ f:SetScript("OnUpdate",function(self,dt)
     local e=db.knowledge and db.knowledge[k]
     if e then
      local part=table.concat({"D",e.kind,e.instance,e.difficulty,e.npc,e.spell,e.name},";")
-     local candidate="B;"..table.concat(parts,",")..","..part
+     local candidate="B;"..table.concat(parts,"|").."|"..part
      if #PREFIX+1+#candidate>235 then break end
      parts[#parts+1]=part;batchKeys[#batchKeys+1]=k
     end
     i=i+1
    end
-   if #batchKeys>1 then payload="B;"..table.concat(parts,",");kind="batch" end
+   if #batchKeys>1 then payload="B;"..table.concat(parts,"|");kind="batch" end
   end
  elseif #timingQueue>0 then
   key=timingQueue[1]
@@ -541,7 +525,6 @@ f:SetScript("OnUpdate",function(self,dt)
  if syncSend(payload) then
   retryDelay=1;retryWait=0
   if kind=="control" then table.remove(controlQueue,1)
-  elseif kind=="smartReply" then table.remove(smartReply,1)
   elseif kind=="discovery" then
    if relayQueued[key] then relaySent=relaySent+1;relayQueued[key]=nil end
    table.remove(syncQueue,1)
@@ -565,20 +548,18 @@ SlashCmdList.DBMCOA=function(s)
  s=(s or ""):lower():match("^%s*(.-)%s*$")
  if not db then return end
  if s=="options" then if InterfaceOptionsFrame_OpenToCategory and _G.DBMCoAOptionsPanel then InterfaceOptionsFrame_OpenToCategory(_G.DBMCoAOptionsPanel);InterfaceOptionsFrame_OpenToCategory(_G.DBMCoAOptionsPanel) else say("Options unavailable on this client") end
- elseif s=="smart" then say("Smart inventory="..#smartInventory.." requests="..#smartPending.." replies="..#smartReply.." packetsReceived="..smartReceived.." requestsReceived="..smartRequests)
-  elseif s=="overnight" then local t=db.receiveTotals or {};say("Saved received discoveries="..(t.discoveries or 0).." timing imports="..(t.timings or 0).." duplicates="..(t.duplicates or 0).." | login raw="..rawReceived.." peers3m="..activePeers().." legacy send="..tostring(db.fastSyncDisabled~=false))
-  elseif s=="status" then local z=zone();say("Auto="..tostring(not db.disabled).." recording="..tostring(recording).." instance="..z.instance.." type="..z.type.." saved="..#db.sessions.." sent="..sent.." received="..received.." pending="..#syncQueue.." controlPending="..#controlQueue.." retryWait="..math.floor(retryWait+0.5).." pongs="..pings.." lastError="..lastSyncError.." channel="..tostring(type(GetChannelName)=="function" and GetChannelName(SYNC_CHANNEL) or "unsupported").." raw="..rawReceived.." duplicates="..duplicates.." rejected="..rejected.." discoverySent="..discoverySent.." peers3m="..activePeers().." timingSent="..timingSent.." timingReceived="..timingReceived.." timingDuplicates="..timingDuplicates.." timingPending="..#timingQueue.." batches="..batchSent.." relaySent="..relaySent.." lastReceive="..lastReceive)
+ elseif s=="status" then local z=zone();say("Auto="..tostring(not db.disabled).." recording="..tostring(recording).." instance="..z.instance.." type="..z.type.." saved="..#db.sessions.." sent="..sent.." received="..received.." pending="..#syncQueue.." controlPending="..#controlQueue.." retryWait="..math.floor(retryWait+0.5).." pongs="..pings.." lastError="..lastSyncError.." channel="..tostring(type(GetChannelName)=="function" and GetChannelName(SYNC_CHANNEL) or "unsupported").." raw="..rawReceived.." duplicates="..duplicates.." rejected="..rejected.." discoverySent="..discoverySent.." peers3m="..activePeers().." timingSent="..timingSent.." timingReceived="..timingReceived.." timingDuplicates="..timingDuplicates.." timingPending="..#timingQueue.." batches="..batchSent.." relaySent="..relaySent.." lastReceive="..lastReceive)
  elseif s=="experimental off" then db.experimentalDisabled=true;say("Experimental warnings and bars disabled")
  elseif s=="experimental on" then db.experimentalDisabled=false;say("Experimental warnings and bars enabled")
  elseif s=="fast off" then db.fastSyncDisabled=true;say("Batch sync off; single-record compatibility mode")
  elseif s=="fast on" then db.fastSyncDisabled=false;say("Batch sync enabled; conservative 0.75s pacing")
  elseif s=="share off" then db.sharingDisabled=true;say("Sync sharing disabled; local recording continues")
- elseif s=="share on" then db.sharingDisabled=false;backfillDone=false;ensureSyncChannel();say("Sync sharing enabled")
+ elseif s=="share on" then db.sharingDisabled=false;backfillDone=false;say("Sync sharing enabled")
  elseif s=="ping" then if queueControl("H;PING") then say("Ping queued; will send using the 1-second rate limit") else say("Ping queue full; try again shortly") end
  elseif s=="ui off" then db.hideStatus=true;if statusFrame then statusFrame:Hide() end
  elseif s=="ui on" then db.hideStatus=false;makeStatus();statusFrame:Show()
  elseif s=="channel off" then db.channelDisabled=true;say("Shared-channel listening disabled; existing channel membership unchanged")
- elseif s=="channel on" then db.channelDisabled=false;db.channelUnsafe=nil;ensureSyncChannel();say("Shared-channel listening enabled (cooperative BBLC25C)")
+ elseif s=="channel on" then db.channelDisabled=false;db.channelUnsafe=nil;say("Shared-channel listening enabled (LootCollector owns BBLC25C)")
  elseif s=="off" then db.disabled=true;save();say("Automatic recording disabled")
  elseif s=="on" then db.disabled=false;refresh();say("Automatic recording enabled")
  elseif s=="clear" then db.sessions={};say("Saved sessions cleared")

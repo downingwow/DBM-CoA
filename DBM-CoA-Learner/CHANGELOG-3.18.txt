@@ -1,0 +1,1 @@
+v3.18: Learner status window now shows archive sharing status, records sent / 382118, and records received. Window enlarged to prevent clipping. Uses existing v3.17 sharing engine. Not tested in game.\n

@@ -1,0 +1,33 @@
+{
+  "version": "v3.22",
+  "prerelease": true,
+  "folders": [
+    "DBM-AQ20",
+    "DBM-AQ40",
+    "DBM-BWL",
+    "DBM-BlackTemple",
+    "DBM-BurningCrusade",
+    "DBM-CoA-Learner",
+    "DBM-CoA-Observer",
+    "DBM-Core",
+    "DBM-GUI",
+    "DBM-GruulsLair",
+    "DBM-Hyjal",
+    "DBM-Karazhan",
+    "DBM-MC",
+    "DBM-MagtheridonsLair",
+    "DBM-Naxx",
+    "DBM-Onyxia",
+    "DBM-Outlands",
+    "DBM-Party-BC",
+    "DBM-Party-Vanilla",
+    "DBM-PvP",
+    "DBM-Serpentshrine",
+    "DBM-SpellTimers",
+    "DBM-Sunwell",
+    "DBM-TheEye",
+    "DBM-WorldEvents",
+    "DBM-ZG",
+    "DBM-ZulAman"
+  ]
+}

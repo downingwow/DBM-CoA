@@ -1,0 +1,6 @@
+DBM-CoA v3.22 - Optional ElvUI compatibility (TEST)
+- Optional ElvUI-aware Learner window backdrop styling, protected by safe API checks.
+- Preserves the original default Blizzard UI and DragonUI presentation if ElvUI is absent.
+- No requirement to disable ElvUI or DragonUI.
+- Retains v3.21 Smart Archive Sync, resize grip, and SavedVariables.
+- In-game compatibility has not been verified.

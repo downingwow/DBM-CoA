@@ -1,0 +1,1 @@
+v3.16: ships 900 historical elite NPCs and their archived spell associations; broadcasts reference entries over BBLC25C using DCOAR16 with 3-second pacing, resume cursor and separate storage on receivers. Reference messages are NOT asserted as verified encounter observations. /coaarchive status, on, off, reset. No in-game test performed.

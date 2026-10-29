@@ -1,78 +1,54 @@
-name: Package and publish addon release
-
+name: Build and publish versioned addon
 on:
-  workflow_dispatch:
   push:
     branches: [main]
-    paths-ignore:
-      - '**/*.md'
-    tags:
-      - 'v*'
-
-concurrency:
-  group: release-${{ github.ref }}
-  cancel-in-progress: false
-
+    paths: ['.release.json']
+  workflow_dispatch:
 permissions:
   contents: write
-
+concurrency:
+  group: addon-release
+  cancel-in-progress: false
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out tagged source
-        uses: actions/checkout@v4
-      - name: Verify addon files and build ZIP
-        shell: bash
+      - uses: actions/checkout@v4
+      - name: Validate manifest and package installable folders
         run: |
-          set -euo pipefail
-          REPO="${{ github.event.repository.name }}"
-          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
-            VERSION="$GITHUB_REF_NAME"
-          else
-            VERSION="auto-${GITHUB_RUN_NUMBER}-${GITHUB_SHA:0:8}"
-          fi
-          mkdir -p dist
-          case "$REPO" in
-            Questie-X)
-              dirs=(Questie-X)
-              ;;
-            LootCollector)
-              dirs=(LootCollector LootCollector_CustomImport LootCollector_StarterDB)
-              ;;
-            DBM-CoA)
-              mapfile -t dirs < <(find . -maxdepth 1 -type d -name 'DBM-*' -printf '%f\n' | sort)
-              ;;
-            *)
-              echo "::error::Unknown addon repository: $REPO"
-              exit 1
-              ;;
-          esac
-          test "${#dirs[@]}" -gt 0 || { echo "::error::No addon directories"; exit 1; }
-          for dir in "${dirs[@]}"; do
-            test -d "$dir" || { echo "::error::Missing $dir"; exit 1; }
-            test -n "$(find "$dir" -maxdepth 1 -name '*.toc' -print -quit)" || { echo "::error::Missing .toc in $dir"; exit 1; }
-          done
-          if [ "$REPO" = DBM-CoA ]; then
-            for dir in DBM-Core DBM-GUI DBM-CoA-Learner DBM-CoA-Observer; do
-              test -d "$dir" || { echo "::error::Required DBM folder missing: $dir"; exit 1; }
-            done
-          fi
-          zip -qr "dist/${REPO}-${VERSION}.zip" "${dirs[@]}" -x '*/.DS_Store' '*/Thumbs.db'
-      - name: Publish versioned GitHub Release
+          python3 - <<'PY'
+          import pathlib,json,zipfile,re,os
+          root=pathlib.Path('.')
+          cfg=json.loads((root/'.release.json').read_text())
+          assert re.fullmatch(r'v[0-9]+(?:[.][0-9]+)+(?:-CoA)?',cfg['version'])
+          folders=cfg['folders']
+          assert folders and len(folders)==len(set(folders))
+          for name in folders:
+              assert '/' not in name and '\\' not in name and name not in ('.','..')
+              p=root/name
+              assert p.is_dir() and list(p.glob('*.toc')), 'Missing addon or TOC: '+name
+          out=root/'dist';out.mkdir(exist_ok=True)
+          artifact=out/(os.environ['GITHUB_REPOSITORY'].split('/')[-1]+'-'+cfg['version']+'.zip')
+          with zipfile.ZipFile(artifact,'w',zipfile.ZIP_DEFLATED) as z:
+              for name in folders:
+                  for p in sorted((root/name).rglob('*')):
+                      if p.is_file() and p.name not in ('.DS_Store','Thumbs.db'):
+                          z.write(p,p.as_posix())
+          with zipfile.ZipFile(artifact) as z: assert z.testzip() is None
+          with open(os.environ['GITHUB_ENV'],'a') as f:
+              f.write('VERSION='+cfg['version']+'\n')
+              f.write('ASSET='+str(artifact)+'\n')
+              f.write('PRERELEASE='+str(cfg['prerelease']).lower()+'\n')
+          PY
+      - name: Publish release and ZIP
         env:
           GH_TOKEN: ${{ github.token }}
-        shell: bash
         run: |
           set -euo pipefail
-          REPO="${{ github.event.repository.name }}"
-          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
-            VERSION="$GITHUB_REF_NAME"
-          else
-            VERSION="auto-${GITHUB_RUN_NUMBER}-${GITHUB_SHA:0:8}"
+          args=()
+          if [ "$PRERELEASE" = true ]; then args+=(--prerelease --latest=false); else args+=(--latest); fi
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "::error::Release already exists; refusing to overwrite it"
+            exit 1
           fi
-          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
-            gh release create "$VERSION" "dist/${REPO}-${VERSION}.zip" --title "${REPO} ${VERSION}" --generate-notes --verify-tag
-          else
-            gh release create "$VERSION" "dist/${REPO}-${VERSION}.zip" --target "$GITHUB_SHA" --title "${REPO} automatic build ${GITHUB_RUN_NUMBER}" --generate-notes --prerelease --latest=false
-          fi
+          gh release create "$VERSION" "$ASSET" --target "$GITHUB_SHA" --title "${GITHUB_REPOSITORY#*/} $VERSION" --notes-file RELEASE-NOTES.md "${args[@]}"

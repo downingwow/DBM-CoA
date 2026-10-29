@@ -1,0 +1,1 @@
+v3.20: Resize learner window by dragging bottom-right grip; saved width and height persist across logins; text adapts to window size. Minimum 320x155, maximum 850x500. Drag main window to move. Not in-game tested.

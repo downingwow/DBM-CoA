@@ -1,0 +1,1 @@
+v3.15 Archive Test: live enemy cast warnings on first observation; predicted cooldown bars only from stable local samples; rate-limited one-time rebroadcast of saved observed discoveries; smart sync retry; historical NPC/spell ID reference datasets bundled separately (not auto-shared as encounter discoveries). Not in-game tested.

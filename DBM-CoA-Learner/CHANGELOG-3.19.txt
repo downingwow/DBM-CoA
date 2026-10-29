@@ -1,0 +1,1 @@
+v3.19: Fix literal backslash-n in learner status text that rendered every status field on one giant line. Use real line breaks, explicit text bounds, top alignment and taller window. Preserve archive sharing progress and saved discoveries. Not in-game tested.\n

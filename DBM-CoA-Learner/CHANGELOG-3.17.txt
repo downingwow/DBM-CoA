@@ -1,0 +1,1 @@
+v3.17: Full historical NPC/spell/quest/item ID and label archive distributed via DCOAR17 batches on BBLC25C; resumable saved cursor and deduplicating receiver. Counts: {'N': 41817, 'S': 214152, 'Q': 10776, 'I': 115373}. Historical reference labels are NOT confirmed boss casts, timers or mechanics. Not in-game tested.

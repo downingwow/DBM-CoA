@@ -49,7 +49,7 @@ The package contains multiple separate addon folders, including **DBM-Core**, **
 
 ## Current build and known limits
 
-**Latest package located:** *DBM-CoA v3.12 — Safe Channel Startup*. Its source files have now been uploaded to this repository. **A downloadable GitHub Release has not yet been published.** [Release downloads](https://github.com/downingwow/DBM-CoA/releases) will appear after the verified package is uploaded.
+**Current source build: v3.22 (experimental test build).** Optional ElvUI compatibility and Smart Archive Sync. Installable ZIPs and version history are published through [GitHub Releases](https://github.com/downingwow/DBM-CoA/releases).
 
 The learner can receive duplicate or invalid timing records, and older versions may not support all current message types. Learned encounter warnings and exact backward compatibility still require in-game verification. Interface target: **30300**.
 
@@ -58,3 +58,8 @@ The learner can receive duplicate or invalid timing records, and older versions 
 Based on [Deadly Boss Mods](https://github.com/DeadlyBossMods/DeadlyBossMods) by its original authors and contributors. CoA-specific learner adaptation and distribution by **Uncle Bone**. Community project, not an official DBM or Ascension release.
 
 [Report issues / request features](https://github.com/downingwow/DBM-CoA/issues) · [Changelog](CHANGELOG.md)
+
+
+## v3.22 changes
+
+Optional ElvUI-aware learner-window styling retains the default UI and DragonUI fallback. Includes Smart Archive Sync, the resizable learner window and historical archive reference data. Archive references are not verified observations; live compatibility remains untested.
