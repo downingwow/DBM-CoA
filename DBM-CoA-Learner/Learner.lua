@@ -430,6 +430,9 @@ f:SetScript("OnEvent",function(self,event,...)
   if ...~="DBM-CoA-Learner" then return end
   DBMCoALearnerDB=DBMCoALearnerDB or {}
   db=DBMCoALearnerDB;db.sessions=db.sessions or {};db.knowledge=db.knowledge or {};db.timings=db.timings or {};db.remoteTimingSources=db.remoteTimingSources or {}
+  -- Auto-learning is ON for both party (dungeons) and raid instances by default.
+  -- Preserve explicit opt-out from previous releases.
+  if db.experimentalDisabled==nil then db.experimentalDisabled=false end
   for k in pairs(db.knowledge) do known[k]=true end
   backfillDone=false
   makeStatus()

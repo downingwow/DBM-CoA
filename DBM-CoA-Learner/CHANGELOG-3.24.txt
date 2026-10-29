@@ -1,0 +1,7 @@
+v3.24 ZG Raid TEST
+- Persist observed per-creature spell recast intervals into raid/party > instance > difficulty > NPC > spell hierarchy.
+- /coatimings browses learned spells, observation counts and stable predictions.
+- Conservative 3+ matching interval requirement; no invented first-pull boss timers.
+- Warnings on actual enemy casts; prediction bars based on local saved observations.
+- Keeps v3.23 archive sync and ElvUI/DragonUI support.
+- Not tested in-game; BACK UP SAVED VARIABLES before installation.

@@ -1,0 +1,3 @@
+DBM-CoA v3.23 observed data review
+Learner uploads include 3 recorded sessions and repeated SPELL_CAST_START entries for Fireball, Hooked Net, Veil of Shadow and Dire Growl. Observer uploads include 3 fights from Scarlet Monastery and health/event samples. Saved DBM-SpellTimers.lua contains utility cooldown settings (repair bots, Jeeves, portals), not boss mechanics.
+LiveLearning now shows immediate cast warnings on observed enemy casts and predicts the next cast only after at least 3 consistent per-creature recast intervals in the current instance session, or at least 5 previously learned stable local timing samples. This is an experimental prediction, not a verified boss timer. Inconsistent intervals are rejected. Existing raid modules are unchanged.

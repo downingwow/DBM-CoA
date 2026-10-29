@@ -1,0 +1,7 @@
+DBM-CoA v3.25 - Raid and Dungeon Learning TEST
+- Automatic experimental encounter learning explicitly defaults ON for fresh users, for both party/dungeon and raid instances.
+- Existing explicit opt-outs are preserved.
+- /coalearning reports current learning status and instance type.
+- Keeps live cast alerts, saved categorized learned timings (/coatimings), Smart Archive Sync, resizable Learner window, and optional ElvUI/DragonUI styling.
+- Predicted cooldowns require repeated consistent real observations; no fabricated Zul'Gurub boss timers.
+- Untested in Conquest Reborn client.

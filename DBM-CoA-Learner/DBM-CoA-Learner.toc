@@ -1,5 +1,5 @@
 ## Interface: 30300
-## Title: DBM CoA AutoLearner and Sync v3.22 ElvUI Compatibility Test
+## Title: DBM CoA AutoLearner and Sync v3.25 Dungeon + Raid Learning Test
 ## Notes: Automatic encounter learning and opt-out channel synchronization for Conquest of Azeroth.
 ## Dependencies: DBM-Core
 ## SavedVariables: DBMCoALearnerDB

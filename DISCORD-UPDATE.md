@@ -1,7 +1,13 @@
-DBM-CoA v3.22 TEST is available!
+🐉 **DBM-CoA v3.25 — Raid & Dungeon Learning**
+**Ascension | Conquest of Azeroth | Conquest Reborn**
 
-Optional ElvUI styling for the learner window, with default UI/DragonUI fallback. Includes Smart Archive Sync, historical archive references, and a resizable learner window. Recording, cooperative sharing and saved data are retained. This is a test build; live compatibility still needs testing.
+• Automatic encounter learning defaults ON for new users in dungeons and raids; existing opt-outs stay respected.
+• `/coalearning` shows learning status and instance type.
+• `/coatimings` browses saved encounter timings and observation counts.
+• Live cast alerts and predicted timers use real observations. Predictions require repeated consistent intervals.
+• Keeps Smart Archive Sync, window resizing, saved data and optional ElvUI/DragonUI styling.
 
-Install all DBM-* folders from the release ZIP and keep your WTF/SavedVariables.
-Download: https://github.com/downingwow/DBM-CoA/releases
-Maintainer: Uncle Bone
+Back up your SavedVariables, then install all DBM-* folders. In-game validation remains pending.
+https://github.com/downingwow/DBM-CoA/releases/tag/v3.25
+
+:dragon: Uncle Bone :dragon:

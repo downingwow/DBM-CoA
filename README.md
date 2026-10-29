@@ -49,7 +49,7 @@ The package contains multiple separate addon folders, including **DBM-Core**, **
 
 ## Current build and known limits
 
-**Current source build: v3.22 (experimental test build).** Optional ElvUI compatibility and Smart Archive Sync. Installable ZIPs and version history are published through [GitHub Releases](https://github.com/downingwow/DBM-CoA/releases).
+**Current source build: v3.25 (experimental test build).** Optional ElvUI compatibility and Smart Archive Sync. Installable ZIPs and version history are published through [GitHub Releases](https://github.com/downingwow/DBM-CoA/releases).
 
 The learner can receive duplicate or invalid timing records, and older versions may not support all current message types. Learned encounter warnings and exact backward compatibility still require in-game verification. Interface target: **30300**.
 
@@ -63,3 +63,7 @@ Based on [Deadly Boss Mods](https://github.com/DeadlyBossMods/DeadlyBossMods) by
 ## v3.22 changes
 
 Optional ElvUI-aware learner-window styling retains the default UI and DragonUI fallback. Includes Smart Archive Sync, the resizable learner window and historical archive reference data. Archive references are not verified observations; live compatibility remains untested.
+
+## v3.25 — Raid and dungeon learning
+
+Experimental encounter learning defaults on for fresh users in dungeon and raid instances; explicit opt-outs remain respected. `/coalearning` shows learning status and instance type. `/coatimings` browses saved timings organized by instance, difficulty, creature and spell. Live alerts use observed casts; predictions need repeated consistent intervals. No fabricated boss timers are supplied. Preserves archive sync, resizing, saved data and optional ElvUI/DragonUI styling. Published as a stable release channel at the maintainer's request; live Conquest Reborn validation remains pending.

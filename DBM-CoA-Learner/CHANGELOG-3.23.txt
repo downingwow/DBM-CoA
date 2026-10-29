@@ -1,0 +1,1 @@
+v3.23 TEST: Improved live cast warnings and added session-derived recast timer bars after 3 stable same-NPC intervals; no speculative archive-derived boss timers. Preserves smart archive sync, ElvUI/DragonUI support, and SavedVariables. Not in-game verified.
