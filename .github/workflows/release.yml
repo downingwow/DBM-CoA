@@ -1,9 +1,17 @@
 name: Package and publish addon release
 
 on:
+  workflow_dispatch:
   push:
+    branches: [main]
+    paths-ignore:
+      - '**/*.md'
     tags:
       - 'v*'
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -19,7 +27,11 @@ jobs:
         run: |
           set -euo pipefail
           REPO="${{ github.event.repository.name }}"
-          VERSION="${GITHUB_REF_NAME}"
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            VERSION="$GITHUB_REF_NAME"
+          else
+            VERSION="auto-${GITHUB_RUN_NUMBER}-${GITHUB_SHA:0:8}"
+          fi
           mkdir -p dist
           case "$REPO" in
             Questie-X)
@@ -54,5 +66,13 @@ jobs:
         run: |
           set -euo pipefail
           REPO="${{ github.event.repository.name }}"
-          VERSION="${GITHUB_REF_NAME}"
-          gh release create "$VERSION" "dist/${REPO}-${VERSION}.zip" --title "${REPO} ${VERSION}" --generate-notes --verify-tag
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            VERSION="$GITHUB_REF_NAME"
+          else
+            VERSION="auto-${GITHUB_RUN_NUMBER}-${GITHUB_SHA:0:8}"
+          fi
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            gh release create "$VERSION" "dist/${REPO}-${VERSION}.zip" --title "${REPO} ${VERSION}" --generate-notes --verify-tag
+          else
+            gh release create "$VERSION" "dist/${REPO}-${VERSION}.zip" --target "$GITHUB_SHA" --title "${REPO} automatic build ${GITHUB_RUN_NUMBER}" --generate-notes --prerelease --latest=false
+          fi
