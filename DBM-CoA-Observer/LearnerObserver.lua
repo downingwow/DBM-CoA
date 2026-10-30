@@ -4,6 +4,8 @@
 local f=CreateFrame("Frame")
 local db, active, elapsed, fight, combatOn, lastTarget = nil, false, 0, nil, false, nil
 local MAX_FIGHTS, MAX_ABILITIES, MAX_EVENTS, MAX_NPCS = 100, 300, 500, 250
+-- Counters avoid repeatedly traversing growing encounter tables on each event.
+local abilityCount, npcCount = 0, 0
 local function now() return GetTime() end
 local function npc(g)
  if type(g)~="string" then return nil end
@@ -28,11 +30,12 @@ local function finish(reason)
   db.fights[#db.fights+1]=fight
   while #db.fights>MAX_FIGHTS do table.remove(db.fights,1) end
  end
- fight=nil;lastTarget=nil
+ fight=nil;lastTarget=nil;abilityCount=0;npcCount=0
 end
 local function begin()
  if fight or not active or not combatOn then return end
  local z=instance()
+ abilityCount=0;npcCount=0
  fight={zone=safe(z.name),type=z.kind,difficulty=z.difficulty,map=z.map,date=date("%Y-%m-%d %H:%M"),start=now(),eventCount=0,npcs={},abilities={},events={},emotes={},health={},truncated=0}
 end
 local function checkZone()
@@ -47,10 +50,10 @@ local function ability(id,spell,ev,label)
  local key=tostring(id)..":"..tostring(spell)..":"..ev
  local a=fight.abilities[key]
  if not a then
-  local n=0;for _ in pairs(fight.abilities) do n=n+1 end
-  if n>=MAX_ABILITIES then fight.truncated=fight.truncated+1;return end
+  if abilityCount>=MAX_ABILITIES then fight.truncated=fight.truncated+1;return end
   a={npc=id,spell=spell,event=ev,name=safe(label),count=0,first=nil,last=nil,minGap=nil,maxGap=nil,sumGap=0,gaps=0}
   fight.abilities[key]=a
+  abilityCount=abilityCount+1
  end
  local t=math.floor((now()-fight.start)*10+0.5)/10
  if a.last and t-a.last>=1 then
@@ -65,8 +68,10 @@ local function target()
  local id=npc(UnitGUID("target"))
  if not id then return end
  if not fight.npcs[tostring(id)] then
-  local n=0;for _ in pairs(fight.npcs) do n=n+1 end
-  if n<MAX_NPCS then fight.npcs[tostring(id)]={name=safe(UnitName("target")),first=math.floor((now()-fight.start)*10)/10} end
+  if npcCount<MAX_NPCS then
+   fight.npcs[tostring(id)]={name=safe(UnitName("target")),first=math.floor((now()-fight.start)*10)/10}
+   npcCount=npcCount+1
+  end
  end
  if UnitCanAttack and UnitCanAttack("player","target") and UnitHealth and UnitHealthMax then
   local max=UnitHealthMax("target")
@@ -90,8 +95,10 @@ local function combat(...)
  fight.eventCount=fight.eventCount+1
  local key=tostring(id)
  if not fight.npcs[key] then
-  local n=0;for _ in pairs(fight.npcs) do n=n+1 end
-  if n<MAX_NPCS then fight.npcs[key]={name=safe(sourceName),first=math.floor((now()-fight.start)*10)/10} end
+  if npcCount<MAX_NPCS then
+   fight.npcs[key]={name=safe(sourceName),first=math.floor((now()-fight.start)*10)/10}
+   npcCount=npcCount+1
+  end
  end
  -- Combat-log header differs across client builds; inspect header conservatively.
  local a6,a7=select(6,...),select(7,...)
