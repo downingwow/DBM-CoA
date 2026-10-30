@@ -1,0 +1,7 @@
+DBM-CoA v3.29 - Zul'Gurub Raid Test
+- Repackages the v3.28 enemy-only warning and timer filtering for the ZG test.
+- Broad learning remains active for players, pets, minions, guardians, and totems; these sources do not produce live timers.
+- Automatic DBM sharing pause in dungeons, raids, battlegrounds and arenas; resumes outside instances.
+- Existing Zul'Gurub encounter modules and experimental learning are retained unchanged.
+- No new boss mechanics or verified timer intervals are claimed in this release.
+- Test build: back up SavedVariables and report any false warnings, missing boss casts, sharing or performance issues.

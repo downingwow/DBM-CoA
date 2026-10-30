@@ -22,6 +22,12 @@ local lastSyncError="none"
 local pings=0
 local rawReceived, duplicates, rejected, discoverySent, pingSent = 0,0,0,0,0
 local lastReceive="none"
+-- Local diagnostics only. Wire prefixes and message formats remain unchanged for older clients.
+local rxStats={discovery=0,timing=0,hello=0,batch=0,other=0,oversized=0,badBatch=0,badTiming=0,badDiscovery=0,badValues=0,ignoredChannel=0,paused=0}
+local function rxMark(k) rxStats[k]=(rxStats[k] or 0)+1 end
+local function rxSummary()
+ return "RX discovery="..rxStats.discovery.." timing="..rxStats.timing.." hello="..rxStats.hello.." batch="..rxStats.batch.." other="..rxStats.other.." badSize="..rxStats.oversized.." badBatch="..rxStats.badBatch.." badTiming="..rxStats.badTiming.." badDiscovery="..rxStats.badDiscovery.." badValues="..rxStats.badValues.." ignoredChannel="..rxStats.ignoredChannel.." paused="..rxStats.paused
+end
 local peerCount=0
 local statusFrame, statusText
 local known = {}
@@ -44,9 +50,19 @@ local function channelSignature()
  return table.concat(parts,"|")
 end
 local function hideSyncChannel() end
--- Passive channel consumer: LootCollector owns BBLC25C. Never join, leave,
--- reorder, or hide its chat channel from DBM. Safe even if LootCollector is disabled.
-local function ensureSyncChannel() end
+-- Independently join the existing shared channel after a 20-second grace period.
+-- Never leave, rename, reorder or create an alternate channel.
+local joinGrace=0
+local joinRetry=0
+local function ensureSyncChannel()
+ if type(GetChannelName)~="function" or type(JoinChannelByName)~="function" then return end
+ local id=GetChannelName(SYNC_CHANNEL)
+ if type(id)=="number" and id>0 then return end
+ if joinGrace<20 or joinRetry>0 then return end
+ -- Joining is independent of the sharing pause; traffic remains paused in instances.
+ pcall(JoinChannelByName,SYNC_CHANNEL)
+ joinRetry=20
+end
 local function verifyChannels() end
 local function say(s) if DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage("|cff66ccffDBM-CoA|r "..s) end end
 local function clock() return GetTime() end
@@ -142,8 +158,14 @@ local function remember(kind, instance, difficulty, npcId, spellId, label)
 end
 -- ASCII-only channel protocol, intentionally separate from LootCollector BBLC25C.
 -- Prefix and payload are plain printable text; never embed WoW escape/control bytes.
+-- Automatically suspend ALL DBM-CoA network sync in every instance.
+-- Do not leave/rejoin LootCollector's shared channel; resume outside automatically.
+local function coaSyncSuspended()
+ local _, instanceType = GetInstanceInfo()
+ return instanceType and instanceType ~= "none"
+end
 local function syncSend(payload)
- if not db or db.channelDisabled or db.channelUnsafe or db.sharingDisabled then return false end
+ if coaSyncSuspended() or not db or db.channelDisabled or db.channelUnsafe or db.sharingDisabled then return false end
  local id=type(GetChannelName)=="function" and GetChannelName(SYNC_CHANNEL) or 0
  if type(id)~="number" or id<=0 or type(SendChatMessage)~="function" then return false end
  local msg=PREFIX..";"..payload
@@ -210,12 +232,13 @@ local function receive(msg,sender)
  -- v3.6 batch envelope: old clients ignore B; new clients unpack each
  -- independently validated v3.4 discovery, without executing remote code.
  if type(msg)=="string" and msg:sub(1,#PREFIX+3)==PREFIX..";B;" then
-  if #msg>240 then rejected=rejected+1;return end
+  if #msg>240 then rejected=rejected+1;rxMark("oversized");return end
+  rxMark("batch")
   local body=msg:sub(#PREFIX+4)
   local parts=0
   for part in (body.."|"):gmatch("(.-)|") do
    parts=parts+1
-   if parts>6 or part=="" or part:sub(1,2)~="D;" then rejected=rejected+1;return end
+   if parts>6 or part=="" or part:sub(1,2)~="D;" then rejected=rejected+1;rxMark("badBatch");return end
    receive(PREFIX..";"..part,sender)
   end
   return
@@ -223,17 +246,19 @@ local function receive(msg,sender)
  if type(msg)~="string" or msg:sub(1,#PREFIX+1)~=PREFIX..";" then return end
  rawReceived=rawReceived+1;lastReceive="message from "..tostring(sender or "?"):sub(1,40)
  peers[sender or "?"]=clock()
- if #msg>240 then rejected=rejected+1;lastReceive="oversized message";return end
+ if #msg>240 then rejected=rejected+1;rxMark("oversized");lastReceive="oversized message";return end
  local payload=msg:sub(#PREFIX+2)
  if payload:sub(1,2)=="H;" then
+  rxMark("hello")
   peers[sender or "?"]=clock()
   if payload=="H;PING" then queueControl("H;PONG") end
   if payload=="H;PONG" then pings=pings+1 end
   return
  end
  if payload:sub(1,2)=="T;" then
+  rxMark("timing")
   local key,t=parseTiming(payload)
-  if not key then rejected=rejected+1;lastReceive="invalid timing format";return end
+  if not key then rejected=rejected+1;rxMark("badTiming");lastReceive="invalid timing format";return end
   db.remoteTimings=db.remoteTimings or {}
   db.remoteTimingSources=db.remoteTimingSources or {}
   local source=tostring(sender or "?")
@@ -250,11 +275,12 @@ local function receive(msg,sender)
   if count>12 then bySource[source]=nil end
   return
  end
- if payload:sub(1,2)~="D;" then return end
+ if payload:sub(1,2)~="D;" then rxMark("other");return end
+ rxMark("discovery")
  local kind,inst,diff,nid,sid,label=payload:match("^D;([NS]);([^;]*);(%d+);(%d+);(%d+);([^;]*)$")
- if not kind or #inst>55 or #label>55 then rejected=rejected+1;lastReceive="invalid discovery format";return end
+ if not kind or #inst>55 or #label>55 then rejected=rejected+1;rxMark("badDiscovery");lastReceive="invalid discovery format";return end
  nid=tonumber(nid);sid=tonumber(sid);diff=tonumber(diff)
- if not nid or nid<1 or nid>100000000 or not sid or sid>100000000 or not diff or diff>100 then rejected=rejected+1;lastReceive="invalid discovery values";return end
+ if not nid or nid<1 or nid>100000000 or not sid or sid>100000000 or not diff or diff>100 then rejected=rejected+1;rxMark("badValues");lastReceive="invalid discovery values";return end
  local key=table.concat({kind,inst,tostring(diff),tostring(nid),tostring(sid)},";")
  if known[key] then duplicates=duplicates+1;return end
  known[key]=true;received=received+1
@@ -298,8 +324,9 @@ local function updateStatus()
   "DBM-CoA Learner",
   (recording and "Recording" or "Idle").." | Events: "..(session and #session.events or 0),
   "Discoveries: "..n.." | Received: "..received,
-  "Sync: "..(ch>0 and not db.sharingDisabled and "Shared channel available" or "Offline").." | Sent: "..sent.." | Queue: "..#syncQueue,
+  "Sync: "..(coaSyncSuspended() and "AUTO-PAUSED (instance)" or (ch>0 and not db.sharingDisabled and "Shared channel available" or "Offline")).." | Sent: "..sent.." | Queue: "..#syncQueue,
   "Peers (3m): "..activePeers().." | Raw: "..rawReceived.." | Dup: "..duplicates.." | Bad: "..rejected,
+  "RX D/T/H: "..rxStats.discovery.."/"..rxStats.timing.."/"..rxStats.hello.." | Invalid T/D: "..rxStats.badTiming.."/"..(rxStats.badDiscovery+rxStats.badValues),
   "Timing sent: "..timingSent.." | Imported: "..timingReceived,
   "Archive: "..archiveStatus.." | Sent: "..(a.sent or 0).." | New: "..(a.received or 0),
   "Duplicates: "..(a.duplicates or 0).." | Conflicts: "..(a.conflicts or 0).." | Requests: "..(a.requests or 0)
@@ -428,6 +455,7 @@ end
 f:SetScript("OnEvent",function(self,event,...)
  if event=="ADDON_LOADED" then
   if ...~="DBM-CoA-Learner" then return end
+  joinGrace=0;joinRetry=0
   DBMCoALearnerDB=DBMCoALearnerDB or {}
   db=DBMCoALearnerDB;db.sessions=db.sessions or {};db.knowledge=db.knowledge or {};db.timings=db.timings or {};db.remoteTimingSources=db.remoteTimingSources or {}
   -- Auto-learning is ON for both party (dungeons) and raid instances by default.
@@ -443,7 +471,9 @@ f:SetScript("OnEvent",function(self,event,...)
  if event=="PLAYER_LOGOUT" then save();return end
  if event=="CHAT_MSG_CHANNEL" then
   local msg,sender,language,channelString,target,flags,zoneId,channelIndex,baseName=...
-  if isSyncChannel(channelString,channelIndex,baseName) then receive(msg,sender) end
+  if isSyncChannel(channelString,channelIndex,baseName) then
+   if coaSyncSuspended() then rxMark("paused") else receive(msg,sender) end
+  elseif type(msg)=="string" and msg:sub(1,#PREFIX+1)==PREFIX..";" then rxMark("ignoredChannel") end
   return
  end
  if event=="PLAYER_ENTERING_WORLD" or event=="ZONE_CHANGED_NEW_AREA" then refresh();return end
@@ -457,6 +487,8 @@ end)
 f:SetScript("OnUpdate",function(self,dt)
  -- Keep recording/UI/channel maintenance separate from the outgoing rate limiter.
  elapsed=elapsed+dt
+ joinGrace=joinGrace+dt
+ if joinRetry>0 then joinRetry=math.max(0,joinRetry-dt) end
  if elapsed>=2 then
   local delta=elapsed;elapsed=0
   if db then refresh() end
@@ -470,7 +502,7 @@ f:SetScript("OnUpdate",function(self,dt)
    ensureSyncChannel()
   end
  end
- if not db or db.sharingDisabled or db.channelDisabled or db.channelUnsafe then return end
+ if coaSyncSuspended() or not db or db.sharingDisabled or db.channelDisabled or db.channelUnsafe then return end
  syncClock=syncClock+dt
  if retryWait>0 then retryWait=math.max(0,retryWait-dt) end
  if syncClock<SEND_INTERVAL or retryWait>0 then return end
@@ -558,14 +590,15 @@ SlashCmdList.DBMCOA=function(s)
  elseif s=="fast on" then db.fastSyncDisabled=false;say("Batch sync enabled; conservative 0.75s pacing")
  elseif s=="share off" then db.sharingDisabled=true;say("Sync sharing disabled; local recording continues")
  elseif s=="share on" then db.sharingDisabled=false;backfillDone=false;say("Sync sharing enabled")
+ elseif s=="syncdebug" or s=="diagnostics" then say(rxSummary());say("Wire="..PREFIX.." archive=DCOAR21 (unchanged); peers3m="..activePeers().." received="..received.." timingReceived="..timingReceived.." lastReceive="..lastReceive)
  elseif s=="ping" then if queueControl("H;PING") then say("Ping queued; will send using the 1-second rate limit") else say("Ping queue full; try again shortly") end
  elseif s=="ui off" then db.hideStatus=true;if statusFrame then statusFrame:Hide() end
  elseif s=="ui on" then db.hideStatus=false;makeStatus();statusFrame:Show()
  elseif s=="channel off" then db.channelDisabled=true;say("Shared-channel listening disabled; existing channel membership unchanged")
- elseif s=="channel on" then db.channelDisabled=false;db.channelUnsafe=nil;say("Shared-channel listening enabled (LootCollector owns BBLC25C)")
+ elseif s=="channel on" then db.channelDisabled=false;db.channelUnsafe=nil;say("Shared-channel listening enabled (auto-joins BBLC25C after 20 seconds)")
  elseif s=="off" then db.disabled=true;save();say("Automatic recording disabled")
  elseif s=="on" then db.disabled=false;refresh();say("Automatic recording enabled")
  elseif s=="clear" then db.sessions={};say("Saved sessions cleared")
  elseif s=="save" then save();refresh();say("Current recording saved (if any)")
- else say("Automatic in instances. Settings: /dbmcoa options. Commands: /dbmcoa status | on | off | save | clear | channel on | channel off | share on/off | fast on/off | experimental on/off | ping | ui on/off") end
+ else say("Automatic in instances. Settings: /dbmcoa options. Commands: /dbmcoa status | on | off | save | clear | channel on | channel off | share on/off | fast on/off | experimental on/off | ping | syncdebug | ui on/off") end
 end

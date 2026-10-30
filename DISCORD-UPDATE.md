@@ -1,13 +1,15 @@
-🐉 **DBM-CoA v3.25 — Raid & Dungeon Learning**
+🐉 **DBM-CoA v4.3 — Encounter overhaul**
 **Ascension | Conquest of Azeroth | Conquest Reborn**
 
-• Automatic encounter learning defaults ON for new users in dungeons and raids; existing opt-outs stay respected.
-• `/coalearning` shows learning status and instance type.
-• `/coatimings` browses saved encounter timings and observation counts.
-• Live cast alerts and predicted timers use real observations. Predictions require repeated consistent intervals.
-• Keeps Smart Archive Sync, window resizing, saved data and optional ElvUI/DragonUI styling.
+• Newest clean-install package, now versioned v4.3.
+• Preserves Vanilla/TBC/Wrath encounter modules.
+• Adds source-derived schedules for Jeklik, Venoxis, Mar’li and Hakkar.
+• Native DBM bars avoid indexed stock duplicates; source-only predictions can adapt after repeated observations.
+• Keeps learning, shared-channel sync and saved data.
 
-Back up your SavedVariables, then install all DBM-* folders. In-game validation remains pending.
-https://github.com/downingwow/DBM-CoA/releases/tag/v3.25
+Use `/coasources` for coverage and `/dbm move` for timer anchors.
+Back up addon folders and SavedVariables, then replace all DBM-* addon folders. Keep your WTF data.
+Experimental source conversion; live validation is pending. This does not cover every CoA boss.
+https://github.com/downingwow/DBM-CoA/releases/tag/v4.3
 
 :dragon: Uncle Bone :dragon:

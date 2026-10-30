@@ -1,0 +1,2417 @@
+{
+  "scope": "Available local DBM addon and four directly retrieved CoA server encounter scripts",
+  "existing_encounter_files": 302,
+  "existing_timer_constructor_calls": 905,
+  "source_derived_bosses": 4,
+  "source_derived_spell_schedules": 35,
+  "source_files": [
+    "boss_jeklik.cpp",
+    "boss_venoxis.cpp",
+    "boss_marli.cpp",
+    "boss_hakkar.cpp"
+  ],
+  "modules": [
+    {
+      "path": "DBM-Naxx/ArachnidQuarter/Anub'Rekhan.lua",
+      "mod": "Anub'Rekhan",
+      "npc_ids": [
+        "15956"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Naxx/ArachnidQuarter/Faerlina.lua",
+      "mod": "Faerlina",
+      "npc_ids": [
+        "15953, 16506"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Naxx/ArachnidQuarter/Maexxna.lua",
+      "mod": "Maexxna",
+      "npc_ids": [
+        "15952"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Naxx/FrostwyrmLair/Sapphiron.lua",
+      "mod": "Sapphiron",
+      "npc_ids": [
+        "15989"
+      ],
+      "timer_constructor_calls": 5
+    },
+    {
+      "path": "DBM-Naxx/FrostwyrmLair/Kel'Thuzad.lua",
+      "mod": "Kel'Thuzad",
+      "npc_ids": [
+        "15990,26614,26615,26616,26617,26618,26619,26620,26621,26622,26623,26624,26625,26626,26627,26628,26629,26630"
+      ],
+      "timer_constructor_calls": 26
+    },
+    {
+      "path": "DBM-Naxx/ConstructQuarter/Thaddius.lua",
+      "mod": "Thaddius",
+      "npc_ids": [
+        "15928"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Naxx/ConstructQuarter/Gluth.lua",
+      "mod": "Gluth",
+      "npc_ids": [
+        "15932"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-Naxx/ConstructQuarter/Grobbulus.lua",
+      "mod": "Grobbulus",
+      "npc_ids": [
+        "15931"
+      ],
+      "timer_constructor_calls": 5
+    },
+    {
+      "path": "DBM-Naxx/ConstructQuarter/Patchwerk.lua",
+      "mod": "Patchwerk",
+      "npc_ids": [
+        "16028"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-Naxx/MilitaryQuarter/Gothik.lua",
+      "mod": "Gothik",
+      "npc_ids": [
+        "16060"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Naxx/MilitaryQuarter/Horsemen.lua",
+      "mod": "Horsemen",
+      "npc_ids": [
+        "16063, 16064, 16065, 30549"
+      ],
+      "timer_constructor_calls": 9
+    },
+    {
+      "path": "DBM-Naxx/MilitaryQuarter/Razuvious.lua",
+      "mod": "Razuvious",
+      "npc_ids": [
+        "16061, 16803, 16803"
+      ],
+      "timer_constructor_calls": 5
+    },
+    {
+      "path": "DBM-Naxx/PlagueQuarter/Loatheb.lua",
+      "mod": "Loatheb",
+      "npc_ids": [
+        "16011"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Naxx/PlagueQuarter/Noth.lua",
+      "mod": "Noth",
+      "npc_ids": [
+        "15954"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Naxx/PlagueQuarter/Heigan.lua",
+      "mod": "Heigan",
+      "npc_ids": [
+        "15936"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Party-Vanilla/Mythic_Champion.lua",
+      "mod": "Mythic Champion",
+      "npc_ids": [
+        "80227"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Angerforge.lua",
+      "mod": "Angerforge",
+      "npc_ids": [
+        "9033"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Emperor.lua",
+      "mod": "Emperor",
+      "npc_ids": [
+        "9019"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Panzor.lua",
+      "mod": "Panzor",
+      "npc_ids": [
+        "8923"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Phalanx.lua",
+      "mod": "Phalanx",
+      "npc_ids": [
+        "9502"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Grebmar.lua",
+      "mod": "Grebmar",
+      "npc_ids": [
+        "9319"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Hedrum.lua",
+      "mod": "Hedrum",
+      "npc_ids": [
+        "9032"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Loregrain.lua",
+      "mod": "Loregrain",
+      "npc_ids": [
+        "9024"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Gorrosh.lua",
+      "mod": "Gorrosh",
+      "npc_ids": [
+        "9027"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Verek.lua",
+      "mod": "Verek",
+      "npc_ids": [
+        "9042"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Stilgiss.lua",
+      "mod": "Stilgiss",
+      "npc_ids": [
+        "9041"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Argelmach.lua",
+      "mod": "Argelmach",
+      "npc_ids": [
+        "8983"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Incendius.lua",
+      "mod": "Incendius",
+      "npc_ids": [
+        "9017"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Okthor.lua",
+      "mod": "Okthor",
+      "npc_ids": [
+        "9030"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Princess.lua",
+      "mod": "Princess",
+      "npc_ids": [
+        "8929"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Summonerstomb.lua",
+      "mod": "Summonerstomb",
+      "npc_ids": [
+        "9034, 9035, 9036, 9037, 9038, 9039, 9040"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Grizzle.lua",
+      "mod": "Grizzle",
+      "npc_ids": [
+        "9028"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Eviscerator.lua",
+      "mod": "Eviscerator",
+      "npc_ids": [
+        "9029"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Anubshiah.lua",
+      "mod": "Anubshiah",
+      "npc_ids": [
+        "9031"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Flamelash.lua",
+      "mod": "Flamelash",
+      "npc_ids": [
+        "9156"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Plugger.lua",
+      "mod": "Plugger",
+      "npc_ids": [
+        "9499"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Coren.lua",
+      "mod": "Coren",
+      "npc_ids": [
+        "23872"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Darkvire.lua",
+      "mod": "Darkvire",
+      "npc_ids": [
+        "9056"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Roccor.lua",
+      "mod": "Roccor",
+      "npc_ids": [
+        "9025"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Hurley.lua",
+      "mod": "Hurley",
+      "npc_ids": [
+        "9537"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Gerstahn.lua",
+      "mod": "Gerstahn",
+      "npc_ids": [
+        "9018"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Baelgar.lua",
+      "mod": "Baelgar",
+      "npc_ids": [
+        "9016"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Ribbly.lua",
+      "mod": "Ribbly",
+      "npc_ids": [
+        "9543"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Magmus.lua",
+      "mod": "Magmus",
+      "npc_ids": [
+        "9938"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Depths/Theldren.lua",
+      "mod": "Theldren",
+      "npc_ids": [
+        "16059"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Atiesh.lua",
+      "mod": "Atiesh",
+      "npc_ids": [
+        "16387"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Hammersmith.lua",
+      "mod": "Hammersmith",
+      "npc_ids": [
+        "11120"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Barthilas.lua",
+      "mod": "Barthilas",
+      "npc_ids": [
+        "10435"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/SothosandJarien.lua",
+      "mod": "SothosandJarien",
+      "npc_ids": [
+        "16101, 16102"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Rivendare.lua",
+      "mod": "Rivendare",
+      "npc_ids": [
+        "10440"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Balnazzar.lua",
+      "mod": "Balnazzar",
+      "npc_ids": [
+        "10812, 10813"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Unforgiven.lua",
+      "mod": "Unforgiven",
+      "npc_ids": [
+        "10516"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Timmy.lua",
+      "mod": "Timmy",
+      "npc_ids": [
+        "10808"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Forresten.lua",
+      "mod": "Forresten",
+      "npc_ids": [
+        "10558"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Ramstein.lua",
+      "mod": "Ramstein",
+      "npc_ids": [
+        "10439"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Siabi.lua",
+      "mod": "Siabi",
+      "npc_ids": [
+        "11058"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Anastari.lua",
+      "mod": "Anastari",
+      "npc_ids": [
+        "10436"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Swordsmith.lua",
+      "mod": "Swordsmith",
+      "npc_ids": [
+        "11121"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Stonespine.lua",
+      "mod": "Stonespine",
+      "npc_ids": [
+        "10809"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Skul.lua",
+      "mod": "Skul",
+      "npc_ids": [
+        "10393"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Maleki.lua",
+      "mod": "Maleki",
+      "npc_ids": [
+        "10438"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Galford.lua",
+      "mod": "Galford",
+      "npc_ids": [
+        "10811"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Willey.lua",
+      "mod": "Willey",
+      "npc_ids": [
+        "10997"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Stratholme/Nerubenkan.lua",
+      "mod": "Nerubenkan",
+      "npc_ids": [
+        "10437"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Doomhowl.lua",
+      "mod": "Doomhowl",
+      "npc_ids": [
+        "10584"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Crystalfang.lua",
+      "mod": "Crystalfang",
+      "npc_ids": [
+        "10376"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Valthalak.lua",
+      "mod": "Valthalak",
+      "npc_ids": [
+        "16042"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Beast.lua",
+      "mod": "Beast",
+      "npc_ids": [
+        "10430"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Smolderweb.lua",
+      "mod": "Smolderweb",
+      "npc_ids": [
+        "10596"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Lordmagus.lua",
+      "mod": "Lordmagus",
+      "npc_ids": [
+        "9217"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Blackhand.lua",
+      "mod": "Blackhand",
+      "npc_ids": [
+        "10429"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Grayhoof.lua",
+      "mod": "Grayhoof",
+      "npc_ids": [
+        "16080"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Bashguud.lua",
+      "mod": "Bashguud",
+      "npc_ids": [
+        "9718"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Drakkisath.lua",
+      "mod": "Drakkisath",
+      "npc_ids": [
+        "10363"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Anvilcrack.lua",
+      "mod": "Anvilcrack",
+      "npc_ids": [
+        "10899"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Solakar.lua",
+      "mod": "Solakar",
+      "npc_ids": [
+        "10264"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Gyth.lua",
+      "mod": "Gyth",
+      "npc_ids": [
+        "10339"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Omokk.lua",
+      "mod": "Omokk",
+      "npc_ids": [
+        "9196"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Grimaxe.lua",
+      "mod": "Grimaxe",
+      "npc_ids": [
+        "9596"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Gizrul.lua",
+      "mod": "Gizrul",
+      "npc_ids": [
+        "10268"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Halycon.lua",
+      "mod": "Halycon",
+      "npc_ids": [
+        "10220"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Voone.lua",
+      "mod": "Voone",
+      "npc_ids": [
+        "9237"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Zigris.lua",
+      "mod": "Zigris",
+      "npc_ids": [
+        "9736"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Voshgajin.lua",
+      "mod": "Voshgajin",
+      "npc_ids": [
+        "9236"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/ButcherS.lua",
+      "mod": "ButcherS",
+      "npc_ids": [
+        "9219"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Wyrmthalak.lua",
+      "mod": "Wyrmthalak",
+      "npc_ids": [
+        "9568"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Battlelord.lua",
+      "mod": "Battlelord",
+      "npc_ids": [
+        "9218"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Runewatcher.lua",
+      "mod": "Runewatcher",
+      "npc_ids": [
+        "10509"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Felguard.lua",
+      "mod": "Felguard",
+      "npc_ids": [
+        "10263"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Blackrock Spire/Pyroguard.lua",
+      "mod": "Pyroguard",
+      "npc_ids": [
+        "9816"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Gordok.lua",
+      "mod": "Gordok",
+      "npc_ids": [
+        "11501, 14324"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Helnurath.lua",
+      "mod": "Helnurath",
+      "npc_ids": [
+        "14506"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Hydrospawn.lua",
+      "mod": "Hydrospawn",
+      "npc_ids": [
+        "13280"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Kreeg.lua",
+      "mod": "Kreeg",
+      "npc_ids": [
+        "14322"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Fengus.lua",
+      "mod": "Fengus",
+      "npc_ids": [
+        "14321"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Slipkik.lua",
+      "mod": "Slipkik",
+      "npc_ids": [
+        "14323"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Illyanna.lua",
+      "mod": "Illyanna",
+      "npc_ids": [
+        "11488"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Alzzin.lua",
+      "mod": "Alzzin",
+      "npc_ids": [
+        "11492"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Kalendris.lua",
+      "mod": "Kalendris",
+      "npc_ids": [
+        "11487"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Pimgib.lua",
+      "mod": "Pimgib",
+      "npc_ids": [
+        "14349"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Tsuzee.lua",
+      "mod": "Tsuzee",
+      "npc_ids": [
+        "11467"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Moldar.lua",
+      "mod": "Moldar",
+      "npc_ids": [
+        "14326"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Princet.lua",
+      "mod": "Princet",
+      "npc_ids": [
+        "11486"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Thimblejack.lua",
+      "mod": "Thimblejack",
+      "npc_ids": [
+        "14338"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Zevrim.lua",
+      "mod": "Zevrim",
+      "npc_ids": [
+        "11490"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Kromcrush.lua",
+      "mod": "Kromcrush",
+      "npc_ids": [
+        "14325"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Pusillin.lua",
+      "mod": "Pusillin",
+      "npc_ids": [
+        "14354"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Immolthar.lua",
+      "mod": "Immolthar",
+      "npc_ids": [
+        "11496"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Isalien.lua",
+      "mod": "Isalien",
+      "npc_ids": [
+        "16097"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Lethtendris.lua",
+      "mod": "Lethtendris",
+      "npc_ids": [
+        "14327"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Dire Maul/Tendris.lua",
+      "mod": "Tendris",
+      "npc_ids": [
+        "11489"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/Darkmaster.lua",
+      "mod": "Darkmaster",
+      "npc_ids": [
+        "1853"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/Vectus.lua",
+      "mod": "Vectus",
+      "npc_ids": [
+        "10432"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/FTKrastinov.lua",
+      "mod": "FTKrastinov",
+      "npc_ids": [
+        "11261"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/MBlackpool.lua",
+      "mod": "MBlackpool",
+      "npc_ids": [
+        "10433"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/BloodSteward.lua",
+      "mod": "BloodSteward",
+      "npc_ids": [
+        "14861"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/IMalicia.lua",
+      "mod": "IMalicia",
+      "npc_ids": [
+        "10505"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/Ravenian.lua",
+      "mod": "Ravenian",
+      "npc_ids": [
+        "10507"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/Kormok.lua",
+      "mod": "Kormok",
+      "npc_ids": [
+        "16118"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/RFrostwhisper.lua",
+      "mod": "RFrostwhisper",
+      "npc_ids": [
+        "10508"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/Alexei.lua",
+      "mod": "Alexei",
+      "npc_ids": [
+        "10504"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/Kirtonos.lua",
+      "mod": "Kirtonos",
+      "npc_ids": [
+        "10506"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/DKDarkreaver.lua",
+      "mod": "DKDarkreaver",
+      "npc_ids": [
+        "14516"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/LKPolkelt.lua",
+      "mod": "LKPolkelt",
+      "npc_ids": [
+        "10901"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/Illucia.lua",
+      "mod": "Illucia",
+      "npc_ids": [
+        "10502"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/Rattlegore.lua",
+      "mod": "Rattlegore",
+      "npc_ids": [
+        "11622"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-Vanilla/Scholomance/JandiceBarov.lua",
+      "mod": "JandiceBarov",
+      "npc_ids": [
+        "10503"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Onyxia/Onyxia.lua",
+      "mod": "Onyxia",
+      "npc_ids": [
+        "10184"
+      ],
+      "timer_constructor_calls": 13
+    },
+    {
+      "path": "DBM-BurningCrusade/DBMv3-Compatibility.lua",
+      "mod": "DBMv3-Compatibility.lua",
+      "npc_ids": [
+        "...",
+        "..."
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-ZulAman/Jan'alai.lua",
+      "mod": "Janalai",
+      "npc_ids": [
+        "23578"
+      ],
+      "timer_constructor_calls": 9
+    },
+    {
+      "path": "DBM-ZulAman/Malacrass.lua",
+      "mod": "Malacrass",
+      "npc_ids": [
+        "24239"
+      ],
+      "timer_constructor_calls": 56
+    },
+    {
+      "path": "DBM-ZulAman/Akil'zon.lua",
+      "mod": "Akilzon",
+      "npc_ids": [
+        "23574"
+      ],
+      "timer_constructor_calls": 8
+    },
+    {
+      "path": "DBM-ZulAman/Zul'jin.lua",
+      "mod": "ZulJin",
+      "npc_ids": [
+        "23863"
+      ],
+      "timer_constructor_calls": 21
+    },
+    {
+      "path": "DBM-ZulAman/Nalorakk.lua",
+      "mod": "Nalorakk",
+      "npc_ids": [
+        "23576"
+      ],
+      "timer_constructor_calls": 7
+    },
+    {
+      "path": "DBM-ZulAman/Halazzi.lua",
+      "mod": "Halazzi",
+      "npc_ids": [
+        "23577"
+      ],
+      "timer_constructor_calls": 11
+    },
+    {
+      "path": "DBM-MC/Golemagg.lua",
+      "mod": "Golemagg",
+      "npc_ids": [
+        "11988"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-MC/Garr.lua",
+      "mod": "Garr",
+      "npc_ids": [
+        "12057"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-MC/Gehennas.lua",
+      "mod": "Gehennas",
+      "npc_ids": [
+        "12259"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-MC/Majordomo.lua",
+      "mod": "Majordomo",
+      "npc_ids": [
+        "12018, 11663, 11664"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-MC/Geddon.lua",
+      "mod": "Geddon",
+      "npc_ids": [
+        "12056"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-MC/Sulfuron.lua",
+      "mod": "Sulfuron",
+      "npc_ids": [
+        "12098"
+      ],
+      "timer_constructor_calls": 5
+    },
+    {
+      "path": "DBM-MC/Magmadar.lua",
+      "mod": "Magmadar",
+      "npc_ids": [
+        "11982"
+      ],
+      "timer_constructor_calls": 10
+    },
+    {
+      "path": "DBM-MC/Lucifron.lua",
+      "mod": "Lucifron",
+      "npc_ids": [
+        "12118"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-MC/Shazzrah.lua",
+      "mod": "Shazzrah",
+      "npc_ids": [
+        "12264"
+      ],
+      "timer_constructor_calls": 9
+    },
+    {
+      "path": "DBM-MC/Ragnaros.lua",
+      "mod": "Ragnaros",
+      "npc_ids": [
+        "11502"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Serpentshrine/Tidewalker.lua",
+      "mod": "Tidewalker",
+      "npc_ids": [
+        "21213"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Serpentshrine/TheLurkerBelow.lua",
+      "mod": "LurkerBelow",
+      "npc_ids": [
+        "21217"
+      ],
+      "timer_constructor_calls": 5
+    },
+    {
+      "path": "DBM-Serpentshrine/Fathomlord.lua",
+      "mod": "Fathomlord",
+      "npc_ids": [
+        "21214"
+      ],
+      "timer_constructor_calls": 8
+    },
+    {
+      "path": "DBM-Serpentshrine/Leotheras.lua",
+      "mod": "Leotheras",
+      "npc_ids": [
+        "21215"
+      ],
+      "timer_constructor_calls": 7
+    },
+    {
+      "path": "DBM-Serpentshrine/Vashj.lua",
+      "mod": "Vashj",
+      "npc_ids": [
+        "21212"
+      ],
+      "timer_constructor_calls": 10
+    },
+    {
+      "path": "DBM-Serpentshrine/Hydross.lua",
+      "mod": "Hydross",
+      "npc_ids": [
+        "21216"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-AQ40/Huhuran.lua",
+      "mod": "Huhuran",
+      "npc_ids": [
+        "15509"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-AQ40/Fankriss.lua",
+      "mod": "Fankriss",
+      "npc_ids": [
+        "15510"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-AQ40/Ouro.lua",
+      "mod": "Ouro",
+      "npc_ids": [
+        "15517"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-AQ40/TwinEmps.lua",
+      "mod": "TwinEmpsAQ",
+      "npc_ids": [
+        "15276, 15275"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-AQ40/ThreeBugs.lua",
+      "mod": "ThreeBugs",
+      "npc_ids": [
+        "15544, 15511, 15543"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-AQ40/Skeram.lua",
+      "mod": "Skeram",
+      "npc_ids": [
+        "15263"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-AQ40/Viscidus.lua",
+      "mod": "Viscidus",
+      "npc_ids": [
+        "15299"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-AQ40/CThun.lua",
+      "mod": "CThun",
+      "npc_ids": [
+        "15727, 15589"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-AQ40/Sartura.lua",
+      "mod": "Sartura",
+      "npc_ids": [
+        "15516"
+      ],
+      "timer_constructor_calls": 8
+    },
+    {
+      "path": "DBM-Core/DBM-Core.lua",
+      "mod": "TestMod",
+      "npc_ids": [
+        "..."
+      ],
+      "timer_constructor_calls": 8
+    },
+    {
+      "path": "DBM-TheEye/KaelThas.lua",
+      "mod": "KaelThas",
+      "npc_ids": [
+        "19622, 20064, 20063, 20060, 20062",
+        "19622"
+      ],
+      "timer_constructor_calls": 19
+    },
+    {
+      "path": "DBM-TheEye/Solarian.lua",
+      "mod": "Solarian",
+      "npc_ids": [
+        "18805",
+        "18805"
+      ],
+      "timer_constructor_calls": 10
+    },
+    {
+      "path": "DBM-TheEye/Mobs.lua",
+      "mod": "mobs",
+      "npc_ids": [],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-TheEye/Alar.lua",
+      "mod": "Alar",
+      "npc_ids": [
+        "19514"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-TheEye/VoidReaver.lua",
+      "mod": "VoidReaver",
+      "npc_ids": [
+        "19516",
+        "19516"
+      ],
+      "timer_constructor_calls": 5
+    },
+    {
+      "path": "DBM-AQ20/Ossirian.lua",
+      "mod": "Ossirian",
+      "npc_ids": [
+        "15339"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-AQ20/Kurinnaxx.lua",
+      "mod": "Kurinnaxx",
+      "npc_ids": [
+        "15348"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-AQ20/Rajaxx.lua",
+      "mod": "Rajaxx",
+      "npc_ids": [
+        "15341"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-AQ20/Buru.lua",
+      "mod": "Buru",
+      "npc_ids": [
+        "15370"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-AQ20/Moam.lua",
+      "mod": "Moam",
+      "npc_ids": [
+        "15340"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-AQ20/Ayamiss.lua",
+      "mod": "Ayamiss",
+      "npc_ids": [
+        "15369"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Karazhan/RomuloAndJulianne.lua",
+      "mod": "RomuloAndJulianne",
+      "npc_ids": [
+        "17534, 17533"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Karazhan/Nightbane.lua",
+      "mod": "Nightbane",
+      "npc_ids": [
+        "17225"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Karazhan/Attumen.lua",
+      "mod": "Attumen",
+      "npc_ids": [
+        "15550, 16151"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Karazhan/ShadeOfAran.lua",
+      "mod": "Aran",
+      "npc_ids": [
+        "16524"
+      ],
+      "timer_constructor_calls": 10
+    },
+    {
+      "path": "DBM-Karazhan/WizardOfOz.lua",
+      "mod": "Oz",
+      "npc_ids": [
+        "18168"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Karazhan/Moroes.lua",
+      "mod": "Moroes",
+      "npc_ids": [
+        "15687"
+      ],
+      "timer_constructor_calls": 8
+    },
+    {
+      "path": "DBM-Karazhan/TerestianIllhoof.lua",
+      "mod": "TerestianIllhoof",
+      "npc_ids": [
+        "15688"
+      ],
+      "timer_constructor_calls": 8
+    },
+    {
+      "path": "DBM-Karazhan/Netherspite.lua",
+      "mod": "Netherspite",
+      "npc_ids": [
+        "15689"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-Karazhan/Curator.lua",
+      "mod": "Curator",
+      "npc_ids": [
+        "15691"
+      ],
+      "timer_constructor_calls": 7
+    },
+    {
+      "path": "DBM-Karazhan/Opera.lua",
+      "mod": "Opera",
+      "npc_ids": [],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Karazhan/BigBadWolf.lua",
+      "mod": "BigBadWolf",
+      "npc_ids": [
+        "17521"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Karazhan/PrinceMalchezaar.lua",
+      "mod": "Prince",
+      "npc_ids": [
+        "15690"
+      ],
+      "timer_constructor_calls": 7
+    },
+    {
+      "path": "DBM-Karazhan/MaidenOfVirtue.lua",
+      "mod": "Maiden",
+      "npc_ids": [
+        "16457"
+      ],
+      "timer_constructor_calls": 9
+    },
+    {
+      "path": "DBM-Karazhan/NamedBeasts.lua",
+      "mod": "Shadikith",
+      "npc_ids": [
+        "16180",
+        "16179",
+        "16181"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-MagtheridonsLair/Magtheridon.lua",
+      "mod": "Magtheridon",
+      "npc_ids": [
+        "17256, 17257"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-BWL/Razorgore.lua",
+      "mod": "Razorgore",
+      "npc_ids": [
+        "12435"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-BWL/Broodlord.lua",
+      "mod": "Broodlord",
+      "npc_ids": [
+        "12017"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-BWL/Flamegor.lua",
+      "mod": "Flamegor",
+      "npc_ids": [
+        "11981"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-BWL/Chromaggus.lua",
+      "mod": "Chromaggus",
+      "npc_ids": [
+        "14020"
+      ],
+      "timer_constructor_calls": 11
+    },
+    {
+      "path": "DBM-BWL/Firemaw.lua",
+      "mod": "Firemaw",
+      "npc_ids": [
+        "11983"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-BWL/Vaelastrasz.lua",
+      "mod": "Vaelastrasz",
+      "npc_ids": [
+        "13020"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-BWL/Ebonroc.lua",
+      "mod": "Ebonroc",
+      "npc_ids": [
+        "14601"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-BWL/Nefarian.lua",
+      "mod": "Nefarian",
+      "npc_ids": [
+        "11583"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-BlackTemple/Bloodboil.lua",
+      "mod": "Bloodboil",
+      "npc_ids": [
+        "22948"
+      ],
+      "timer_constructor_calls": 8
+    },
+    {
+      "path": "DBM-BlackTemple/EssenceOfSouls.lua",
+      "mod": "Souls",
+      "npc_ids": [
+        "23418"
+      ],
+      "timer_constructor_calls": 14
+    },
+    {
+      "path": "DBM-BlackTemple/Illidan.lua",
+      "mod": "Illidan",
+      "npc_ids": [
+        "22917"
+      ],
+      "timer_constructor_calls": 24
+    },
+    {
+      "path": "DBM-BlackTemple/ShadeOfAkama.lua",
+      "mod": "Akama",
+      "npc_ids": [
+        "23421"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-BlackTemple/Trash.lua",
+      "mod": "Trash",
+      "npc_ids": [
+        "22879"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-BlackTemple/Shahraz.lua",
+      "mod": "Shahraz",
+      "npc_ids": [
+        "22947"
+      ],
+      "timer_constructor_calls": 14
+    },
+    {
+      "path": "DBM-BlackTemple/Naj'entus.lua",
+      "mod": "Najentus",
+      "npc_ids": [
+        "22887"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-BlackTemple/Supremus.lua",
+      "mod": "Supremus",
+      "npc_ids": [
+        "22898"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-BlackTemple/IllidariCouncil.lua",
+      "mod": "Council",
+      "npc_ids": [
+        "22949, 22950, 22951, 22952"
+      ],
+      "timer_constructor_calls": 13
+    },
+    {
+      "path": "DBM-BlackTemple/TeronGorefiend.lua",
+      "mod": "TeronGorefiend",
+      "npc_ids": [
+        "22871"
+      ],
+      "timer_constructor_calls": 15
+    },
+    {
+      "path": "DBM-Sunwell/Kalecgos.lua",
+      "mod": "Kalecgos",
+      "npc_ids": [
+        "24850"
+      ],
+      "timer_constructor_calls": 11
+    },
+    {
+      "path": "DBM-Sunwell/Brutallus.lua",
+      "mod": "Brutallus",
+      "npc_ids": [
+        "24882"
+      ],
+      "timer_constructor_calls": 7
+    },
+    {
+      "path": "DBM-Sunwell/Arynyes.lua",
+      "mod": "Arynyes",
+      "npc_ids": [
+        "25837"
+      ],
+      "timer_constructor_calls": 9
+    },
+    {
+      "path": "DBM-Sunwell/EredarTwins.lua",
+      "mod": "Twins",
+      "npc_ids": [
+        "25165, 25166"
+      ],
+      "timer_constructor_calls": 10
+    },
+    {
+      "path": "DBM-Sunwell/Trash.lua",
+      "mod": "Trash",
+      "npc_ids": [
+        "25507"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-Sunwell/Kil'jaeden.lua",
+      "mod": "Kil",
+      "npc_ids": [
+        "25657, 25588, 25696, 25315"
+      ],
+      "timer_constructor_calls": 24
+    },
+    {
+      "path": "DBM-Sunwell/M'uru.lua",
+      "mod": "Muru",
+      "npc_ids": [
+        "25741"
+      ],
+      "timer_constructor_calls": 8
+    },
+    {
+      "path": "DBM-Sunwell/Felmyst.lua",
+      "mod": "Felmyst",
+      "npc_ids": [
+        "25038"
+      ],
+      "timer_constructor_calls": 15
+    },
+    {
+      "path": "DBM-ZG/Hakkar.lua",
+      "mod": "Hakkar",
+      "npc_ids": [
+        "14834"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-ZG/Arlokk.lua",
+      "mod": "Arlokk",
+      "npc_ids": [
+        "14515"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-ZG/Thekal.lua",
+      "mod": "Thekal",
+      "npc_ids": [
+        "14509, 11348, 11347"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-ZG/Gahzranka.lua",
+      "mod": "Gahzranka",
+      "npc_ids": [
+        "15114"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-ZG/Jeklik.lua",
+      "mod": "Jeklik",
+      "npc_ids": [
+        "14517"
+      ],
+      "timer_constructor_calls": 9
+    },
+    {
+      "path": "DBM-ZG/Marli.lua",
+      "mod": "Marli",
+      "npc_ids": [
+        "14510"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-ZG/Bloodlord.lua",
+      "mod": "Bloodlord",
+      "npc_ids": [
+        "11382, 14988"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-ZG/EdgeOfMadness.lua",
+      "mod": "EdgeOfMadness",
+      "npc_ids": [
+        "15083"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-ZG/Venoxis.lua",
+      "mod": "Venoxis",
+      "npc_ids": [
+        "14507"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-ZG/Jindo.lua",
+      "mod": "Jindo",
+      "npc_ids": [
+        "11380"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-GruulsLair/Maulgar.lua",
+      "mod": "High King Maulgar",
+      "npc_ids": [
+        "18831, 18832, 18834, 18835, 18836"
+      ],
+      "timer_constructor_calls": 8
+    },
+    {
+      "path": "DBM-GruulsLair/Gruul.lua",
+      "mod": "Gruul",
+      "npc_ids": [
+        "19044"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Party-BC/Mythic_Champion.lua",
+      "mod": "Mythic Champion",
+      "npc_ids": [
+        "80227"
+      ],
+      "timer_constructor_calls": 15
+    },
+    {
+      "path": "DBM-Party-BC/Hellfire_Ramp/Omor.lua",
+      "mod": "Omor",
+      "npc_ids": [
+        "17308"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/Hellfire_Ramp/Gargolmar.lua",
+      "mod": "Gargolmar",
+      "npc_ids": [
+        "17306"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/Hellfire_Ramp/Vazruden.lua",
+      "mod": "Vazruden",
+      "npc_ids": [
+        "17537, 17536"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/Hellfire_ShatteredHalls/Porung.lua",
+      "mod": "Porung",
+      "npc_ids": [
+        "20923"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/Hellfire_ShatteredHalls/O'mrogg.lua",
+      "mod": "O'mrogg",
+      "npc_ids": [
+        "16809"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Party-BC/Hellfire_ShatteredHalls/Nethekurse.lua",
+      "mod": "Nethekurse",
+      "npc_ids": [
+        "16807"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Party-BC/Hellfire_ShatteredHalls/Kargath.lua",
+      "mod": "Kargath",
+      "npc_ids": [
+        "16808"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-Party-BC/Auct_Tombs/Shaffar.lua",
+      "mod": "Shaffar",
+      "npc_ids": [
+        "18344"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Party-BC/Auct_Tombs/Tavarok.lua",
+      "mod": "Tavarok",
+      "npc_ids": [
+        "18343"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Party-BC/Auct_Tombs/Yor.lua",
+      "mod": "Yor",
+      "npc_ids": [
+        "22930"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/Auct_Tombs/Pandemonius.lua",
+      "mod": "Pandemonius",
+      "npc_ids": [
+        "18341"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Party-BC/Hellfire_BloodFurnace/Broggok.lua",
+      "mod": "Broggok",
+      "npc_ids": [
+        "17380"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/Hellfire_BloodFurnace/Maker.lua",
+      "mod": "Maker",
+      "npc_ids": [
+        "17381"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/Hellfire_BloodFurnace/Keli'dan.lua",
+      "mod": "Keli'dan",
+      "npc_ids": [
+        "17377, 17653"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/TK_Botanica/Laj.lua",
+      "mod": "Laj",
+      "npc_ids": [
+        "17980"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/TK_Botanica/Freywinn.lua",
+      "mod": "Freywinn",
+      "npc_ids": [
+        "17975"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/TK_Botanica/WarpSplinter.lua",
+      "mod": "WarpSplinter",
+      "npc_ids": [
+        "17977"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-Party-BC/TK_Botanica/Sarannis.lua",
+      "mod": "Sarannis",
+      "npc_ids": [
+        "17976"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/TK_Botanica/Thorngrin.lua",
+      "mod": "Thorngrin",
+      "npc_ids": [
+        "17978"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/TK_Mechanar/Gyrokill.lua",
+      "mod": "Gyrokill",
+      "npc_ids": [
+        "19218"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/TK_Mechanar/Pathaleon.lua",
+      "mod": "Pathaleon",
+      "npc_ids": [
+        "19220"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/TK_Mechanar/Ironhand.lua",
+      "mod": "Ironhand",
+      "npc_ids": [
+        "19710"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-Party-BC/TK_Mechanar/Sepethrea.lua",
+      "mod": "Sepethrea",
+      "npc_ids": [
+        "19221"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/TK_Mechanar/Capacitus.lua",
+      "mod": "Capacitus",
+      "npc_ids": [
+        "19219"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Party-BC/Coil_Steamvault/Kalithresh.lua",
+      "mod": "Kalithresh",
+      "npc_ids": [
+        "17798"
+      ],
+      "timer_constructor_calls": 7
+    },
+    {
+      "path": "DBM-Party-BC/Coil_Steamvault/Steamrigger.lua",
+      "mod": "Steamrigger",
+      "npc_ids": [
+        "17796"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Party-BC/Coil_Steamvault/Thespia.lua",
+      "mod": "Thespia",
+      "npc_ids": [
+        "17797"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Party-BC/CoT_OldHillsbrad/Skarloc.lua",
+      "mod": "Skarloc",
+      "npc_ids": [
+        "17862"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/CoT_OldHillsbrad/EpochHunter.lua",
+      "mod": "EpochHunter",
+      "npc_ids": [
+        "18096"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/CoT_OldHillsbrad/Drake.lua",
+      "mod": "Drake",
+      "npc_ids": [
+        "17848"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/Auct_SethekkHalls/Ikiss.lua",
+      "mod": "Ikiss",
+      "npc_ids": [
+        "18473"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-Party-BC/Auct_SethekkHalls/Syth.lua",
+      "mod": "Syth",
+      "npc_ids": [
+        "18472"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Party-BC/Auct_SethekkHalls/Anzu.lua",
+      "mod": "Anzu",
+      "npc_ids": [
+        "23035"
+      ],
+      "timer_constructor_calls": 5
+    },
+    {
+      "path": "DBM-Party-BC/Coil_Underbog/Stalker.lua",
+      "mod": "Stalker",
+      "npc_ids": [
+        "17882"
+      ],
+      "timer_constructor_calls": 5
+    },
+    {
+      "path": "DBM-Party-BC/Coil_Underbog/Muselek.lua",
+      "mod": "Muselek",
+      "npc_ids": [
+        "17826"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Party-BC/Coil_Underbog/Ghazan.lua",
+      "mod": "Ghazan",
+      "npc_ids": [
+        "18105"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Party-BC/Coil_Underbog/Hungarfen.lua",
+      "mod": "Hungarfen",
+      "npc_ids": [
+        "17770"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/MagistersTerrace/Kael'thas.lua",
+      "mod": "Kael",
+      "npc_ids": [
+        "24664"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Party-BC/MagistersTerrace/Vexallus.lua",
+      "mod": "Vexallus",
+      "npc_ids": [
+        "24744"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/MagistersTerrace/Selin.lua",
+      "mod": "Selin",
+      "npc_ids": [
+        "24723"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/MagistersTerrace/Delrissa.lua",
+      "mod": "Delrissa",
+      "npc_ids": [
+        "24560, 24557, 24558, 24554, 24561, 24559, 24555, 24553, 24556"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/Auct_ShadowLabyrinth/Hellmaw.lua",
+      "mod": "Hellmaw",
+      "npc_ids": [
+        "18731"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-Party-BC/Auct_ShadowLabyrinth/Inciter.lua",
+      "mod": "Inciter",
+      "npc_ids": [
+        "18667"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Party-BC/Auct_ShadowLabyrinth/Murmur.lua",
+      "mod": "Murmur",
+      "npc_ids": [
+        "18708"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-Party-BC/Auct_ShadowLabyrinth/Vorpil.lua",
+      "mod": "Vorpil",
+      "npc_ids": [
+        "18732"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Party-BC/Auct_Crypts/Shirrak.lua",
+      "mod": "Shirrak",
+      "npc_ids": [
+        "18371"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/Auct_Crypts/Maladaar.lua",
+      "mod": "Maladaar",
+      "npc_ids": [
+        "18373"
+      ],
+      "timer_constructor_calls": 5
+    },
+    {
+      "path": "DBM-Party-BC/CoT_BlackMorass/Deja.lua",
+      "mod": "Deja",
+      "npc_ids": [
+        "17879"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/CoT_BlackMorass/PortalTimers.lua",
+      "mod": "PT",
+      "npc_ids": [],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/CoT_BlackMorass/Aeonus.lua",
+      "mod": "Aeonus",
+      "npc_ids": [
+        "17881"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/CoT_BlackMorass/Temporus.lua",
+      "mod": "Temporus",
+      "npc_ids": [
+        "17880"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-Party-BC/TK_Arcatraz/Skyriss.lua",
+      "mod": "Skyriss",
+      "npc_ids": [
+        "20912"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-Party-BC/TK_Arcatraz/Dalliah.lua",
+      "mod": "Dalliah",
+      "npc_ids": [
+        "20885"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/TK_Arcatraz/Zereketh.lua",
+      "mod": "Zereketh",
+      "npc_ids": [
+        "20870"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-Party-BC/TK_Arcatraz/Soccothrates.lua",
+      "mod": "Soccothrates",
+      "npc_ids": [
+        "20886"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/Coil_Slavepens/Mennu.lua",
+      "mod": "Mennu",
+      "npc_ids": [
+        "17941"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/Coil_Slavepens/Quagmirran.lua",
+      "mod": "Quagmirran",
+      "npc_ids": [
+        "17942"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Party-BC/Coil_Slavepens/Rokmar.lua",
+      "mod": "Rokmar",
+      "npc_ids": [
+        "17991"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Hyjal/Chromius.lua",
+      "mod": "Chromius",
+      "npc_ids": [
+        "26643"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-Hyjal/Azgalor.lua",
+      "mod": "Azgalor",
+      "npc_ids": [
+        "17842"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-Hyjal/Anetheron.lua",
+      "mod": "Anetheron",
+      "npc_ids": [
+        "17808"
+      ],
+      "timer_constructor_calls": 4
+    },
+    {
+      "path": "DBM-Hyjal/Archimonde.lua",
+      "mod": "Archimonde",
+      "npc_ids": [
+        "17968,26648,26647"
+      ],
+      "timer_constructor_calls": 16
+    },
+    {
+      "path": "DBM-Hyjal/Kazrogal.lua",
+      "mod": "Kazrogal",
+      "npc_ids": [
+        "17888"
+      ],
+      "timer_constructor_calls": 6
+    },
+    {
+      "path": "DBM-Hyjal/RageWinterchill.lua",
+      "mod": "RageWinterchill",
+      "npc_ids": [
+        "17767"
+      ],
+      "timer_constructor_calls": 10
+    },
+    {
+      "path": "DBM-WorldEvents/Ahune.lua",
+      "mod": "Ahune",
+      "npc_ids": [
+        "25740"
+      ],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-WorldEvents/ApothecaryTrio.lua",
+      "mod": "ApothecaryTrio",
+      "npc_ids": [
+        "36272, 36296, 36565"
+      ],
+      "timer_constructor_calls": 1
+    },
+    {
+      "path": "DBM-WorldEvents/HeadlessHorseman.lua",
+      "mod": "HeadlessHorseman",
+      "npc_ids": [
+        "23682, 23775"
+      ],
+      "timer_constructor_calls": 2
+    },
+    {
+      "path": "DBM-WorldEvents/CorenDirebrew.lua",
+      "mod": "CorenDirebrew",
+      "npc_ids": [
+        "23872"
+      ],
+      "timer_constructor_calls": 3
+    },
+    {
+      "path": "DBM-PvP/Arenas/Arenas.lua",
+      "mod": "Arenas",
+      "npc_ids": [],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-PvP/Battlegrounds/Warsong.lua",
+      "mod": "WarsongGulch",
+      "npc_ids": [],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-PvP/Battlegrounds/EyeOfTheStorm.lua",
+      "mod": "EyeoftheStorm",
+      "npc_ids": [],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-PvP/Battlegrounds/IsleOfConquest.lua",
+      "mod": "IsleofConquest",
+      "npc_ids": [],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-PvP/Battlegrounds/Alterac.lua",
+      "mod": "AlteracValley",
+      "npc_ids": [],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-PvP/Battlegrounds/Arathi.lua",
+      "mod": "ArathiBasin",
+      "npc_ids": [],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-PvP/Battlegrounds/Battlegrounds.lua",
+      "mod": "Battlegrounds",
+      "npc_ids": [],
+      "timer_constructor_calls": 0
+    },
+    {
+      "path": "DBM-Outlands/Kazzak.lua",
+      "mod": "Kazzak",
+      "npc_ids": [
+        "18728"
+      ],
+      "timer_constructor_calls": 8
+    }
+  ]
+}

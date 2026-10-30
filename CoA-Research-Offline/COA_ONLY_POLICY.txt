@@ -1,0 +1,6 @@
+DBM-CoA v3.38 research import policy
+Only Conquest of Azeroth / Conquest Reborn sources are eligible for live encounter mappings.
+Exclude Free-Pick overlay spell tables, unrelated realm exports, and unverified custom content.
+Legacy exiles-db reference JSON files are preserved for offline research only, not loaded as CoA facts.
+Server scripts from third-party repos are hypotheses until verified against live Conquest Reborn.
+The 52-NPC observer research index remains observation-only; not all entries are CoA-specific.

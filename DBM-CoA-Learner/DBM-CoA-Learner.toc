@@ -1,5 +1,8 @@
 ## Interface: 30300
-## Title: DBM CoA AutoLearner and Sync v3.25 Dungeon + Raid Learning Test
+## Version: 4.3
+## X-Maintainer: Uncle Bone
+## X-Website: https://github.com/downingwow/DBM-CoA
+## Title: DBM-CoA - Prebuilt Encounter Overhaul + Adaptive Learning
 ## Notes: Automatic encounter learning and opt-out channel synchronization for Conquest of Azeroth.
 ## Dependencies: DBM-Core
 ## SavedVariables: DBMCoALearnerDB
@@ -11,5 +14,16 @@ ArchiveFullQ.lua
 ArchiveFullI.lua
 Learner.lua
 Options.lua
+StockTimerIndex.lua
+Coverage.lua
+EncounterEngine.lua
 LiveLearning.lua
+ObservedNPCSpells.lua
+ResearchIndex.lua
+CompactNames.lua
+ResearchBrowser.lua
+ZoneResearch.lua
 ArchiveShare.lua
+
+CoAServerSources.lua
+SourceTimerEngine.lua

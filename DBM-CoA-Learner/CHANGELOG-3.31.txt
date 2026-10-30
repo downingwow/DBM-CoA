@@ -1,0 +1,1 @@
+v3.31: Automatically join existing BBLC25C channel 20 seconds after addon initialization if missing, independently of LootCollector or Questie-X. Retry at most every 20 seconds until joined. Never leave or reorder channels. Preserve DCOAL31/DCOAR21 wire formats, existing instance-based sharing pause, enemy-only timer filters, and broad learning. In-game compatibility unverified.

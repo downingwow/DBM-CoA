@@ -1,0 +1,8 @@
+CoA research source URLs (external GitHub repository contents not bundled or downloaded):
+https://github.com/srhinos/coa-datamine
+https://github.com/hertigservices/ascension-data
+https://github.com/hertigservices/Ascension_preservation
+https://github.com/Conquest-of-AzerothCore/azerothcore-wotlk-coa
+https://github.com/Conquest-of-AzerothCore
+
+Local reference records from CoA-Research-Import-Foundation-v1.zip; preserved exiles-db snapshot, not verified for Conquest Reborn.

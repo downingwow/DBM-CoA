@@ -1,0 +1,9 @@
+DBM-CoA v3.39 — Shared NPC Research TEST
+- Fixed classic GUID NPC entry extraction to hex characters 7-10, matching 3.3.5 creature GUID layout.
+- Reject classic player-pet GUID 0xF140 from hostile NPC learning.
+- Native DBM test countdown: /coatest; diagnostics: /coastatus.
+- Bundled real offline SQLite index of 41,817 NPC and 214,152 spell reference records (unverified preserved snapshot).
+- Compact in-game name lookup limited to previously observed NPC/spell IDs; no bulk reference memory load.
+- Existing game-wide learner, native bars, research browser, and shared-channel settings retained.
+- All reference records are research only; not automatically enabled as encounter warnings.
+- External GitHub repository full imports and live server verification still pending.

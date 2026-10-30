@@ -1,0 +1,6 @@
+SOURCE-CONVERSION PROGRESS ONLY; NOT FULL OVERHAUL.
+Converted CoA server script: boss_jeklik.cpp (10 spell schedules, 50% phase transition).
+Adjusted existing DBM-ZG Jeklik timer to avoid phase-two heal countdown on pull.
+Preserved existing 303+ DBM module registrations and adaptive learning/sharing.
+Other CoA server scripts remain unconverted.
+Source license: AzerothCore GPLv2; extracted mechanics are facts, not copied server code.

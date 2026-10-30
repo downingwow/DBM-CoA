@@ -1,0 +1,12 @@
+DBM-CoA v4.0 PREBUILT PRIORITY TEST
+
+- Preserves all packaged DBM boss modules and their prebuilt encounter timers.
+- Generates conservative NPC+spell stock timer index from existing encounter Lua definitions.
+- Learner operates game-wide but no longer adds duplicate predicted bars for indexed stock timers.
+- Observations and stock discrepancies retained; stock timers are not overwritten from one observation.
+- Existing BBLC25C sharing logic preserved without changing protocols.
+- /coacoverage reports prebuilt indexed associations.
+- Native DBM timer rendering and /coatest retained.
+- No Free-Pick player spell overlay imported.
+
+LIMITATIONS: This is not a complete CoA Development script import; GitHub server scripts have not been converted to new boss modules. No live WoW testing. The stock index covers only a subset of timer constructors with literal IDs.

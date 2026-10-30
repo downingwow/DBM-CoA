@@ -1,0 +1,1521 @@
+{
+  "module_registrations": 303,
+  "timer_constructor_references": 917,
+  "modules": [
+    {
+      "id": "Ayamiss",
+      "file": "DBM-AQ20/Ayamiss.lua",
+      "timers": 1
+    },
+    {
+      "id": "Buru",
+      "file": "DBM-AQ20/Buru.lua",
+      "timers": 1
+    },
+    {
+      "id": "Kurinnaxx",
+      "file": "DBM-AQ20/Kurinnaxx.lua",
+      "timers": 0
+    },
+    {
+      "id": "Moam",
+      "file": "DBM-AQ20/Moam.lua",
+      "timers": 0
+    },
+    {
+      "id": "Ossirian",
+      "file": "DBM-AQ20/Ossirian.lua",
+      "timers": 0
+    },
+    {
+      "id": "Rajaxx",
+      "file": "DBM-AQ20/Rajaxx.lua",
+      "timers": 0
+    },
+    {
+      "id": "CThun",
+      "file": "DBM-AQ40/CThun.lua",
+      "timers": 3
+    },
+    {
+      "id": "Fankriss",
+      "file": "DBM-AQ40/Fankriss.lua",
+      "timers": 1
+    },
+    {
+      "id": "Huhuran",
+      "file": "DBM-AQ40/Huhuran.lua",
+      "timers": 4
+    },
+    {
+      "id": "Ouro",
+      "file": "DBM-AQ40/Ouro.lua",
+      "timers": 1
+    },
+    {
+      "id": "Sartura",
+      "file": "DBM-AQ40/Sartura.lua",
+      "timers": 8
+    },
+    {
+      "id": "Skeram",
+      "file": "DBM-AQ40/Skeram.lua",
+      "timers": 1
+    },
+    {
+      "id": "ThreeBugs",
+      "file": "DBM-AQ40/ThreeBugs.lua",
+      "timers": 1
+    },
+    {
+      "id": "TwinEmpsAQ",
+      "file": "DBM-AQ40/TwinEmps.lua",
+      "timers": 2
+    },
+    {
+      "id": "Viscidus",
+      "file": "DBM-AQ40/Viscidus.lua",
+      "timers": 1
+    },
+    {
+      "id": "Broodlord",
+      "file": "DBM-BWL/Broodlord.lua",
+      "timers": 1
+    },
+    {
+      "id": "Chromaggus",
+      "file": "DBM-BWL/Chromaggus.lua",
+      "timers": 11
+    },
+    {
+      "id": "Ebonroc",
+      "file": "DBM-BWL/Ebonroc.lua",
+      "timers": 3
+    },
+    {
+      "id": "Firemaw",
+      "file": "DBM-BWL/Firemaw.lua",
+      "timers": 3
+    },
+    {
+      "id": "Flamegor",
+      "file": "DBM-BWL/Flamegor.lua",
+      "timers": 3
+    },
+    {
+      "id": "Nefarian",
+      "file": "DBM-BWL/Nefarian.lua",
+      "timers": 4
+    },
+    {
+      "id": "Razorgore",
+      "file": "DBM-BWL/Razorgore.lua",
+      "timers": 1
+    },
+    {
+      "id": "Vaelastrasz",
+      "file": "DBM-BWL/Vaelastrasz.lua",
+      "timers": 2
+    },
+    {
+      "id": "Bloodboil",
+      "file": "DBM-BlackTemple/Bloodboil.lua",
+      "timers": 8
+    },
+    {
+      "id": "Souls",
+      "file": "DBM-BlackTemple/EssenceOfSouls.lua",
+      "timers": 14
+    },
+    {
+      "id": "Illidan",
+      "file": "DBM-BlackTemple/Illidan.lua",
+      "timers": 24
+    },
+    {
+      "id": "Council",
+      "file": "DBM-BlackTemple/IllidariCouncil.lua",
+      "timers": 13
+    },
+    {
+      "id": "Najentus",
+      "file": "DBM-BlackTemple/Naj'entus.lua",
+      "timers": 6
+    },
+    {
+      "id": "Akama",
+      "file": "DBM-BlackTemple/ShadeOfAkama.lua",
+      "timers": 3
+    },
+    {
+      "id": "Shahraz",
+      "file": "DBM-BlackTemple/Shahraz.lua",
+      "timers": 14
+    },
+    {
+      "id": "Supremus",
+      "file": "DBM-BlackTemple/Supremus.lua",
+      "timers": 6
+    },
+    {
+      "id": "TeronGorefiend",
+      "file": "DBM-BlackTemple/TeronGorefiend.lua",
+      "timers": 15
+    },
+    {
+      "id": "Trash",
+      "file": "DBM-BlackTemple/Trash.lua",
+      "timers": 2
+    },
+    {
+      "id": "TestMod",
+      "file": "DBM-Core/DBM-Core.lua",
+      "timers": 8
+    },
+    {
+      "id": "Gruul",
+      "file": "DBM-GruulsLair/Gruul.lua",
+      "timers": 4
+    },
+    {
+      "id": "High King Maulgar",
+      "file": "DBM-GruulsLair/Maulgar.lua",
+      "timers": 8
+    },
+    {
+      "id": "Anetheron",
+      "file": "DBM-Hyjal/Anetheron.lua",
+      "timers": 4
+    },
+    {
+      "id": "Archimonde",
+      "file": "DBM-Hyjal/Archimonde.lua",
+      "timers": 16
+    },
+    {
+      "id": "Azgalor",
+      "file": "DBM-Hyjal/Azgalor.lua",
+      "timers": 6
+    },
+    {
+      "id": "Chromius",
+      "file": "DBM-Hyjal/Chromius.lua",
+      "timers": 6
+    },
+    {
+      "id": "Kazrogal",
+      "file": "DBM-Hyjal/Kazrogal.lua",
+      "timers": 6
+    },
+    {
+      "id": "RageWinterchill",
+      "file": "DBM-Hyjal/RageWinterchill.lua",
+      "timers": 10
+    },
+    {
+      "id": "Attumen",
+      "file": "DBM-Karazhan/Attumen.lua",
+      "timers": 3
+    },
+    {
+      "id": "BigBadWolf",
+      "file": "DBM-Karazhan/BigBadWolf.lua",
+      "timers": 3
+    },
+    {
+      "id": "Curator",
+      "file": "DBM-Karazhan/Curator.lua",
+      "timers": 7
+    },
+    {
+      "id": "Maiden",
+      "file": "DBM-Karazhan/MaidenOfVirtue.lua",
+      "timers": 9
+    },
+    {
+      "id": "Moroes",
+      "file": "DBM-Karazhan/Moroes.lua",
+      "timers": 8
+    },
+    {
+      "id": "Shadikith",
+      "file": "DBM-Karazhan/NamedBeasts.lua",
+      "timers": 6
+    },
+    {
+      "id": "Hyakiss",
+      "file": "DBM-Karazhan/NamedBeasts.lua",
+      "timers": 6
+    },
+    {
+      "id": "Rokad",
+      "file": "DBM-Karazhan/NamedBeasts.lua",
+      "timers": 6
+    },
+    {
+      "id": "Netherspite",
+      "file": "DBM-Karazhan/Netherspite.lua",
+      "timers": 2
+    },
+    {
+      "id": "Nightbane",
+      "file": "DBM-Karazhan/Nightbane.lua",
+      "timers": 4
+    },
+    {
+      "id": "Opera",
+      "file": "DBM-Karazhan/Opera.lua",
+      "timers": 0
+    },
+    {
+      "id": "Prince",
+      "file": "DBM-Karazhan/PrinceMalchezaar.lua",
+      "timers": 7
+    },
+    {
+      "id": "RomuloAndJulianne",
+      "file": "DBM-Karazhan/RomuloAndJulianne.lua",
+      "timers": 3
+    },
+    {
+      "id": "Aran",
+      "file": "DBM-Karazhan/ShadeOfAran.lua",
+      "timers": 10
+    },
+    {
+      "id": "TerestianIllhoof",
+      "file": "DBM-Karazhan/TerestianIllhoof.lua",
+      "timers": 8
+    },
+    {
+      "id": "Oz",
+      "file": "DBM-Karazhan/WizardOfOz.lua",
+      "timers": 1
+    },
+    {
+      "id": "Garr",
+      "file": "DBM-MC/Garr.lua",
+      "timers": 2
+    },
+    {
+      "id": "Geddon",
+      "file": "DBM-MC/Geddon.lua",
+      "timers": 6
+    },
+    {
+      "id": "Gehennas",
+      "file": "DBM-MC/Gehennas.lua",
+      "timers": 4
+    },
+    {
+      "id": "Golemagg",
+      "file": "DBM-MC/Golemagg.lua",
+      "timers": 1
+    },
+    {
+      "id": "Lucifron",
+      "file": "DBM-MC/Lucifron.lua",
+      "timers": 6
+    },
+    {
+      "id": "Magmadar",
+      "file": "DBM-MC/Magmadar.lua",
+      "timers": 10
+    },
+    {
+      "id": "Majordomo",
+      "file": "DBM-MC/Majordomo.lua",
+      "timers": 2
+    },
+    {
+      "id": "Ragnaros",
+      "file": "DBM-MC/Ragnaros.lua",
+      "timers": 4
+    },
+    {
+      "id": "Shazzrah",
+      "file": "DBM-MC/Shazzrah.lua",
+      "timers": 9
+    },
+    {
+      "id": "Sulfuron",
+      "file": "DBM-MC/Sulfuron.lua",
+      "timers": 5
+    },
+    {
+      "id": "Magtheridon",
+      "file": "DBM-MagtheridonsLair/Magtheridon.lua",
+      "timers": 6
+    },
+    {
+      "id": "Anub",
+      "file": "DBM-Naxx/ArachnidQuarter/Anub'Rekhan.lua",
+      "timers": 4
+    },
+    {
+      "id": "Faerlina",
+      "file": "DBM-Naxx/ArachnidQuarter/Faerlina.lua",
+      "timers": 4
+    },
+    {
+      "id": "Maexxna",
+      "file": "DBM-Naxx/ArachnidQuarter/Maexxna.lua",
+      "timers": 3
+    },
+    {
+      "id": "Gluth",
+      "file": "DBM-Naxx/ConstructQuarter/Gluth.lua",
+      "timers": 2
+    },
+    {
+      "id": "Grobbulus",
+      "file": "DBM-Naxx/ConstructQuarter/Grobbulus.lua",
+      "timers": 5
+    },
+    {
+      "id": "Patchwerk",
+      "file": "DBM-Naxx/ConstructQuarter/Patchwerk.lua",
+      "timers": 6
+    },
+    {
+      "id": "Thaddius",
+      "file": "DBM-Naxx/ConstructQuarter/Thaddius.lua",
+      "timers": 4
+    },
+    {
+      "id": "Kel",
+      "file": "DBM-Naxx/FrostwyrmLair/Kel'Thuzad.lua",
+      "timers": 26
+    },
+    {
+      "id": "Sapphiron",
+      "file": "DBM-Naxx/FrostwyrmLair/Sapphiron.lua",
+      "timers": 5
+    },
+    {
+      "id": "Gothik",
+      "file": "DBM-Naxx/MilitaryQuarter/Gothik.lua",
+      "timers": 1
+    },
+    {
+      "id": "Horsemen",
+      "file": "DBM-Naxx/MilitaryQuarter/Horsemen.lua",
+      "timers": 9
+    },
+    {
+      "id": "Razuvious",
+      "file": "DBM-Naxx/MilitaryQuarter/Razuvious.lua",
+      "timers": 5
+    },
+    {
+      "id": "Heigan",
+      "file": "DBM-Naxx/PlagueQuarter/Heigan.lua",
+      "timers": 3
+    },
+    {
+      "id": "Loatheb",
+      "file": "DBM-Naxx/PlagueQuarter/Loatheb.lua",
+      "timers": 4
+    },
+    {
+      "id": "Noth",
+      "file": "DBM-Naxx/PlagueQuarter/Noth.lua",
+      "timers": 3
+    },
+    {
+      "id": "Onyxia",
+      "file": "DBM-Onyxia/Onyxia.lua",
+      "timers": 13
+    },
+    {
+      "id": "Kazzak",
+      "file": "DBM-Outlands/Kazzak.lua",
+      "timers": 8
+    },
+    {
+      "id": "Maladaar",
+      "file": "DBM-Party-BC/Auct_Crypts/Maladaar.lua",
+      "timers": 5
+    },
+    {
+      "id": "Shirrak",
+      "file": "DBM-Party-BC/Auct_Crypts/Shirrak.lua",
+      "timers": 1
+    },
+    {
+      "id": "Anzu",
+      "file": "DBM-Party-BC/Auct_SethekkHalls/Anzu.lua",
+      "timers": 5
+    },
+    {
+      "id": "Ikiss",
+      "file": "DBM-Party-BC/Auct_SethekkHalls/Ikiss.lua",
+      "timers": 2
+    },
+    {
+      "id": "Syth",
+      "file": "DBM-Party-BC/Auct_SethekkHalls/Syth.lua",
+      "timers": 3
+    },
+    {
+      "id": "Hellmaw",
+      "file": "DBM-Party-BC/Auct_ShadowLabyrinth/Hellmaw.lua",
+      "timers": 3
+    },
+    {
+      "id": "Inciter",
+      "file": "DBM-Party-BC/Auct_ShadowLabyrinth/Inciter.lua",
+      "timers": 4
+    },
+    {
+      "id": "Murmur",
+      "file": "DBM-Party-BC/Auct_ShadowLabyrinth/Murmur.lua",
+      "timers": 6
+    },
+    {
+      "id": "Vorpil",
+      "file": "DBM-Party-BC/Auct_ShadowLabyrinth/Vorpil.lua",
+      "timers": 4
+    },
+    {
+      "id": "Pandemonius",
+      "file": "DBM-Party-BC/Auct_Tombs/Pandemonius.lua",
+      "timers": 3
+    },
+    {
+      "id": "Shaffar",
+      "file": "DBM-Party-BC/Auct_Tombs/Shaffar.lua",
+      "timers": 3
+    },
+    {
+      "id": "Tavarok",
+      "file": "DBM-Party-BC/Auct_Tombs/Tavarok.lua",
+      "timers": 4
+    },
+    {
+      "id": "Yor",
+      "file": "DBM-Party-BC/Auct_Tombs/Yor.lua",
+      "timers": 0
+    },
+    {
+      "id": "Aeonus",
+      "file": "DBM-Party-BC/CoT_BlackMorass/Aeonus.lua",
+      "timers": 1
+    },
+    {
+      "id": "Deja",
+      "file": "DBM-Party-BC/CoT_BlackMorass/Deja.lua",
+      "timers": 0
+    },
+    {
+      "id": "PT",
+      "file": "DBM-Party-BC/CoT_BlackMorass/PortalTimers.lua",
+      "timers": 0
+    },
+    {
+      "id": "Temporus",
+      "file": "DBM-Party-BC/CoT_BlackMorass/Temporus.lua",
+      "timers": 2
+    },
+    {
+      "id": "Drake",
+      "file": "DBM-Party-BC/CoT_OldHillsbrad/Drake.lua",
+      "timers": 1
+    },
+    {
+      "id": "EpochHunter",
+      "file": "DBM-Party-BC/CoT_OldHillsbrad/EpochHunter.lua",
+      "timers": 0
+    },
+    {
+      "id": "Skarloc",
+      "file": "DBM-Party-BC/CoT_OldHillsbrad/Skarloc.lua",
+      "timers": 1
+    },
+    {
+      "id": "Mennu",
+      "file": "DBM-Party-BC/Coil_Slavepens/Mennu.lua",
+      "timers": 0
+    },
+    {
+      "id": "Quagmirran",
+      "file": "DBM-Party-BC/Coil_Slavepens/Quagmirran.lua",
+      "timers": 0
+    },
+    {
+      "id": "Rokmar",
+      "file": "DBM-Party-BC/Coil_Slavepens/Rokmar.lua",
+      "timers": 0
+    },
+    {
+      "id": "Kalithresh",
+      "file": "DBM-Party-BC/Coil_Steamvault/Kalithresh.lua",
+      "timers": 7
+    },
+    {
+      "id": "Steamrigger",
+      "file": "DBM-Party-BC/Coil_Steamvault/Steamrigger.lua",
+      "timers": 3
+    },
+    {
+      "id": "Thespia",
+      "file": "DBM-Party-BC/Coil_Steamvault/Thespia.lua",
+      "timers": 4
+    },
+    {
+      "id": "Ghazan",
+      "file": "DBM-Party-BC/Coil_Underbog/Ghazan.lua",
+      "timers": 3
+    },
+    {
+      "id": "Hungarfen",
+      "file": "DBM-Party-BC/Coil_Underbog/Hungarfen.lua",
+      "timers": 1
+    },
+    {
+      "id": "Muselek",
+      "file": "DBM-Party-BC/Coil_Underbog/Muselek.lua",
+      "timers": 4
+    },
+    {
+      "id": "Stalker",
+      "file": "DBM-Party-BC/Coil_Underbog/Stalker.lua",
+      "timers": 5
+    },
+    {
+      "id": "Broggok",
+      "file": "DBM-Party-BC/Hellfire_BloodFurnace/Broggok.lua",
+      "timers": 0
+    },
+    {
+      "id": "Keli",
+      "file": "DBM-Party-BC/Hellfire_BloodFurnace/Keli'dan.lua",
+      "timers": 0
+    },
+    {
+      "id": "Maker",
+      "file": "DBM-Party-BC/Hellfire_BloodFurnace/Maker.lua",
+      "timers": 1
+    },
+    {
+      "id": "Gargolmar",
+      "file": "DBM-Party-BC/Hellfire_Ramp/Gargolmar.lua",
+      "timers": 0
+    },
+    {
+      "id": "Omor",
+      "file": "DBM-Party-BC/Hellfire_Ramp/Omor.lua",
+      "timers": 1
+    },
+    {
+      "id": "Vazruden",
+      "file": "DBM-Party-BC/Hellfire_Ramp/Vazruden.lua",
+      "timers": 0
+    },
+    {
+      "id": "Kargath",
+      "file": "DBM-Party-BC/Hellfire_ShatteredHalls/Kargath.lua",
+      "timers": 2
+    },
+    {
+      "id": "Nethekurse",
+      "file": "DBM-Party-BC/Hellfire_ShatteredHalls/Nethekurse.lua",
+      "timers": 4
+    },
+    {
+      "id": "O",
+      "file": "DBM-Party-BC/Hellfire_ShatteredHalls/O'mrogg.lua",
+      "timers": 3
+    },
+    {
+      "id": "Porung",
+      "file": "DBM-Party-BC/Hellfire_ShatteredHalls/Porung.lua",
+      "timers": 1
+    },
+    {
+      "id": "Delrissa",
+      "file": "DBM-Party-BC/MagistersTerrace/Delrissa.lua",
+      "timers": 0
+    },
+    {
+      "id": "Kael",
+      "file": "DBM-Party-BC/MagistersTerrace/Kael'thas.lua",
+      "timers": 3
+    },
+    {
+      "id": "Selin",
+      "file": "DBM-Party-BC/MagistersTerrace/Selin.lua",
+      "timers": 0
+    },
+    {
+      "id": "Vexallus",
+      "file": "DBM-Party-BC/MagistersTerrace/Vexallus.lua",
+      "timers": 0
+    },
+    {
+      "id": "Mythic Champion",
+      "file": "DBM-Party-BC/Mythic_Champion.lua",
+      "timers": 15
+    },
+    {
+      "id": "Dalliah",
+      "file": "DBM-Party-BC/TK_Arcatraz/Dalliah.lua",
+      "timers": 1
+    },
+    {
+      "id": "Skyriss",
+      "file": "DBM-Party-BC/TK_Arcatraz/Skyriss.lua",
+      "timers": 2
+    },
+    {
+      "id": "Soccothrates",
+      "file": "DBM-Party-BC/TK_Arcatraz/Soccothrates.lua",
+      "timers": 0
+    },
+    {
+      "id": "Zereketh",
+      "file": "DBM-Party-BC/TK_Arcatraz/Zereketh.lua",
+      "timers": 1
+    },
+    {
+      "id": "Freywinn",
+      "file": "DBM-Party-BC/TK_Botanica/Freywinn.lua",
+      "timers": 0
+    },
+    {
+      "id": "Laj",
+      "file": "DBM-Party-BC/TK_Botanica/Laj.lua",
+      "timers": 1
+    },
+    {
+      "id": "Sarannis",
+      "file": "DBM-Party-BC/TK_Botanica/Sarannis.lua",
+      "timers": 0
+    },
+    {
+      "id": "Thorngrin",
+      "file": "DBM-Party-BC/TK_Botanica/Thorngrin.lua",
+      "timers": 1
+    },
+    {
+      "id": "WarpSplinter",
+      "file": "DBM-Party-BC/TK_Botanica/WarpSplinter.lua",
+      "timers": 2
+    },
+    {
+      "id": "Capacitus",
+      "file": "DBM-Party-BC/TK_Mechanar/Capacitus.lua",
+      "timers": 3
+    },
+    {
+      "id": "Gyrokill",
+      "file": "DBM-Party-BC/TK_Mechanar/Gyrokill.lua",
+      "timers": 1
+    },
+    {
+      "id": "Ironhand",
+      "file": "DBM-Party-BC/TK_Mechanar/Ironhand.lua",
+      "timers": 2
+    },
+    {
+      "id": "Pathaleon",
+      "file": "DBM-Party-BC/TK_Mechanar/Pathaleon.lua",
+      "timers": 1
+    },
+    {
+      "id": "Sepethrea",
+      "file": "DBM-Party-BC/TK_Mechanar/Sepethrea.lua",
+      "timers": 0
+    },
+    {
+      "id": "Angerforge",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Angerforge.lua",
+      "timers": 0
+    },
+    {
+      "id": "Anubshiah",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Anubshiah.lua",
+      "timers": 0
+    },
+    {
+      "id": "Argelmach",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Argelmach.lua",
+      "timers": 0
+    },
+    {
+      "id": "Baelgar",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Baelgar.lua",
+      "timers": 0
+    },
+    {
+      "id": "Coren",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Coren.lua",
+      "timers": 0
+    },
+    {
+      "id": "Darkvire",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Darkvire.lua",
+      "timers": 0
+    },
+    {
+      "id": "Emperor",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Emperor.lua",
+      "timers": 0
+    },
+    {
+      "id": "Eviscerator",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Eviscerator.lua",
+      "timers": 0
+    },
+    {
+      "id": "Flamelash",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Flamelash.lua",
+      "timers": 0
+    },
+    {
+      "id": "Gerstahn",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Gerstahn.lua",
+      "timers": 0
+    },
+    {
+      "id": "Gorrosh",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Gorrosh.lua",
+      "timers": 0
+    },
+    {
+      "id": "Grebmar",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Grebmar.lua",
+      "timers": 0
+    },
+    {
+      "id": "Grizzle",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Grizzle.lua",
+      "timers": 0
+    },
+    {
+      "id": "Hedrum",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Hedrum.lua",
+      "timers": 0
+    },
+    {
+      "id": "Hurley",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Hurley.lua",
+      "timers": 0
+    },
+    {
+      "id": "Incendius",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Incendius.lua",
+      "timers": 0
+    },
+    {
+      "id": "Loregrain",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Loregrain.lua",
+      "timers": 0
+    },
+    {
+      "id": "Magmus",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Magmus.lua",
+      "timers": 0
+    },
+    {
+      "id": "Okthor",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Okthor.lua",
+      "timers": 0
+    },
+    {
+      "id": "Panzor",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Panzor.lua",
+      "timers": 0
+    },
+    {
+      "id": "Phalanx",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Phalanx.lua",
+      "timers": 0
+    },
+    {
+      "id": "Plugger",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Plugger.lua",
+      "timers": 0
+    },
+    {
+      "id": "Princess",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Princess.lua",
+      "timers": 0
+    },
+    {
+      "id": "Ribbly",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Ribbly.lua",
+      "timers": 0
+    },
+    {
+      "id": "Roccor",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Roccor.lua",
+      "timers": 0
+    },
+    {
+      "id": "Stilgiss",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Stilgiss.lua",
+      "timers": 0
+    },
+    {
+      "id": "Summonerstomb",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Summonerstomb.lua",
+      "timers": 0
+    },
+    {
+      "id": "Theldren",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Theldren.lua",
+      "timers": 0
+    },
+    {
+      "id": "Verek",
+      "file": "DBM-Party-Vanilla/Blackrock Depths/Verek.lua",
+      "timers": 0
+    },
+    {
+      "id": "Anvilcrack",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Anvilcrack.lua",
+      "timers": 0
+    },
+    {
+      "id": "Bashguud",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Bashguud.lua",
+      "timers": 0
+    },
+    {
+      "id": "Battlelord",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Battlelord.lua",
+      "timers": 0
+    },
+    {
+      "id": "Beast",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Beast.lua",
+      "timers": 0
+    },
+    {
+      "id": "Blackhand",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Blackhand.lua",
+      "timers": 0
+    },
+    {
+      "id": "ButcherS",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/ButcherS.lua",
+      "timers": 0
+    },
+    {
+      "id": "Crystalfang",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Crystalfang.lua",
+      "timers": 0
+    },
+    {
+      "id": "Doomhowl",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Doomhowl.lua",
+      "timers": 0
+    },
+    {
+      "id": "Drakkisath",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Drakkisath.lua",
+      "timers": 0
+    },
+    {
+      "id": "Felguard",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Felguard.lua",
+      "timers": 0
+    },
+    {
+      "id": "Gizrul",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Gizrul.lua",
+      "timers": 0
+    },
+    {
+      "id": "Grayhoof",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Grayhoof.lua",
+      "timers": 0
+    },
+    {
+      "id": "Grimaxe",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Grimaxe.lua",
+      "timers": 0
+    },
+    {
+      "id": "Gyth",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Gyth.lua",
+      "timers": 0
+    },
+    {
+      "id": "Halycon",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Halycon.lua",
+      "timers": 0
+    },
+    {
+      "id": "Lordmagus",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Lordmagus.lua",
+      "timers": 0
+    },
+    {
+      "id": "Omokk",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Omokk.lua",
+      "timers": 0
+    },
+    {
+      "id": "Pyroguard",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Pyroguard.lua",
+      "timers": 0
+    },
+    {
+      "id": "Runewatcher",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Runewatcher.lua",
+      "timers": 0
+    },
+    {
+      "id": "Smolderweb",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Smolderweb.lua",
+      "timers": 0
+    },
+    {
+      "id": "Solakar",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Solakar.lua",
+      "timers": 0
+    },
+    {
+      "id": "Valthalak",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Valthalak.lua",
+      "timers": 0
+    },
+    {
+      "id": "Voone",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Voone.lua",
+      "timers": 0
+    },
+    {
+      "id": "Voshgajin",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Voshgajin.lua",
+      "timers": 0
+    },
+    {
+      "id": "Wyrmthalak",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Wyrmthalak.lua",
+      "timers": 0
+    },
+    {
+      "id": "Zigris",
+      "file": "DBM-Party-Vanilla/Blackrock Spire/Zigris.lua",
+      "timers": 0
+    },
+    {
+      "id": "Alzzin",
+      "file": "DBM-Party-Vanilla/Dire Maul/Alzzin.lua",
+      "timers": 0
+    },
+    {
+      "id": "Fengus",
+      "file": "DBM-Party-Vanilla/Dire Maul/Fengus.lua",
+      "timers": 0
+    },
+    {
+      "id": "Gordok",
+      "file": "DBM-Party-Vanilla/Dire Maul/Gordok.lua",
+      "timers": 0
+    },
+    {
+      "id": "Helnurath",
+      "file": "DBM-Party-Vanilla/Dire Maul/Helnurath.lua",
+      "timers": 0
+    },
+    {
+      "id": "Hydrospawn",
+      "file": "DBM-Party-Vanilla/Dire Maul/Hydrospawn.lua",
+      "timers": 0
+    },
+    {
+      "id": "Illyanna",
+      "file": "DBM-Party-Vanilla/Dire Maul/Illyanna.lua",
+      "timers": 0
+    },
+    {
+      "id": "Immolthar",
+      "file": "DBM-Party-Vanilla/Dire Maul/Immolthar.lua",
+      "timers": 0
+    },
+    {
+      "id": "Isalien",
+      "file": "DBM-Party-Vanilla/Dire Maul/Isalien.lua",
+      "timers": 0
+    },
+    {
+      "id": "Kalendris",
+      "file": "DBM-Party-Vanilla/Dire Maul/Kalendris.lua",
+      "timers": 0
+    },
+    {
+      "id": "Kreeg",
+      "file": "DBM-Party-Vanilla/Dire Maul/Kreeg.lua",
+      "timers": 0
+    },
+    {
+      "id": "Kromcrush",
+      "file": "DBM-Party-Vanilla/Dire Maul/Kromcrush.lua",
+      "timers": 0
+    },
+    {
+      "id": "Lethtendris",
+      "file": "DBM-Party-Vanilla/Dire Maul/Lethtendris.lua",
+      "timers": 0
+    },
+    {
+      "id": "Moldar",
+      "file": "DBM-Party-Vanilla/Dire Maul/Moldar.lua",
+      "timers": 0
+    },
+    {
+      "id": "Pimgib",
+      "file": "DBM-Party-Vanilla/Dire Maul/Pimgib.lua",
+      "timers": 0
+    },
+    {
+      "id": "Princet",
+      "file": "DBM-Party-Vanilla/Dire Maul/Princet.lua",
+      "timers": 0
+    },
+    {
+      "id": "Pusillin",
+      "file": "DBM-Party-Vanilla/Dire Maul/Pusillin.lua",
+      "timers": 0
+    },
+    {
+      "id": "Slipkik",
+      "file": "DBM-Party-Vanilla/Dire Maul/Slipkik.lua",
+      "timers": 0
+    },
+    {
+      "id": "Tendris",
+      "file": "DBM-Party-Vanilla/Dire Maul/Tendris.lua",
+      "timers": 0
+    },
+    {
+      "id": "Thimblejack",
+      "file": "DBM-Party-Vanilla/Dire Maul/Thimblejack.lua",
+      "timers": 0
+    },
+    {
+      "id": "Tsuzee",
+      "file": "DBM-Party-Vanilla/Dire Maul/Tsuzee.lua",
+      "timers": 0
+    },
+    {
+      "id": "Zevrim",
+      "file": "DBM-Party-Vanilla/Dire Maul/Zevrim.lua",
+      "timers": 0
+    },
+    {
+      "id": "Mythic Champion",
+      "file": "DBM-Party-Vanilla/Mythic_Champion.lua",
+      "timers": 6
+    },
+    {
+      "id": "Alexei",
+      "file": "DBM-Party-Vanilla/Scholomance/Alexei.lua",
+      "timers": 0
+    },
+    {
+      "id": "BloodSteward",
+      "file": "DBM-Party-Vanilla/Scholomance/BloodSteward.lua",
+      "timers": 0
+    },
+    {
+      "id": "DKDarkreaver",
+      "file": "DBM-Party-Vanilla/Scholomance/DKDarkreaver.lua",
+      "timers": 0
+    },
+    {
+      "id": "Darkmaster",
+      "file": "DBM-Party-Vanilla/Scholomance/Darkmaster.lua",
+      "timers": 0
+    },
+    {
+      "id": "FTKrastinov",
+      "file": "DBM-Party-Vanilla/Scholomance/FTKrastinov.lua",
+      "timers": 0
+    },
+    {
+      "id": "IMalicia",
+      "file": "DBM-Party-Vanilla/Scholomance/IMalicia.lua",
+      "timers": 0
+    },
+    {
+      "id": "Illucia",
+      "file": "DBM-Party-Vanilla/Scholomance/Illucia.lua",
+      "timers": 0
+    },
+    {
+      "id": "JandiceBarov",
+      "file": "DBM-Party-Vanilla/Scholomance/JandiceBarov.lua",
+      "timers": 0
+    },
+    {
+      "id": "Kirtonos",
+      "file": "DBM-Party-Vanilla/Scholomance/Kirtonos.lua",
+      "timers": 0
+    },
+    {
+      "id": "Kormok",
+      "file": "DBM-Party-Vanilla/Scholomance/Kormok.lua",
+      "timers": 0
+    },
+    {
+      "id": "LKPolkelt",
+      "file": "DBM-Party-Vanilla/Scholomance/LKPolkelt.lua",
+      "timers": 0
+    },
+    {
+      "id": "MBlackpool",
+      "file": "DBM-Party-Vanilla/Scholomance/MBlackpool.lua",
+      "timers": 0
+    },
+    {
+      "id": "RFrostwhisper",
+      "file": "DBM-Party-Vanilla/Scholomance/RFrostwhisper.lua",
+      "timers": 0
+    },
+    {
+      "id": "Rattlegore",
+      "file": "DBM-Party-Vanilla/Scholomance/Rattlegore.lua",
+      "timers": 0
+    },
+    {
+      "id": "Ravenian",
+      "file": "DBM-Party-Vanilla/Scholomance/Ravenian.lua",
+      "timers": 0
+    },
+    {
+      "id": "Vectus",
+      "file": "DBM-Party-Vanilla/Scholomance/Vectus.lua",
+      "timers": 0
+    },
+    {
+      "id": "Anastari",
+      "file": "DBM-Party-Vanilla/Stratholme/Anastari.lua",
+      "timers": 0
+    },
+    {
+      "id": "Atiesh",
+      "file": "DBM-Party-Vanilla/Stratholme/Atiesh.lua",
+      "timers": 0
+    },
+    {
+      "id": "Balnazzar",
+      "file": "DBM-Party-Vanilla/Stratholme/Balnazzar.lua",
+      "timers": 0
+    },
+    {
+      "id": "Barthilas",
+      "file": "DBM-Party-Vanilla/Stratholme/Barthilas.lua",
+      "timers": 0
+    },
+    {
+      "id": "Forresten",
+      "file": "DBM-Party-Vanilla/Stratholme/Forresten.lua",
+      "timers": 0
+    },
+    {
+      "id": "Galford",
+      "file": "DBM-Party-Vanilla/Stratholme/Galford.lua",
+      "timers": 0
+    },
+    {
+      "id": "Hammersmith",
+      "file": "DBM-Party-Vanilla/Stratholme/Hammersmith.lua",
+      "timers": 0
+    },
+    {
+      "id": "Maleki",
+      "file": "DBM-Party-Vanilla/Stratholme/Maleki.lua",
+      "timers": 0
+    },
+    {
+      "id": "Nerubenkan",
+      "file": "DBM-Party-Vanilla/Stratholme/Nerubenkan.lua",
+      "timers": 0
+    },
+    {
+      "id": "Ramstein",
+      "file": "DBM-Party-Vanilla/Stratholme/Ramstein.lua",
+      "timers": 0
+    },
+    {
+      "id": "Rivendare",
+      "file": "DBM-Party-Vanilla/Stratholme/Rivendare.lua",
+      "timers": 0
+    },
+    {
+      "id": "Siabi",
+      "file": "DBM-Party-Vanilla/Stratholme/Siabi.lua",
+      "timers": 0
+    },
+    {
+      "id": "Skul",
+      "file": "DBM-Party-Vanilla/Stratholme/Skul.lua",
+      "timers": 0
+    },
+    {
+      "id": "SothosandJarien",
+      "file": "DBM-Party-Vanilla/Stratholme/SothosandJarien.lua",
+      "timers": 0
+    },
+    {
+      "id": "Stonespine",
+      "file": "DBM-Party-Vanilla/Stratholme/Stonespine.lua",
+      "timers": 0
+    },
+    {
+      "id": "Swordsmith",
+      "file": "DBM-Party-Vanilla/Stratholme/Swordsmith.lua",
+      "timers": 0
+    },
+    {
+      "id": "Timmy",
+      "file": "DBM-Party-Vanilla/Stratholme/Timmy.lua",
+      "timers": 0
+    },
+    {
+      "id": "Unforgiven",
+      "file": "DBM-Party-Vanilla/Stratholme/Unforgiven.lua",
+      "timers": 0
+    },
+    {
+      "id": "Willey",
+      "file": "DBM-Party-Vanilla/Stratholme/Willey.lua",
+      "timers": 0
+    },
+    {
+      "id": "Arenas",
+      "file": "DBM-PvP/Arenas/Arenas.lua",
+      "timers": 0
+    },
+    {
+      "id": "AlteracValley",
+      "file": "DBM-PvP/Battlegrounds/Alterac.lua",
+      "timers": 0
+    },
+    {
+      "id": "ArathiBasin",
+      "file": "DBM-PvP/Battlegrounds/Arathi.lua",
+      "timers": 0
+    },
+    {
+      "id": "Battlegrounds",
+      "file": "DBM-PvP/Battlegrounds/Battlegrounds.lua",
+      "timers": 0
+    },
+    {
+      "id": "EyeoftheStorm",
+      "file": "DBM-PvP/Battlegrounds/EyeOfTheStorm.lua",
+      "timers": 0
+    },
+    {
+      "id": "IsleofConquest",
+      "file": "DBM-PvP/Battlegrounds/IsleOfConquest.lua",
+      "timers": 0
+    },
+    {
+      "id": "WarsongGulch",
+      "file": "DBM-PvP/Battlegrounds/Warsong.lua",
+      "timers": 0
+    },
+    {
+      "id": "Fathomlord",
+      "file": "DBM-Serpentshrine/Fathomlord.lua",
+      "timers": 8
+    },
+    {
+      "id": "Hydross",
+      "file": "DBM-Serpentshrine/Hydross.lua",
+      "timers": 4
+    },
+    {
+      "id": "Leotheras",
+      "file": "DBM-Serpentshrine/Leotheras.lua",
+      "timers": 7
+    },
+    {
+      "id": "LurkerBelow",
+      "file": "DBM-Serpentshrine/TheLurkerBelow.lua",
+      "timers": 5
+    },
+    {
+      "id": "Tidewalker",
+      "file": "DBM-Serpentshrine/Tidewalker.lua",
+      "timers": 3
+    },
+    {
+      "id": "Vashj",
+      "file": "DBM-Serpentshrine/Vashj.lua",
+      "timers": 10
+    },
+    {
+      "id": "Arynyes",
+      "file": "DBM-Sunwell/Arynyes.lua",
+      "timers": 9
+    },
+    {
+      "id": "Brutallus",
+      "file": "DBM-Sunwell/Brutallus.lua",
+      "timers": 7
+    },
+    {
+      "id": "Twins",
+      "file": "DBM-Sunwell/EredarTwins.lua",
+      "timers": 10
+    },
+    {
+      "id": "Felmyst",
+      "file": "DBM-Sunwell/Felmyst.lua",
+      "timers": 15
+    },
+    {
+      "id": "Kalecgos",
+      "file": "DBM-Sunwell/Kalecgos.lua",
+      "timers": 11
+    },
+    {
+      "id": "Kil",
+      "file": "DBM-Sunwell/Kil'jaeden.lua",
+      "timers": 24
+    },
+    {
+      "id": "Muru",
+      "file": "DBM-Sunwell/M'uru.lua",
+      "timers": 8
+    },
+    {
+      "id": "Trash",
+      "file": "DBM-Sunwell/Trash.lua",
+      "timers": 6
+    },
+    {
+      "id": "Alar",
+      "file": "DBM-TheEye/Alar.lua",
+      "timers": 4
+    },
+    {
+      "id": "KaelThas",
+      "file": "DBM-TheEye/KaelThas.lua",
+      "timers": 19
+    },
+    {
+      "id": "mobs",
+      "file": "DBM-TheEye/Mobs.lua",
+      "timers": 1
+    },
+    {
+      "id": "Solarian",
+      "file": "DBM-TheEye/Solarian.lua",
+      "timers": 10
+    },
+    {
+      "id": "VoidReaver",
+      "file": "DBM-TheEye/VoidReaver.lua",
+      "timers": 5
+    },
+    {
+      "id": "Ahune",
+      "file": "DBM-WorldEvents/Ahune.lua",
+      "timers": 0
+    },
+    {
+      "id": "ApothecaryTrio",
+      "file": "DBM-WorldEvents/ApothecaryTrio.lua",
+      "timers": 1
+    },
+    {
+      "id": "CorenDirebrew",
+      "file": "DBM-WorldEvents/CorenDirebrew.lua",
+      "timers": 3
+    },
+    {
+      "id": "HeadlessHorseman",
+      "file": "DBM-WorldEvents/HeadlessHorseman.lua",
+      "timers": 2
+    },
+    {
+      "id": "Arlokk",
+      "file": "DBM-ZG/Arlokk.lua",
+      "timers": 6
+    },
+    {
+      "id": "Bloodlord",
+      "file": "DBM-ZG/Bloodlord.lua",
+      "timers": 2
+    },
+    {
+      "id": "EdgeOfMadness",
+      "file": "DBM-ZG/EdgeOfMadness.lua",
+      "timers": 4
+    },
+    {
+      "id": "Gahzranka",
+      "file": "DBM-ZG/Gahzranka.lua",
+      "timers": 0
+    },
+    {
+      "id": "Hakkar",
+      "file": "DBM-ZG/Hakkar.lua",
+      "timers": 6
+    },
+    {
+      "id": "Jeklik",
+      "file": "DBM-ZG/Jeklik.lua",
+      "timers": 9
+    },
+    {
+      "id": "Jindo",
+      "file": "DBM-ZG/Jindo.lua",
+      "timers": 2
+    },
+    {
+      "id": "Marli",
+      "file": "DBM-ZG/Marli.lua",
+      "timers": 4
+    },
+    {
+      "id": "Thekal",
+      "file": "DBM-ZG/Thekal.lua",
+      "timers": 3
+    },
+    {
+      "id": "Venoxis",
+      "file": "DBM-ZG/Venoxis.lua",
+      "timers": 3
+    },
+    {
+      "id": "Akilzon",
+      "file": "DBM-ZulAman/Akil'zon.lua",
+      "timers": 8
+    },
+    {
+      "id": "Halazzi",
+      "file": "DBM-ZulAman/Halazzi.lua",
+      "timers": 11
+    },
+    {
+      "id": "Janalai",
+      "file": "DBM-ZulAman/Jan'alai.lua",
+      "timers": 9
+    },
+    {
+      "id": "Malacrass",
+      "file": "DBM-ZulAman/Malacrass.lua",
+      "timers": 56
+    },
+    {
+      "id": "Nalorakk",
+      "file": "DBM-ZulAman/Nalorakk.lua",
+      "timers": 7
+    },
+    {
+      "id": "ZulJin",
+      "file": "DBM-ZulAman/Zul'jin.lua",
+      "timers": 21
+    }
+  ]
+}

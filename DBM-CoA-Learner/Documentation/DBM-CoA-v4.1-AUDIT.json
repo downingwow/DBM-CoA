@@ -1,0 +1,8 @@
+{
+  "build": "4.1 TEST",
+  "existing_module_registrations": 303,
+  "timer_constructor_references": 917,
+  "new_verified_encounters_from_coa_server_scripts": 0,
+  "source_repos_imported_full": 0,
+  "notes": "Existing packaged modules are retained, not newly verified. Offline historical NPC/spell datasets are preserved; no claim of complete source conversion."
+}

@@ -1,0 +1,8 @@
+DBM-CoA v4.1 TEST — Prebuilt encounter audit and adaptive diagnostics
+- Preserves all existing packaged DBM encounter modules and their stock timers.
+- Learner never duplicates indexed stock NPC/spell timers.
+- /coaengine reports current zone, indexed prebuilt timer coverage, observed mechanics and stock discrepancies.
+- /coaengine on|off controls stock discrepancy monitoring without disabling stock DBM modules.
+- No new boss script conversions claimed; server-source extraction remains outstanding.
+- Native DBM anchors remain the only timer anchors.
+- Existing BBLC25C sharing preserved unchanged.

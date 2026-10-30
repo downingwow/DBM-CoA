@@ -1,0 +1,5 @@
+DBM-CoA v3.39 Shared NPC Research TEST — not a stable release
+
+Added real indexed offline research database, compact in-game observed-ID names, safer 3.3.5 GUID filtering, native timer self-test and status commands.
+
+No claim is made that all GitHub repositories have been imported. The historical exiles-db NPC/spell records are unverified and do not become boss timers automatically. This package is intended for testing on Conquest Reborn.

@@ -1,0 +1,6 @@
+DBM-CoA v3.33 TEST - 2026-10-29
+Added research-only NPC ability index from latest Observer SavedVariables: 52 NPCs and 256 unique NPC/spell/event keys.
+Preserved movable learned timer bars and existing live enemy-only filtering, learner, and sharing.
+Offline companion references include 41817 NPC and 214152 spell ID/name records from preserved exiles-db snapshots.
+GitHub sources catalogued, NOT fully imported; server scripts and full external datasets require separate source download.
+Research index is deliberately not used to trigger warnings, because observational NPC association does not prove boss mechanics.

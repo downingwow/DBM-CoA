@@ -26,8 +26,8 @@ local timerScreech		= mod:NewBuffActiveTimer(4, 6605)
 local timerScreechCD	= mod:NewCDTimer(20, 6605)
 -- local timerPain			= mod:NewTargetTimer(18, 23952)
 local timerHeal			= mod:NewCastTimer(4, 23954)
-local timerHealCD		= mod:NewCDTimer(20, 23954)
-local timerChargeCD		= mod:NewCDTimer(20, 340040)
+local timerHealCD		= mod:NewCDTimer(25, 23954)
+local timerChargeCD		= mod:NewCDTimer(15, 340040)
 
 
 --- Ascended
@@ -35,12 +35,16 @@ local warnConcoc		= mod:NewTargetAnnounce(350381)
 local TimerConcoc		= mod:NewTargetTimer(6, 350381)
 
 
+-- CoA Development server script: Phase 1 starts after flight path, Phase 2 at 50%.
+-- Only show first-heal timer once phase 2 is observed, never on pull.
+local phaseTwo = false
 function mod:OnCombatStart(delay)
-	timerHealCD:Start(-delay)
+    phaseTwo = false
 end
 
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(23954,340020) then
+        phaseTwo = true
 		timerHeal:Start()
 		timerHealCD:Start()
 		warnHeal:Show()
@@ -74,6 +78,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	-- 	warnPain:Show(args.destName)
 	-- end
 	if args:IsSpellID(340500) then
+        phaseTwo = true
 		warnPhase:Show()
 	end
 end

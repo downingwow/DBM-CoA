@@ -1,5 +1,5 @@
 {
-  "version": "v3.25",
+  "version": "v4.3",
   "prerelease": false,
   "folders": [
     "DBM-AQ20",
@@ -29,5 +29,8 @@
     "DBM-WorldEvents",
     "DBM-ZG",
     "DBM-ZulAman"
+  ],
+  "extras": [
+    "CoA-Research-Offline"
   ]
 }

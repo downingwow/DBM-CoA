@@ -1,0 +1,7 @@
+DBM-CoA v3.37 - Consolidated & Labeled Native Timers (TEST)
+- Native DBM move previews now explicitly identify Main Boss Timers and Important / Enlarged Timers.
+- Learned timers use DBM.Bars:CreateBar and share the same native DBM anchors; no custom learned-timer anchor is created.
+- Use /dbm move to arrange bars, /dbm options to style them, /coabars for help.
+- Existing hostile-NPC filters, research data, encounter learner and sharing settings preserved.
+- This is a focused UI correction; broader combat-engine/repository integrations are NOT included yet.
+- Requires in-game testing on Conquest Reborn.

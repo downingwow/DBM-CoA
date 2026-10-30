@@ -1,0 +1,8 @@
+DBM-CoA v3.37.1 TEST — Combat and encounter foundation
+- Strict hostile NPC source classification: excludes players, pets, guardians and player-controlled summons based on combat flags.
+- Native DBM learned timers; no extra learned bar anchor.
+- Distinct observed / predicted / manually verified evidence status. At least five consistent intervals before predicting.
+- Per-instance/raid/difficulty/NPC/spell records, with 24 sample cap per ability.
+- Zone-scoped read-only research accessor; large offline NPC/spell JSON never loaded into game memory.
+- Zul'Gurub pilot /coazg reports observed encounters without inventing mechanic IDs.
+- No full Details! parser transplant; no new GitHub boss scripts imported; in-game tests pending.

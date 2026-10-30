@@ -700,11 +700,11 @@ do
 	function DBT:ShowMovableBar(small, large)
 		if small or small == nil then
 			local bar1 = self:CreateBar(20, "Move1", "Interface\\Icons\\Spell_Nature_WispSplode", nil, true)
-			bar1:SetText(DBM_CORE_MOVABLE_BAR)
+			bar1:SetText("DBM - Main Boss Timers (drag to move)")
 		end
 		if large or large == nil then
 			local bar2 = self:CreateBar(20, "Move2", "Interface\\Icons\\Spell_Nature_WispSplode", true)
-			bar2:SetText(DBM_CORE_MOVABLE_BAR)
+			bar2:SetText("DBM - Important / Enlarged Timers (drag to move)")
 		end
 		updateClickThrough(self, false)
 		self.movable = true

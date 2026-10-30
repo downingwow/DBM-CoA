@@ -1,0 +1,9 @@
+DBM-CoA v3.38 Universal CoA Research TEST
+- Universal hostile NPC observation across outdoor zones, dungeons, and raids.
+- World-zone learning records partitioned by zone and difficulty.
+- No automatic warning for every observed cast; confidence-gated native DBM prediction bars only.
+- Removed ZulGurubPilot.lua from load list (historical file retained).
+- Generalized zone research accessor; removed Zul Gurub special case.
+- Explicit CoA-only research import policy: no Free-Pick overlays or unverified realm data in live mechanics.
+- Retained DBM's native bars, labels and original sharing settings.
+- Not yet a comprehensive Github-to-encounter conversion; requires live validation.

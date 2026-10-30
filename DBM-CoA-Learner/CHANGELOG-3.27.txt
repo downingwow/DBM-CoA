@@ -1,0 +1,7 @@
+DBM-CoA v3.27 TEST
+- Suspend ALL DBM-CoA chat synchronization automatically inside any instance (party, raid, arena, battleground, scenario).
+- No outgoing or incoming DBM-CoA sync while instanced; resume when outside. Never leave/rejoin LootCollector channel.
+- Retain combat recording and enemy NPC learning in dungeons and raids.
+- Exclude players, friendly units, party/raid-owned NPCs, pets and guardians from live warnings/timers.
+- No migration/deletion of previous saved observations.
+- Not verified in-game.

@@ -1,0 +1,7 @@
+DBM-CoA v3.34 TEST - 2026-10-29
+- Added /coaresearch in-game NPC cast evidence lookup from v3.33 observed index.
+- Target an NPC or specify numeric NPC ID. Limits chat output to 12 casts.
+- Existing movable learned timers and channel behavior retained.
+- Research evidence remains separate from verified timers and warnings.
+- Full external GitHub datasets NOT imported; no claim of live server parity.
+- Not yet in-game tested.

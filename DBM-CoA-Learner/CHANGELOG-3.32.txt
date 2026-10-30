@@ -1,0 +1,10 @@
+DBM-CoA v3.32 TEST - 2026-10-29
+- Learned timer bars can be moved: /coabars unlock, drag the label, /coabars lock.
+- /coabars reset restores the original position; position is saved per account.
+- Added a research-only NPC/spell lookup extracted from the updated Observer(5) file.
+- Candidate NPC spell IDs are never used alone for live timers or warnings.
+- Preserves v3.31 BBLC25C channel joining, sharing and encounter-learning logic.
+- Preserves hostile server-controlled NPC-only live warnings/timers.
+- Full raw SavedVariables remain external; do not bundle user character data in releases.
+- External GitHub datamines have not been fully imported or verified against live encounters.
+- Native DBM bar integration is not included in this test build.

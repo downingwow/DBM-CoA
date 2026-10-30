@@ -1,0 +1,8 @@
+DBM-CoA v3.28 TEST
+- Separate broad combat data collection from live warnings/timer eligibility.
+- Preserve existing Learner recording of player, pet, guardian, summon, minion, and totem abilities for reference and permitted out-of-instance sharing.
+- Require a positively identified hostile NPC with server-controlled source flags for all live warnings, predicted bars and categorized encounter timers.
+- Exclude player-controlled NPC summons even if their creature GUID has a valid NPC ID.
+- Preserve v3.27 automatic pause of DBM sharing in instances and resume outside instances.
+- No changes to other addons or global channel membership.
+- Requires in-game testing on Ascension's combat log flag implementation.
