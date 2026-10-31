@@ -1,97 +1,92 @@
-# DBM-CoA — Boss Warnings, Encounter Timers & Experimental Auto-Learning
+# DBM-CoA — Deadly Boss Mods for Conquest Reborn
 
-> **[⬇ Download v5.0.3](https://github.com/downingwow/DBM-CoA/releases/download/v5.0.3/DBM-CoA-v5.0.3.zip)**
+**Maintained by Uncle Bone** · [CoA Research & Addons](https://coa-research.unclebone.workers.dev/) · [Report an issue](https://github.com/downingwow/DBM-CoA/issues)
 
+**Current development build: v5.0.3 (TEST)** — WoW 3.3.5a / Ascension Conquest of Azeroth / Conquest Reborn.
 
-## Current release
+> **Important:** v5.0.3 is a test build, not a live-verified stable release. Check [GitHub Releases](https://github.com/downingwow/DBM-CoA/releases) for published downloads and version labels. The README version does not mean the corresponding ZIP has been published to GitHub.
 
-# DBM-CoA v4.3 — Available-source overhaul, clean installation
+## 🚨 REQUIRED UPDATE STEP: DELETE THE OLD `DBM-CoA-Observer` FOLDER
 
-This release versions the newest previously unnumbered clean-install development package as v4.3. It includes the available-source overhaul following v4.2.
+**`DBM-CoA-Observer` is an ADDON FOLDER inside your WoW `Interface/AddOns` directory. You MUST DELETE THAT ENTIRE FOLDER when updating from a build that included it.**
 
-- Retains the packaged Vanilla, TBC and Wrath encounter modules.
-- Adds source-derived encounter schedules for Jeklik, Venoxis, Mar'li and Hakkar: four bosses and 35 spell schedules in the supplied coverage report.
-- Source-derived native DBM bars are limited to spells absent from the stock timer index to reduce duplicate bars. Stock modules remain authoritative.
-- Source-only predictions can adapt after at least eight observed intervals; historical references are not confirmed live mechanics.
-- Retains game-wide learning, BBLC25C sharing protocols, research tools, native timer rendering and saved data.
-- Uses the supplied clean-install organization, with historical documentation under Documentation.
+1. **Close World of Warcraft.**
+2. Open your WoW installation's **`Interface/AddOns/`** directory.
+3. Find the **folder** named **`DBM-CoA-Observer`**.
+4. **DELETE THE ENTIRE `DBM-CoA-Observer` FOLDER.**
+5. Extract all included DBM addon folders from the new ZIP into `Interface/AddOns/`, replacing old addon files.
+6. Start the game. **No slash commands or setup are needed.**
 
-Commands include `/coasources`, `/coaengine`, `/coacoverage`, `/coastatus`, `/coatimings` and `/coatest`. Use `/dbm move` for native timer anchors.
+**Why:** `DBM-CoA-Observer` was discontinued and is no longer distributed. Installing a new ZIP does **not** automatically remove old addon folders. Do not delete `DBM-CoA-Learner` or `DBM-Core`.
 
-This is published on the stable release channel by maintainer request. The engine and source conversion remain experimental and have not been validated in the live Conquest Reborn client. This is not a conversion of every CoA encounter. Initial source timers start when combat-log identification occurs, which can be later than pull; health phases require a visible unit. Existing stock cooldowns may be inaccurate.
+Back up your `WTF` SavedVariables before updating. Keeping SavedVariables preserves learner history and user preferences.
 
-Install all DBM-* folders together into Interface/AddOns. Back up existing addon files and WTF/SavedVariables first. Replace old addon folders to avoid leftover files; retain SavedVariables.
+## What's new since v4.2.1
 
-Maintainer: Uncle Bone — https://github.com/downingwow
+### Dungeon research and experimental timers
 
+- Research coverage for **19 Vanilla dungeon maps**, including **190 documented encounter NPC IDs**.
+- Research-backed experimental dungeon cast warnings where supported by evidence.
+- **80 source-derived repeat-timer candidates across six dungeon maps**.
+- Timer predictions start **after an observed matching NPC spell cast**; they do not guarantee a correct first-cast timer.
+- Strict dungeon map, creature NPC ID and spell ID matching reduces unrelated warnings.
+- Existing DBM boss modules remain available; custom Conquest Reborn mechanics may differ from stock DBM encounters.
+- **Expanded Ascension-specific Zul'Gurub boss scripts are still in development**, not implemented in this build.
 
-**DBM-CoA helps you react to dangerous fights.** It combines the familiar **Deadly Boss Mods (DBM)** boss-mod system with a custom experimental learner for **Ascension: Conquest of Azeroth / Conquest Reborn**.
+### Plug and play
 
-## What DBM does during a fight
+- Dungeon Research, cast warnings and experimental source-repeat timers **enabled by default on fresh installations**.
+- AutoLearner continues recording encounter evidence automatically.
+- Normal operation requires **no slash commands, setup wizard or manual activation**.
+- Existing saved on/off preferences are respected.
+- In-game DBM interface remains available for adjustments.
 
-When a supported encounter is recognized, DBM can provide **warnings, countdown bars, sounds, and on-screen alerts** for important boss abilities. This helps a group anticipate mechanics rather than relying only on the combat log. The included package contains DBM's core interface and modules for many classic-era dungeons, raids, world events, and PvP content.
+### AutoLearner and compatible sharing
 
-**Important:** A packaged boss module is not proof that a specific custom CoA encounter has fully accurate warnings. Custom bosses may require new data.
+- Continues using the shared **`BBLC25C`** channel alongside compatible Questie-X and LootCollector builds.
+- Keeps existing DBM-specific message protocols **`DCOAL31`** and **`DCOAR21`**, rather than introducing a new incompatible format.
+- Preserves existing receiving, duplicate suppression and rate-limit behavior.
+- Outgoing sharing is automatically restricted inside instances as previously designed.
+- **Exact compatibility with every historical DBM-CoA version has not been verified**; older clients must understand the existing protocol.
+- Sharing only occurs while the game and addon are running.
 
-## What makes DBM-CoA different: AutoLearner
+### UI, architecture and performance
 
-Many custom CoA bosses do not have handcrafted DBM modules. **DBM-CoA AutoLearner** watches supported combat information while you are actively playing and tries to build evidence about how encounters work.
+- Preserves the original **multi-folder DBM architecture**, including core, GUI and load-on-demand encounter modules.
+- Removes the discontinued `DBM-CoA-Observer` from the distributed package.
+- Updates the visible DBM GUI footer to identify **DBM-CoA**, **Uncle Bone**, the GitHub maintainer and the CoA Research website.
+- Designed for the default Blizzard UI, DragonUI and ElvUI environments; compatibility still needs in-game validation.
+- Keeps existing raid modules, learner data and saved preferences.
 
-- **Records combat events** such as observed spell activity and timing evidence during encounters.
-- **Builds local encounter history** that can be used to study patterns and improve future warnings.
-- **Learns timing information** from repeated observations rather than requiring every encounter to be manually programmed from scratch.
-- **Stores learned data** in WoW SavedVariables so it survives logouts and restarts.
-- **Synchronizes compatible learning data** with other addon users, potentially improving knowledge faster than one player's runs alone.
-- **Provides diagnostics** for sent and received messages, duplicate or rejected records, retries, and responsive addon peers.
-- **Offers a draggable status display** and learner-related controls integrated with DBM's options.
+## What DBM-CoA does
 
-This system is **experimental**. Observed timing patterns are not necessarily exact cooldowns, and incomplete or malformed data can lead to unreliable warnings. Players should still pay attention to the encounter.
+DBM-CoA adapts Deadly Boss Mods for the custom Conquest Reborn client. Supported encounters can provide boss warnings, countdown bars, sounds and on-screen alerts. Its **AutoLearner** records observed spell activity and timing patterns, saves evidence between sessions, and exchanges compatible discoveries with other players.
 
-## Sharing and other addon compatibility
+Research-backed candidate timers and learned predictions are **experimental**. Source schedules may not reflect the live realm, difficulty scaling, phases or modified encounters. Do not treat every listed dungeon or boss as having a complete, verified custom encounter module.
 
-DBM-CoA uses the **existing LootCollector channel `BBLC25C`**, with DBM-specific messages rather than creating a competing global channel. Startup joining is delayed to avoid interfering with existing channels. The latest build is designed to coexist with compatible Questie-X and LootCollector builds.
+## Installation
 
-The peer-response count reflects other responding addon users, **not necessarily everyone present in the chat channel**. Learning and sync only happen when the game client and addon are running; this is not an overnight server-side monitor.
+1. Close WoW and back up SavedVariables.
+2. **Delete `Interface/AddOns/DBM-CoA-Observer/` if it exists.**
+3. Replace old DBM addon folders with the folders from the current release ZIP. Keep all supplied DBM folders alongside one another; do **not** combine them into one folder.
+4. Start Conquest Reborn and play. The learner and new research features start automatically unless previously disabled in saved settings.
 
-## Observer component
+**Version note:** This README documents the **v5.0.3 development/test package**. A GitHub release is only available when it appears under [Releases](https://github.com/downingwow/DBM-CoA/releases).
 
-The current ZIP also includes **DBM-CoA-Observer**, a separate passive evidence-collection addon. It stores its own data independently of the main learner. Its presence does **not** mean the Observer and AutoLearner databases have already been merged.
+## Known limits
 
-## PvP: current versus planned
+- Dungeon research roster coverage is not the same as fully implemented boss warnings for all 19 dungeons.
+- The 80 timer candidates are source-derived and **not live verified**.
+- Custom Zul'Gurub Ascension-specific encounter scripts are **not yet integrated**.
+- Legacy sharing across all older versions and default UI/DragonUI/ElvUI behavior need player testing.
+- The discontinued Observer's separately saved data is not automatically merged into the AutoLearner.
 
-The package includes traditional **DBM-PvP** content. A future expansion of the **CoA learner** is planned to collect battleground objective events and carefully validated arena/player spell timing evidence. **Do not confuse the included PvP modules with a finished automatic PvP-learning system.**
+## Credits, support and licensing
 
-## What's included
+**CoA maintainer:** Uncle Bone · [GitHub: downingwow](https://github.com/downingwow)
 
-The package contains multiple separate addon folders, including **DBM-Core**, **DBM-GUI**, encounter modules, **DBM-CoA-Learner**, and **DBM-CoA-Observer**. The complete package must be extracted into `Interface/AddOns` so all required components sit side by side.
+**Research and addon hub:** https://coa-research.unclebone.workers.dev/
 
-## Install / update
+Based on [Deadly Boss Mods](https://github.com/DeadlyBossMods/DeadlyBossMods) and its upstream contributors. Required third-party licensing and attribution notices remain applicable. This is a community adaptation, not an official DBM or Ascension release.
 
-1. Back up `DBMCoALearnerDB`, `DBMCoAObserverDB`, and other DBM SavedVariables before updating.
-2. Extract **all top-level folders** from the release ZIP into `World of Warcraft/Interface/AddOns`.
-3. Restart the game and check that DBM-Core and the CoA learner are enabled.
-4. Configure learner recording, sharing, and diagnostics in DBM's options. Review experimental warnings before relying on them.
-
-## Current build and known limits
-
-**Current source build: v4.3.** Optional ElvUI compatibility and Smart Archive Sync. Installable ZIPs and version history are published through [GitHub Releases](https://github.com/downingwow/DBM-CoA/releases).
-
-The learner can receive duplicate or invalid timing records, and older versions may not support all current message types. Learned encounter warnings and exact backward compatibility still require in-game verification. Interface target: **30300**.
-
-## Credits and support
-
-Based on [Deadly Boss Mods](https://github.com/DeadlyBossMods/DeadlyBossMods) by its original authors and contributors. CoA-specific learner adaptation and distribution by **Uncle Bone**. Community project, not an official DBM or Ascension release.
-
-[Report issues / request features](https://github.com/downingwow/DBM-CoA/issues) · [Changelog](CHANGELOG.md)
-
-
-## v3.22 changes
-
-Optional ElvUI-aware learner-window styling retains the default UI and DragonUI fallback. Includes Smart Archive Sync, the resizable learner window and historical archive reference data. Archive references are not verified observations; live compatibility remains untested.
-
-## v3.25 — Raid and dungeon learning
-
-Experimental encounter learning defaults on for fresh users in dungeon and raid instances; explicit opt-outs remain respected. `/coalearning` shows learning status and instance type. `/coatimings` browses saved timings organized by instance, difficulty, creature and spell. Live alerts use observed casts; predictions need repeated consistent intervals. No fabricated boss timers are supplied. Preserves archive sync, resizing, saved data and optional ElvUI/DragonUI styling. Published as a stable release channel at the maintainer's request; live Conquest Reborn validation remains pending.
-
-
-The repository stores the offline research SQLite database as `.sqlite.gz` to fit upload limits. Decompress it for local research. The release workflow verifies its SHA-256 and restores the original `.sqlite` inside the release ZIP. This file is offline research data and is not loaded by WoW.
+[GitHub Releases](https://github.com/downingwow/DBM-CoA/releases) · [Issues](https://github.com/downingwow/DBM-CoA/issues)
