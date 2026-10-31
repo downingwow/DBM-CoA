@@ -1,0 +1,13 @@
+DBM-CoA v4.2.2 — CLASSIC 19 RESEARCH SAFE TEST
+
+BASE: existing v4.2.1 multi-folder addon, without overnight observer.
+NEW: passive research roster for all 19 Vanilla dungeons (190 map-scoped NPC IDs).
+No new predictive timer or boss cast warning is enabled in this conservative test.
+No encounter events are registered by the new roster module. Existing DBM functionality is retained.
+Zul'Gurub existing stock/source pilot modules are unchanged; Ascension-specific eight-boss overhaul is NOT implemented here.
+Research is upstream source-backed but not live verified. Roster may include optional bosses.
+The 19-dungeon research manifest identifies 6 timed-candidate dungeons: Deadmines, Zul'Farrak, Blackrock Spire, Blackrock Depths, Scholomance, Stratholme.
+Research manifest also identifies spell-trigger candidates in BFD, Maraudon, Ragefire Chasm, Dire Maul.
+Do not interpret these as implemented warnings. Requires source-specific NPC/spell/cast mapping and live tests.
+No change to BBLC25C, AutoLearner, SavedVariables, GUI, or raid modules.
+Source: https://github.com/downingwow/CoA-Research/tree/main/research/dbm

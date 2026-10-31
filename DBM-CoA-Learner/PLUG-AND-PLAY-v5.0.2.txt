@@ -1,0 +1,10 @@
+DBM-CoA 5.0.2 TEST — plug and play / legacy protocol preservation
+- Dungeon Research, cast warnings, and cast-triggered source repeat bars ON by default.
+- Defaults initialize on ADDON_LOADED, without opening options or entering slash commands.
+- Explicit saved disabled choices remain disabled.
+- AutoLearner and BBLC25C sync code unchanged; legacy DCOAL31 and DCOAR21 wire prefixes unchanged.
+- No wire format, channel join/leave, receiving or rate-limit changes.
+- No guarantee of compatibility with every historic version; older clients must recognize existing wire protocols.
+- Multi-folder architecture retained; no Overnight Observer.
+- Predictive bars remain source-derived and unverified; only follow observed NPC casts.
+- Untested in game; do not publish as stable until tested.

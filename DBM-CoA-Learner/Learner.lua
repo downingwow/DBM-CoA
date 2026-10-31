@@ -461,6 +461,10 @@ f:SetScript("OnEvent",function(self,event,...)
   -- Auto-learning is ON for both party (dungeons) and raid instances by default.
   -- Preserve explicit opt-out from previous releases.
   if db.experimentalDisabled==nil then db.experimentalDisabled=false end
+  -- Plug-and-play research defaults. Never overwrite existing saved choices.
+  if db.coaDungeonResearchEnabled==nil then db.coaDungeonResearchEnabled=true end
+  if db.coaDungeonResearchWarnings==nil then db.coaDungeonResearchWarnings=true end
+  if db.coaDungeonPredictiveTimers==nil then db.coaDungeonPredictiveTimers=true end
   for k in pairs(db.knowledge) do known[k]=true end
   backfillDone=false
   makeStatus()

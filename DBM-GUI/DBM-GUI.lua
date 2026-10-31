@@ -1829,8 +1829,8 @@ local function CreateOptionsMenu()
 	end
 
 	-- Set Revision // please don't translate this!
-	DBM_GUI_OptionsFrameRevision:SetText("Version: "..DBM.DisplayVersion.." - Core: r"..DBM.Revision.." - Gui: r"..revision)
-	DBM_GUI_OptionsFrameTranslation:SetText("Translated by: "..L.TranslationBy)
+	DBM_GUI_OptionsFrameRevision:SetText("DBM-CoA v5.0.3 | Conquest Reborn")
+	DBM_GUI_OptionsFrameTranslation:SetText("Maintained by Uncle Bone | github.com/downingwow")
 end
 DBM:RegisterOnGuiLoadCallback(CreateOptionsMenu, 1)
 

@@ -36,6 +36,7 @@ local function learned(id,sid)
  return nil
 end
 local function timer(id,sid,duration)
+ if not DBMCoALearnerDB or not DBMCoALearnerDB.coaZGStockSourceTimers then return end
  if stock(id,sid) or not DBM or not DBM.Bars or not DBM.Bars.CreateBar then return end
  if not duration or duration<=0 then return end
  local name,icon=spellName(sid)

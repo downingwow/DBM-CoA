@@ -1,0 +1,9 @@
+DBM-CoA v5.0 TEST — experimental Classic research supplement
+19 dungeons: map/NPC lookup rosters available, source-backed spell cast alert candidates in 10 maps.
+Warnings: opt-in, based on actual hostile NPC casts and map/NPC whitelist, not name matching.
+No new predictive timers, no unverified health-phase warning injection, no new ZG boss registration.
+Existing ZG source timer candidate engine and raid modules preserved unchanged.
+Experimental toggle: Interface > AddOns > DBM-CoA > Dungeon Research.
+No new sharing messages. Stock timer index suppression is best-effort and not a full dedup guarantee.
+No in-game validation; research is not proof of live server deployment.
+Source: https://github.com/downingwow/CoA-Research
