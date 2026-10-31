@@ -1,10 +1,8 @@
 ## Interface: 30300
-## Version: 4.3
-## X-Maintainer: Uncle Bone
-## X-Website: https://github.com/downingwow/DBM-CoA
 ## Title: DBM-CoA - Prebuilt Encounter Overhaul + Adaptive Learning
 ## Notes: Automatic encounter learning and opt-out channel synchronization for Conquest of Azeroth.
 ## Dependencies: DBM-Core
+## Version: 4.2.1
 ## SavedVariables: DBMCoALearnerDB
 ArchiveRefs.lua
 ArchiveSeed.lua
@@ -27,3 +25,4 @@ ArchiveShare.lua
 
 CoAServerSources.lua
 SourceTimerEngine.lua
+CoAResearchIntegration.lua

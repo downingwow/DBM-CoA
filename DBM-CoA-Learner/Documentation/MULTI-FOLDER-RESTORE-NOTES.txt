@@ -1,0 +1,8 @@
+DBM-CoA v4.2 multi-folder restoration test
+Source: DBM-CoA-Available-Sources-Overhaul-Clean-Install.zip
+This is an exact restoration of the multi-folder package, not the broken single-folder experiment.
+No encounter scripts, load order, SavedVariables or addon APIs were changed.
+TOC files: 27; encounter/support modules: 23; load-on-demand modules: 21.
+This package does NOT claim additional memory savings. Benchmark with identical gameplay conditions.
+Installation: remove the single DBM-CoA folder, install all DBM-* folders from this archive.
+Keep SavedVariables. Do not mix with the single-folder test.

@@ -1,0 +1,8 @@
+DBM-CoA v4.2.1 - Research integration TEST
+- Preserves multi-folder, load-on-demand encounter architecture.
+- Removes DBM-CoA-Observer entirely (do not install it alongside this build).
+- Keeps main learner, BBLC25C protocol, stock timers, and historical ZG source timer candidates.
+- Adds lightweight research provenance/validation policy and /coaresearch diagnostics.
+- No large SQL/DBC imports. No newly claimed validated boss mechanics.
+- Source research: https://github.com/downingwow/CoA-Research
+- Not tested inside Conquest Reborn. Compare in-game behavior before release.
