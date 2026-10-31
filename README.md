@@ -1,5 +1,8 @@
 # DBM-CoA — Deadly Boss Mods for Conquest Reborn
 
+> **[⬇ Download v5.0.3](https://github.com/downingwow/DBM-CoA/releases/download/v5.0.3/DBM-CoA-v5.0.3.zip)**
+
+
 **Maintained by Uncle Bone** · [CoA Research & Addons](https://coa-research.unclebone.workers.dev/) · [Report an issue](https://github.com/downingwow/DBM-CoA/issues)
 
 **Current release: v5.0.3** — WoW 3.3.5a / Ascension Conquest of Azeroth / Conquest Reborn.
