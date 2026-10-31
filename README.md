@@ -1,6 +1,6 @@
 # DBM-CoA — Boss Warnings, Encounter Timers & Experimental Auto-Learning
 
-> **[⬇ Download v4.2.1](https://github.com/downingwow/DBM-CoA/releases/download/v4.2.1/DBM-CoA-v4.2.1.zip)**
+> **[⬇ Download v5.0.3](https://github.com/downingwow/DBM-CoA/releases/download/v5.0.3/DBM-CoA-v5.0.3.zip)**
 
 
 ## Current release
