@@ -2,9 +2,9 @@
 
 **Maintained by Uncle Bone** · [CoA Research & Addons](https://coa-research.unclebone.workers.dev/) · [Report an issue](https://github.com/downingwow/DBM-CoA/issues)
 
-**Current development build: v5.0.3 (TEST)** — WoW 3.3.5a / Ascension Conquest of Azeroth / Conquest Reborn.
+**Current release: v5.0.3** — WoW 3.3.5a / Ascension Conquest of Azeroth / Conquest Reborn.
 
-> **Important:** v5.0.3 is a test build, not a live-verified stable release. Check [GitHub Releases](https://github.com/downingwow/DBM-CoA/releases) for published downloads and version labels. The README version does not mean the corresponding ZIP has been published to GitHub.
+> **Release: v5.0.3.** Experimental dungeon mechanics remain source-derived and require in-game validation.
 
 ## 🚨 REQUIRED UPDATE STEP: DELETE THE OLD `DBM-CoA-Observer` FOLDER
 
@@ -71,7 +71,7 @@ Research-backed candidate timers and learned predictions are **experimental**. S
 3. Replace old DBM addon folders with the folders from the current release ZIP. Keep all supplied DBM folders alongside one another; do **not** combine them into one folder.
 4. Start Conquest Reborn and play. The learner and new research features start automatically unless previously disabled in saved settings.
 
-**Version note:** This README documents the **v5.0.3 development/test package**. A GitHub release is only available when it appears under [Releases](https://github.com/downingwow/DBM-CoA/releases).
+**Release version:** v5.0.3. See [GitHub Releases](https://github.com/downingwow/DBM-CoA/releases) for the published download.
 
 ## Known limits
 
